@@ -77,7 +77,7 @@ Some of the requirements to continue with the integration process, are listed be
 * PHP version v5.4 or later
 * MySQL version v5.0 or later
 * PHP CURL enabled server/host
-* Midtrans plugin for WooCommerce [ [GitHub](https://github.com/veritrans/SNAP-Woocommerce) | [Zip](https://github.com/veritrans/SNAP-Woocommerce/archive/master.zip) ]
+* Download Midtrans plugin for WooCommerce: [Zip](https://github.com/veritrans/SNAP-Woocommerce/archive/master.zip) (Open source on [GitHub](https://github.com/veritrans/SNAP-Woocommerce))
 
 #### WooCommerce Plugin Installation
 Select **any one** of the installation options given below.
@@ -188,7 +188,9 @@ Some of the requirements to continue with the integration process, are listed be
 * Magento 2 version 2.1.0, 2.2.0, 2.3.4 and later **|** Tested up to v2.3.4
 * PHP v5.6 or later
 * MySQL v5.7 or later
-* Midtrans plugin for Magento; For Magento v2.x [ [GitHub](https://github.com/Midtrans/Midtrans-Magento2) | [Zip](https://github.com/Midtrans/Midtrans-Magento2/archive/master.zip) ], For Magento v1.9 [ [GitHub](https://github.com/veritrans/SNAP-Magento) | [Zip](https://github.com/veritrans/SNAP-Magento/archive/master.zip) ]
+* Download Midtrans plugin for Magento (Please choose accordingly):
+    * For Magento v2.x: [Zip file](https://github.com/Midtrans/Midtrans-Magento2/archive/master.zip) (Open source on [GitHub](https://github.com/Midtrans/Midtrans-Magento2))
+    * For Magento v1.9: [Zip file](https://github.com/veritrans/SNAP-Magento/archive/master.zip) (Open source on [GitHub](https://github.com/veritrans/SNAP-Magento))
 
 #### Midtrans Snap Plugins Installation
 
@@ -390,7 +392,7 @@ Some of the requirements to continue with the integration process, are listed be
 * PrestaShop 1.6 and 1.7 or later **|** Tested up to v1.7
 * PHP version 5.4 or later
 * MySQL version 5.0 or later
-* Midtrans plugin for PrestaShop [ [GitHub](https://github.com/veritrans/SNAP-Prestashop) | [Zip](https://github.com/veritrans/SNAP-Prestashop/archive/master.zip) ]
+* Download Midtrans plugin for PrestaShop: [Zip file](https://github.com/veritrans/SNAP-Prestashop/archive/master.zip) (Open source on [GitHub](https://github.com/veritrans/SNAP-Prestashop))
 
 #### PrestaShop Plugin Installation and Configuration
 To install and configure the Midtrans-PrestaShop plugin, follow the steps given below.
@@ -479,7 +481,10 @@ Some of the requirements to continue with the integration process, are listed be
 * OpenCart minimal 2.0 or later **|** Tested up to v3.0
 * PHP version 5.4 or later
 * MySQL version 5.0 or later
-* Midtrans plugin for OpenCart: For OpenCart v3.0 [[GitHub](https://github.com/Midtrans/Midtrans-Opencart3) | [Zip](https://github.com/Midtrans/Midtrans-Opencart3/archive/master.zip) ]; For OpenCart v2.3 [ [GitHub](https://github.com/Midtrans/SNAP-Opencart-2.3/) | [Zip](https://github.com/Midtrans/SNAP-Opencart-2.3/archive/master.zip)]; For OpenCart v2.o, OpenCart v2.1, or OpenCart v2.2 [ [GitHub](https://github.com/veritrans/SNAP-Opencart) | [Zip](https://github.com/veritrans/SNAP-Opencart/archive/master.zip)]
+* Download Midtrans plugin for OpenCart (Please choose accordingly):
+    * For OpenCart v3.0: [Zip file](https://github.com/Midtrans/Midtrans-Opencart3/archive/master.zip) (Open source on [GitHub](https://github.com/Midtrans/Midtrans-Opencart3))
+    * For OpenCart v2.3: [Zip file](https://github.com/Midtrans/SNAP-Opencart-2.3/archive/master.zip) (Open source on [GitHub](https://github.com/Midtrans/SNAP-Opencart-2.3/))
+    * For OpenCart v2.0, OpenCart v2.1 or OpenCart v2.2: [Zip file](https://github.com/veritrans/SNAP-Opencart/archive/master.zip) (Open source on [GitHub](https://github.com/veritrans/SNAP-Opencart))
 
 #### OpenCart Plugin Installation and Configuration
 To install and configure Midtrans-OpenCart plugin, follow the steps given below.
@@ -575,7 +580,7 @@ Some of the requirements to continue with the integration process, are listed be
    * WHMCS v5.3.12 - v7.x or later **|** Tested up to WHMCS v7.6
    * PHP version 5.4 or later
    * MySQL version 5.0 or later
-   * Midtrans plugin for WHMCS [ [GitHub](https://github.com/veritrans/SNAP-whmcs) | [Zip](https://github.com/veritrans/SNAP-whmcs/archive/master.zip) ]
+   * Download Midtrans plugin for WHMCS: [Zip file](https://github.com/veritrans/SNAP-whmcs/archive/master.zip) (Open source on [GitHub](https://github.com/veritrans/SNAP-whmcs))
 
 #### WHMCS Plugin Installation and Configuration
 To install and configure Midtrans-WHMCS plugin, follow the steps given below.
@@ -658,7 +663,7 @@ Some of the requirements to continue with the integration process, are listed be
  * Drupal Commerce 8.x-2.xx **|** Tested up to v8.x - 2.x
  * PHP v5.6.x or later
  * MySQL version 5.0 or later
- * Midtrans plugin for Drupal [ [GitHub](https://github.com/Midtrans/Midtrans-Drupal8) | [Zip](https://github.com/Midtrans/Midtrans-Drupal8/archive/master.zip) ]
+ * Download Midtrans plugin for Drupal: [Zip file](https://github.com/Midtrans/Midtrans-Drupal8/archive/master.zip) (Open source on [GitHub](https://github.com/Midtrans/Midtrans-Drupal8))
 
 #### Drupal 8 Plugin Installation and Configuration
 To install and configure Drupal 8 plugin, follow the steps given below.
@@ -757,7 +762,7 @@ Some of the requirements to continue with the integration process, are listed be
    * PHP version 5.4 or later
    * MySQL version 5.0 or later
    * PHP CURL enabled server/host
-   * Midtrans plugin for WordPress EDD [ [GitHub](https://github.com/Midtrans/midtrans-edd) | [Zip](https://github.com/Midtrans/midtrans-edd/archive/master.zip) ]
+   * Download Midtrans plugin for WordPress EDD: [Zip file](https://github.com/Midtrans/midtrans-edd/archive/master.zip) (Open source on [GitHub](https://github.com/Midtrans/midtrans-edd))
 
 #### WordPress EDD Plugin Installation
 To install Midtrans-WordPress EDD plugin, select any **one** of the installation methods given below.
