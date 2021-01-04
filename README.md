@@ -144,9 +144,10 @@ Optional card body content, or actually you can use any html/markdown content wi
 
 ## Deploying to Production
 
-- Just open pull request or commit to `master` branch.
-- Commit pushed to `master` branch will be auto-deployed to https://midtrans-docs.netlify.com .
-	- Each pull request will also trigger Netlify to deploy as preview branch. So you can preview how it will looks like before merging to `master` branch.
+- Just open pull request or commit to `deploy-production` branch.
+- Commit pushed to `deploy-production` branch will be auto-deployed (via Netlify CD set-up) to https://midtrans-docs.netlify.app . Which is CNAME to https://docs.midtrans.com.
+	- Each pull request to this branch will also trigger Netlify to deploy as preview branch. So you can preview how it will looks like before merging to deployment branch.
+- Commit pushed to `master` branch will trigger [branch deployment](https://docs.netlify.com/site-deploys/overview/#definitions) to `https://master--midtrans-docs.netlify.app/`.
 
 <details>
 <summary>Optional Advanced Usage - (Click to expand)</summary>

@@ -1,7 +1,7 @@
 # Midtrans Payments Overview {docsify-ignore}
 <hr>
 
-Midtrans helps your business to accept payment methods such as [cards, bank transfer, wallets, over the counter, cardless credits, direct debit, and other methods](https://midtrans.com/payments). 
+Midtrans helps your business to accept payment methods such as [card payment, bank transfer, e-money, over the counter, cardless credits, direct debit, and other methods](https://midtrans.com/payments). 
 
 <!-- TODO: put image of all payment methodss icon here? -->
 <!-- ![payment methods](https://midtrans.com/assets/images/channels/payment-channels-sprite-v4.png) -->
@@ -21,7 +21,24 @@ Snap user interface helps to securely accept payments on your website and mobile
 <p style="text-align: center;">
   <button onclick="
   event.target.innerText = `Processing...`;
-  fetch(`https://cors-anywhere.herokuapp.com/https://midtrans.com/api/request_snap_token`)
+  var reqHeaders = new Headers();
+  reqHeaders.append('Accept', 'application/json');
+  reqHeaders.append('Content-Type', 'application/json');
+  reqHeaders.append('Authorization', 'Basic '+btoa('SB-Mid-server-GwUP_WGbJPXsDzsNEBRs8IYA:'));
+  var reqOpts = {
+    method: 'POST',
+    headers: reqHeaders,
+    body: JSON.stringify({
+      'transaction_details':{
+        'order_id':'demo-docs-main-'+Math.round((new Date()).getTime()/1),
+        'gross_amount':10000
+      },
+      'credit_card':{
+        'secure':true
+      }
+    })
+  };
+  fetch('https://cors-anywhere.herokuapp.com/https://app.sandbox.midtrans.com/snap/v1/transactions', reqOpts)
     .then(res=>res.json())
     .then(res=>{
       let snapToken = res.token;

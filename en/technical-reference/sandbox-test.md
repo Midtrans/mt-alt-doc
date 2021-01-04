@@ -1,13 +1,13 @@
 # Testing Payment on Sandbox
 <hr>
 
-On Sandbox, Midtrans use web based simulator to simulate payment-provider's/bank's system response, so that you can test most success and failure scenario that might happen on production, **without actually doing real payment**.
+In the Sandbox environment, Midtrans uses web-based simulator to simulate a response from payment provider or bank's system. This helps to test different scenarios that can happen on production, without actually doing real payments.
 
 This is the list of payment credentials that you can use on Midtrans **Sandbox environment**. Please note that, it will not work on Production environment.
 
 Payment category:
-- [Card Payment](#credit-card)
-- [E-Wallets](#e-wallet)
+- [Card Payment](#card-payments)
+- [E-Money](#e-money)
 - [Bank Transfer](#bank-transfer)
 - [Convenience Store](#convenience-store)
 - [Direct Debit](#direct-debit)
@@ -15,9 +15,7 @@ Payment category:
 
 ### Card Payments
 
-Use the card number on the table, and use this Expiry Date and CVV
-
-#### Expiry Date and CVV
+The table given below lists the details to be entered for simulating credit card transactions.
 
 |Input | Value|
 |------|------|
@@ -25,7 +23,7 @@ Use the card number on the table, and use this Expiry Date and CVV
 |Expiry Year | `2025` (or any future year)|
 |CVV | `123`|
 |OTP/3DS | `112233`|
-|Card Number | *Check table below*|
+|Card Number | Refer to table given below. |
 
 #### Card Number
 
@@ -52,7 +50,9 @@ Use the card number on the table, and use this Expiry Date and CVV
 |Full Authentication <br> *Cardholder is 3DS ready* | **Accept Transaction:** 3701 9216 9722 458 <br> **Denied by Bank Transaction:** 3742 9635 4400 881|
 |Attempted Authentication <br> *Cardholder is not  <br>  enrolled for 3DS* | **Accept Transaction:** 3737 4772 6661 940 <br> **Challenge by FDS Transaction:** 3706 6568 4049 309 <br> **Denied by FDS Transaction:** 3780 9621 8340 018 <br> **Denied by Bank Transaction:** 3703 5609 7975 856|
 
-> **IMPORTANT**: Not all acquiring bank might be able to accept JCB & Amex card. You can use BNI & BCA acquiring for JCB. BCA acquiring can accept Amex.
+FDS means Fraud Detection System. "Denied by FDS" means to simulate a transaction that is being denied because it is suspected as fraudulent.
+
+> **Note**: Not every acquiring banks might be able to accept JCB and Amex card. You can use BNI & BCA acquiring for JCB. BCA acquiring can accept Amex.
 
 #### **Bank-Specific**
 
@@ -97,7 +97,7 @@ This is useful for Installment/Promo scenario which require bank specific card.
 
 ##### Offline Card 
 
-It is used for testing a transaction with transaction status *Deny*, because the card is not eligible for online transactions.
+It is used for testing a specific scenario where the card is not eligible for online transactions, which result in *Deny* transaction status.
 
 | Brand      | Card Number         |
 | ---------- | ------------------- |
@@ -106,18 +106,20 @@ It is used for testing a transaction with transaction status *Deny*, because the
 
 <!-- tabs:end -->
 
-?> **[General](#card-number)** card number is for general feature testing of card payment, **[Bank Specific](#card-number)** card number is useful for testing advanced card feature like on-us/off-us installment, whitelist BIN, promo, etc. that requires card from specific Bank.
+?> **[General](#card-number)** card number is used for general feature testing of card payment. <br>
+**[Bank Specific](#card-number)** card number is useful for testing advanced card features (on-us/off-us installments, whitelist BIN, promo, and so on) that require card from specific bank.
 
-### E-Wallets
+### E-Money
 
 |Payment Methods | Description|
 |----------|------------|
-|Go-Pay | On mobile platform you will be auto redirected to Gopay Simulator. <br> On desktop, QR Code image will be displayed, copy the QR Code image URL then use this [QRIS Simulator](https://simulator.sandbox.midtrans.com/qris/index), or if fail, use [Gopay Simulator](https://simulator.sandbox.midtrans.com/gopay/ui/index).|
-|QRIS | QR Code image will be displayed, copy the QR Code image URL then use this [QRIS Simulator](https://simulator.sandbox.midtrans.com/qris/index)|
-|Indosat Dompetku | **Accept number:** 08123456789 <br> **Deny number:** other than 08123456789|
+|GoPay | On mobile platform you are automatically redirected to GoPay Simulator. <br>On desktop, QR Code image is displayed. To perform a test transaction, enter the QR Code image URL in [QRIS Simulator](https://simulator.sandbox.midtrans.com/qris/index), or [GoPay Simulator](https://simulator.sandbox.midtrans.com/gopay/ui/index). |
+|QRIS | To perform a test transaction, copy the QR Code image URL and use it in [QRIS Simulator](https://simulator.sandbox.midtrans.com/qris/index). |
+|Indosat Dompetku | **Accept number:** 08123456789 <br>**Deny number:** other than 08123456789 |
 |Mandiri E-cash | **Accept number:** 0987654321 <br> **PIN:** 12345 <br> **OTP:** 12123434|
 
-!> **Note**: On Sandbox, Midtrans use web based payment simulator, so payment that require App Deeplink like GoPay, will not use real App deeplink and use web simulator instead. To test real App Deeplink use case, please use Midtrans **Production Environment**.
+?>***Note***:  On Sandbox, Midtrans uses web-based payment simulator. So, payment that requires app deeplink like GoPay, will use web simulator instead of real app deeplink. To test real app deeplink use cases, please use Midtrans *Production Environment*.
+
 ### Bank Transfer
 
 |Payment Methods | Description|
@@ -149,6 +151,7 @@ It is used for testing a transaction with transaction status *Deny*, because the
 |KlikBCA | Midtrans will register user id filled in KlikBCA input. To perform a test transaction, use the [KlikBca Simulator](https://simulator.sandbox.midtrans.com/bca/klikbca/index).|
 
 
+?> ***Note on Alfamart:*** *If you are unable to find out what to input in `Product Code` field, please contact us at support@midtrans.com with subject: `Sandbox Alfamart Product Code` and mention your Merchant ID.*
 
 
 ### Cardless Credit 

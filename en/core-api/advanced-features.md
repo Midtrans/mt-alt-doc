@@ -1,17 +1,18 @@
 # Core API Advanced Features
 <hr>
 <!-- TODO:add sample code for lang other than CURL? -->
-Core API have various optional parameters that can be utilized for more advanced use case that can help your integration.
+
+Core API has various optional parameters that can be utilized to integrate with more advanced use cases.
 
 ## General
-### Recommended Params
-It's recommended to send as much detail so on report/dashboard those information will be included.
+### Recommended Parameters
+You can customize the `transaction_details` to include more information such as `customer_details`, `item_details`, and so on. While sending API requests, it is recommended to send more details regarding the transaction, so that these details can get added to the report. This report can be viewed on the *Dashboard*.
 
-You can customize `transaction_details` data. To include data like `customer_details`, `item_details`. 
-
-Below are the recommended JSON param for general use (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameters added in the *Request Body* of a [Charge API Request](/en/core-api/credit-card.md#_2-sending-transaction-data-to-charge-api), to include more details of the transaction, are shown below.
+
 ```json
 {
   "payment_type": "credit_card",
@@ -66,7 +67,8 @@ Below are the recommended JSON param for general use (this param is used during 
 }
 ```
 
-#### **As CURL**
+#### **Sample Charge API Request**
+The JSON objects `item_details`, `customer_details`, and `shipping_address` are included in the sample Charge API Request shown below.
 
 ```bash
 curl -X POST \
@@ -126,16 +128,99 @@ curl -X POST \
   }
 }'
 ```
+
 <!-- tabs:end -->
 
-Refer to [Core API Docs](https://api-docs.midtrans.com/#json-object) for more detail & definition.
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+For general use, the JSON parameters recommended to be included in the Charge API request are described in the table given below.
+
+<table style="width:100%">  
+  <tr>     
+    <th colspan="2">Parameter</th> <th>Description</th>  <th>Type</th>  
+  </tr>   
+    <tr>      
+    <td>item_details</td> <td></td> <td>The details of the item purchased.</td> <td>Object</td>
+  </tr>
+  <tr>      
+   <td></td> <td>id</td>  <td>The id of the item purchased.</td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>price</td>  <td>The price of the item.</td> <td>String</td>
+  </tr>
+   <tr>      
+   <td></td> <td>quantity</td>  <td>The number of items purchased.</td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>name</td>  <td>The name of the item purchased.</td> <td>String</td>
+  </tr>
+  <tr>      
+    <td>customer_details</td> <td></td> <td>The details of the customer.</td> <td>Object</td>
+  </tr>
+  <tr>      
+   <td></td> <td>first_name</td>  <td>The first name of the payer. </td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>last_name</td>  <td>The last name of the payer. </td> <td>String</td>
+  </tr>
+   <tr>      
+   <td></td> <td>email</td>  <td>The email address of the payer. </td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>phone</td>  <td>The phone number of the payer.</td> <td>String</td>
+    </tr> <tr>      
+   <td></td> <td>address</td>  <td>The postal address of the payer.</td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>city</td>  <td>The city of payer.</td> <td>String</td>
+  </tr>
+    <tr>      
+   <td></td> <td>postal_code</td>  <td>The postal code of the payer.</td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>country_code</td>  <td>The country code of the payer. </td> <td>String</td>   </tr> <td>shipping_address</td> <td></td> <td>The address to which the item is to be shipped.</td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>first_name</td>  <td>The first name of the customer.</td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>last_name</td>  <td>The last name of the customer</td> <td>String</td>
+  </tr>
+   <tr>      
+   <td></td> <td>email</td>  <td>The email address of the customer.</td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>phone</td>  <td>The phone number of the customer.</td> <td>String</td> </tr><tr>      
+   <td></td> <td>address</td>  <td>The postal address.</td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>city</td>  <td>The name of the city.</td> <td>String</td>
+  </tr>
+   <tr>      
+   <td></td> <td>postal_code</td>  <td>The postal code.</td> <td>String</td>
+  </tr>
+  <tr>      
+   <td></td> <td>country_code</td>  <td>The country code.</td> <td>String</td>   </tr></table>
+
+
+
+
+For more details, refer to [JSON Object](https://api-docs.midtrans.com/#json-object).
+
+</article>
+</details>
+
+
 
 ### Custom Transaction Expiry
-Custom Expiry feature enables merchants to set an expiry time of payment with pending status for every transaction. When the time elapsed, customer will no longer be able to pay the transaction. The following payment is the list of payment with Pending Status (***all payment method except Credit Card***)
-
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/bank-transfer.md?id=charge-api-request)):
+Custom transaction expiry can be configured for all payment methods except for *Credit Card* payment methods. You can configure expiry time for the payment of a transaction with the *Transaction Status* : *Pending*. After the expiry time is elapsed, the customer will not be able to make a payment for the transaction.
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameter added in the *Request Body* of a [Charge API Request](/en/core-api/e-wallet.md#_1-sending-transaction-data-to-charge-api-request), to configure custom transaction expiry, is shown below.
+
 ```json
 ...
   "custom_expiry": {
@@ -145,7 +230,10 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   }
 ...
 ```
-#### **As CURL**
+
+#### **Sample Charge API Request**
+The JSON object `custom_expiry` included in the sample Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -167,19 +255,28 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
-| Parameter | Type | Description |
---- | --- | ---
-`order_time` | String(50)(***optional***) | Timestamp in `yyyy-MM-dd hh:mm:ss Z` format. <br>**If not specified, transaction time will be used as order time** (when customer confirm payment channel).
-`expiry_duration` | String(50)(***required***) | Time duration the payment will remain valid.
-`unit` | String(50)(***required***) | Valid values are: `second, minute, hour, or day`. <br>**NOTE:** If attribute undefined, default unit is minute. 
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+The JSON attributes recommended to be included in the Charge API request, to configure custom transaction expiry, are described in the table given below.
+
+Parameter| Description | Type | Note
+--- | --- | --- | ---
+order_time | The date and time at which the item was ordered.<br/>If not specified, transaction time (the time at which the payment method was confirmed) will be used as order_ time. | String (50) |It is in the format, *YYYY-MM-DD* *HH:MM:SS.*<br/>Time zone: Western Indonesian Time (GMT+7)
+expiry_duration | The duration for which the transaction is valid. | String (50) |--
+unit | The unit of expiry_duration. | String (50) |Valid values are second, minute, hour or day.<br>Default value is minute.
+
+</article>
+</details>
 
 ### Custom Fields
-Custom Fields is a feature that enables merchants to charge a transaction with a unique data according to the merchant's need.
-Custom field allow you to send your own (custom) data to Core API, and then it will be send back from Midtrans to your backend on HTTP notification. Also will be displayed on Dashboard under the order detail.
-
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/bank-transfer.md?id=charge-api-request)):
+Custom Fields is a feature that enables you to include any specific details about the transaction. These details will be sent to the Core API. These will be included in the HTTP notification sent from Midtrans to the merchant backend. These custom details will also be displayed on the *Dashboard* under order details.
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameters added in the *Request Body* of a [Charge API Request](/en/core-api/credit-card.md#_2-sending-transaction-data-to-charge-api), to include custom fields, are shown below.
+
 ```json
 ...
   "custom_field1": "this is custom text defined by merchant",
@@ -187,7 +284,10 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   "custom_field3": "customer selected blue color variant"
 ...
 ```
-#### **As CURL**
+
+#### **Sample Charge API Request**
+The JSON objects `custom_field1`, `custom_field2`, `custom_field3` included in the sample Charge API Request are shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -206,18 +306,29 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
-| Parameter | Type | Description |
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+The JSON parameters recommended to be included in the Charge API request, to configure custom transaction expiry, are described in the table given below.
+
+Parameter| Description | Type
 --- | --- | ---
-custom_field1 | String(255)<br>(***optional***) | Custom field 1 for custom parameter from merchant <br>Input any data you want here
-custom_field2 | String(255)<br>(***optional***) | Custom field 2 for custom parameter from merchant <br>Input any data you want here
-custom_field3 | String(255)<br>(***optional***) | Custom field 3 for custom parameter from merchant <br>Input any data you want here
+custom_field1 | You can write custom details about the transaction. |String (255)
+custom_field2 | You can write custom details about the transaction. |String (255)
+custom_field3 | You can write custom details about the transaction. |String (255)
+
+</article>
+</details>
 
 ### Metadata
-Metadata is similar with custom field which enables merchant to put **free-form JSON object** instead of String. Merchants can use this metadata as a transaction tag where merchants retrieve it via Get Status or Notification payload. Additionally, merchants can also configure their fraud detection rules based on their metadata fields.
+Metadata is similar to [Custom Fields](/en/core-api/advanced-features.md#custom-fields) which enables you to put **free-form JSON object** instead of String. You can use this metadata as a transaction tag and retrieve it using *Get Status* or *Notification Payload*. Additionally, you can also configure fraud detection rules based on the metadata fields.
 
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/bank-transfer.md?id=charge-api-request)):
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameters added in the *Request Body* of a [Charge API Request](/en/core-api/credit-card.md#_2-sending-transaction-data-to-charge-api), to include metadata, is shown below.
+
 ```json
 ...
   "metadata": {
@@ -227,7 +338,10 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
    }
 ...
 ```
-#### **As CURL**
+
+#### **Sample Charge API Request**
+The JSON object `metadata`, included in the sample Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -248,20 +362,29 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
-| Parameter | Type | Description |
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+The JSON parameter recommended to be included in the Charge API request, to configure metadata, is described in the table given below.
+
+Parameter| Description | Type
 --- | --- | ---
-metadata | JSON Object | Object containing the metadata parameters
+metadata | Object containing the metadata parameters|Object
+
+</article>
+</details>
 
 ## Credit Card
+
 ### 3 Domain Secure (3DS)
-Three Domain Secure (3DS) feature can be enabled/disabled for certain transaction. By default you **should always enable 3DS**, unless you understand the risk of disabling 3DS and the requirement (it will require you to have agreement and approved by the Acquiring Bank). To allow disabling 3DS please consult to Midtrans Activation team.
+Three Domain Secure (3DS) feature can be enabled/disabled for a specific transaction. By default, you **should always enable 3DS**. Please understand the risks involved in disabling 3DS. This will require you to have agreement and approval by the *Acquiring Bank*. Consult Midtrans Activation team to allow disabling 3DS.
 
-* Set the `authentication` value to `true` to enable 3DS
-* Set the `authentication` value to `false` to disable 3DS
-
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
 <!-- tabs:start -->
+
 #### **JSON Param**
+The JSON parameters added in the *Request Body* of a Charge API Request, to enable 3DS, is shown below.
+
 ```json
 ...
   "credit_card": {
@@ -270,7 +393,9 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   }
 ...
 ```
-#### **As CURL**
+#### **Sample Charge API Request**
+The JSON attribute ` authentication`, included in the sample Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -290,14 +415,26 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
-### Route Transactions to Specific Acquiring
-Merchant can specify which Acquring Bank they prefer to use for specific transaction. Transaction fund will be routed to that specific acquiring bank. Please consult to Midtrans Activation Team for the availability of the acquiring bank.
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
 
-* Specify the bank name inside the `bank` parameter
+The JSON parameter recommended to be included in the Charge API request, to enable/disable 3DS authentication, is described in the table given below.
 
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
+| Parameter      | Description                            | Type    | Values                                           |
+| -------------- | -------------------------------------- | ------- | ------------------------------------------------ |
+| authentication | Flag to enable the 3DS authentication. | Boolean | `true` to enable 3DS.<br>`false` to disable 3DS. |
+
+</article>
+</details>
+
+### Routing Transactions to Specific Acquiring Bank
+You can specify a preferred *Acquiring Bank* for a specific transaction. Specify the bank name inside `bank` parameter. The transaction fund will be routed to that specific *Acquiring Bank*. Consult Midtrans Activation team to get information about the availability of the *Acquiring Bank*.
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameter added in the *Request Body* of a [Charge API Request](/en/core-api/credit-card.md#_2-sending-transaction-data-to-charge-api), to route the transaction fund to a specific *Acquiring Bank*, is shown below.
+
 ```json
 {
   "transaction_details": {
@@ -311,7 +448,9 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   }
 }
 ```
-#### **As CURL**
+#### **Sample Charge API Request**
+The JSON attribute `bank`, included in the sample Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -331,28 +470,43 @@ curl -X POST \
 }'
 ```
 <!-- tabs:end -->
-> Valid **bank** values: `mandiri, bni, cimb, bca, maybank, bri, or mega`
+
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+| Parameter | Description                             | Type   | Values                                                       |
+| --------- | --------------------------------------- | ------ | ------------------------------------------------------------ |
+| bank      | Name of the preferred *Acquiring Bank*. | String | `mandiri`, `bni`, `cimb`, `bca`, `maybank`, `bri` or `mega`. |
+
+</article>
+</details>
 
 ### Recurring/One Click Transaction
-You can allow customer to save their card credentials for easier and faster future transactions. Card credentials will be saved securely on Midtrans side. Merchant will only need to store and associate each unique customer with unique `saved_token_id` from initial Charge Response.
+You can allow the customer to save their card credentials, **including the CVV number**, for future transactions. This adds to a better customer experience. Midtrans saves the card credentials securely. Store and associate each customer with a unique `saved_token_id` from the Charge API Response received during the first transaction.
 
 <details>
 <summary><b>Sequence Diagram</b></summary>
 <article>
-The overall Recurring/One Click end-to-end payment proccess can be illustrated in following sequence diagram:
+The Recurring/One Click end-to-end payment process can be illustrated in following sequence diagram.
 
 ![one click sequence diagram](../../asset/image/core_api-sequence_one_click.png)
 </article>
 </details>
 
-#### Retrieve *token_id*
-You need a `token_id` from [Get Card Token Step](/en/core-api/credit-card.md?id=_1-get-card-token) to charge with One Click feature.
+#### Retrieving the `token_id`
+`token_id` is retrieved from [Getting the Card Token](/en/core-api/credit-card#_1-getting-the-card-token). `token_id` is a representation of customer's card information used for the transaction. Merchant frontend JavaScript securely transmits card information to Midtrans Core API in exchange of card `token_id`. `token_id` should be retrieved using [MidtransNew3ds JS library](https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js). on merchant frontend. This avoids the risk of card information being transmitted to merchant backend.
 
-#### One Click Initials Charge Request
-Add additional attribute in charge request credit_card object when charging the initial transaction for One Click feature.
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
+For more details, refer to [Getting the Card Token](/en/core-api/credit-card#_1-getting-the-card-token).
+
+#### Charge API Request for initial transaction
+Additional attributes `token_id` and `save_token_id` are added in `credit_card` object in the *Request Body* during [Charge API Request](/en/core-api/bank-transfer.md).
+
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameters added in the *Request Body* of a Charge API Request, to enable *One Click* transaction, is shown below.
+
 ```json
 {
   "payment_type": "credit_card",
@@ -367,7 +521,9 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   }
 }
 ```
-#### **As CURL**
+#### **Sample Charge API Request for the First Transaction**
+The JSON attribute `save_token_id`, included in the sample Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -387,9 +543,9 @@ curl -X POST \
   }
 }'
 ```
-<!-- tabs:end -->
+#### **Sample Charge API Response for the First Transaction**
+The sample Charge API response for the first transaction is shown below.
 
-#### One Click Initials Charge Response
 ```json
 {
     "status_code": "201",
@@ -410,18 +566,18 @@ curl -X POST \
 }
 ```
 
-#### One Click Initials Open 3DS Authentication Page
-As part of API response, we now have `redirect_url`. It should be opened (displayed to customer) using [MidtransNew3ds JS library](https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js) on merchant's website frontend.
+?> ***Note***: The `transaction_status` is *Pending*. <br>The `redirect_url` received in the response is used in [Opening 3DS Authentication Page for the First Transaction](#opening-3ds-authentication-page-for-the-first-transaction).
 
-To open 3DS page we can use `MidtransNew3ds.authenticate` or `MidtransNew3ds.redirect` function. Input the `redirect_url` retrieved previously. Please take a look [Open 3DS Authenticate Page JS Implementation Step](/en/core-api/credit-card?id=open-3ds-authenticate-page-js-implementation) for more details.
+<!-- tabs:end -->
 
-#### One Click Initials 3DS Authenticate JSON Response
-JSON Attribute | Description |
---- | --- 
-saved_token_id | Token ID of a credit card to be charged for the following transaction	
-saved_token_id_expired_at | Expiry date of the Token ID
+#### Opening 3DS Authentication Page for the First Transaction
+To open 3DS authentication page on merchant frontend, display the `redirect_url` retrieved from Charge API response. The redirect URL is displayed using `MidtransNew3ds.authenticate` or `MidtransNew3ds.redirect` function in [MidtransNew3DS JS library](https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js).
 
-You will get the **response and notifications** like the following:
+ For more details, refer to [Open 3DS Authentication Page JS Implementation](/en/core-api/credit-card?id=open-3ds-authentication-page-js-implementation).
+
+?>***Note***: When the customer completes the transaction on the page, the *Transaction Status* changes from *Pending* to *Capture*.
+#### Sample 3DS Authenticate JSON Response for the First Transaction
+
 ```json
 {
   "status_code": "200"
@@ -446,13 +602,29 @@ You will get the **response and notifications** like the following:
   "channel_response_message": "Approved"
 }
 ```
-You need to store `saved_token_id` to your Database.
+<details>
+<summary><b>Response Body JSON Attribute Description</b></summary>
+<article>
 
-#### One Click Following Transaction Charge Request
-Add `saved_token_id` in value of `token_id` attribute when charging the following One Click transaction.
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
+| Parameter                 | Description                                                  | Type   | Note |
+| ------------------------- | ------------------------------------------------------------ | ------ | ---- |
+| saved_token_id            | Token ID of a credit card to be charged for recurring transactions. | String | --   |
+| saved_token_id_expired_at | Expiry date and time of the Token ID. It is in the format YYYY-MM-DD HH:MM:SS | String | --   |
+
+</article>
+</details>
+
+Store the `saved_token_id` in your database for recurring transactions using the same card.
+
+#### Charge API Request for Recurring Transactions
+
+For recurring transactions by the customer, add `saved_token_id` as the value of `token_id` attribute, while sending [Charge API Request](/en/core-api/credit-card.md#_2-sending-transaction-data-to-charge-api).
+
 <!-- tabs:start -->
-##### **JSON Param**
+
+#### **JSON Parameter**
+The JSON parameters added in the *Request Body* of a Charge API Request to allow *One Click* transaction, is shown below.
+
 ```json
 {
   "payment_type": "credit_card",
@@ -465,7 +637,9 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   }
 }
 ```
-#### **As CURL**
+#### **Sample Charge API Request for recurring transactions**
+The JSON attribute `token_id` included in the sample Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -485,10 +659,10 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
-#### One Click Following Transaction Charge Response and Notifications
-Following One Click Charge Response is identical with [Card Payment Charge Response and Response](https://api-docs.midtrans.com/#card-payment-charge-response-and-notifications). Successful One Click transaction is described as `capture` status and is ready for settlement.
+#### Charge API Response and Notifications for Recurring Transactions
+The Charge API response for recurring transaction on the card is identical with [Card Payment Charge Response](/en/core-api/credit-card.md#sample-response). Successful *One Click* transaction is flagged as `"transaction_status": "capture"` and is ready for settlement.
 
-You will get the **response and notifications** like the following:
+#### Sample Charge API Response for recurring transactions
 ```json
 {
   "status_code": "200",
@@ -511,23 +685,27 @@ You will get the **response and notifications** like the following:
 }
 ```
 
-To better understand the use cases, you an also further refer to [this article](https://support.midtrans.com/hc/en-us/articles/360002419153-One-Click-Two-Clicks-and-Recurring-Transaction).
+For more use-cases, refer to [One Click, Two click and Recurring Transactions](https://support.midtrans.com/hc/en-us/articles/360002419153-One-Click-Two-Clicks-and-Recurring-Transaction).
 
 ### Recurring Transaction with Register Card API
-You can allow customer to save their card credentials for easier and faster future transactions. Card credentials will be saved securely on Midtrans side. Merchant will only need to store and associate each unique customer with unique `saved_token_id` from initial Charge Response.
+You can allow the customer to save their card credentials, **including the CVV number**, for future transactions. Midtrans saves the card credentials securely. You have to store and associate each customer with a unique `saved_token_id` from the Charge API Response received during the first transaction.
 
 <details>
 <summary><b>Sequence Diagram</b></summary>
 <article>
-The overall Register Card API end-to-end payment proccess can be illustrated in following sequence diagram:
+The overall Register Card API end-to-end payment process can be illustrated in following sequence diagram:
 
 ![one click sequence diagram](../../asset/image/core_api-sequence_register_card.png)
 </article>
 </details>
 
-#### Register Card via MidtransNew3ds JS
+#### Registering the Card
+The card credentials can be saved on Midtrans and `saved_token_id` can be retrieved using MidtransNew3ds JS or Register API request.
 
-To save card credentials on Midtrans and retrieve card's `saved_token_id`, use `MidtransNew3ds.registerCard` via [MidtransNew3ds JS library](/en/core-api/credit-card#include-midtrans-js). Implement the following Javascript on the payment page.
+<!-- tabs:start -->
+
+#### **MidtransNew3ds JS**
+To save card credentials on Midtrans and retrieve card's `saved_token_id`, use `MidtransNew3ds.registerCard` through [MidtransNew3ds JS library](https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js). Implement the following JavaScript on the payment page.
 ```javascript
 // Create the card object with the required fields
 var cardData = {
@@ -549,17 +727,31 @@ var options = {
 }
 
 MidtransNew3ds.registerCard(cardData, options);
+
 ```
 
-<details>
-<summary><b>Alternative: Manual API Request</b></summary>
-<article>
+#### **Register API Request for Registering Card Credentials**
+To save card credentials on Midtrans and retrieve card's `saved_token_id`, use Register API request.
 
-HTTP Method | API Endpoint |
+#### Register API Request Details
+
+Method | API Endpoint
 --- | ---
 GET | `https://api.sandbox.midtrans.com/v2/card/register`
 
-#### Register Card HTTP Request
+#### Query Parameters
+
+| Parameter      | Description                      | Type   | Note                                       |
+| -------------- | -------------------------------- | ------ | ------------------------------------------ |
+| card_number    | The card number of the customer. | String | --                                         |
+| card_exp_month | The month of expiry on the card. | String | It is in MM format                         |
+| card_exp_year  | The year of expiry on the card.  | String | It is in YYYY format.                      |
+| client_key     | Your *Client Key*.               | String | It can be retrieved from your MAP account. |
+
+#### Register API Sample Request
+
+Sample Register API request is given below.
+
 ```bash
 curl -X GET \
   'https://api.sandbox.midtrans.com/v2/card/register?card_number=5211111111111117&card_exp_month=12&card_exp_year=2021&client_key=<YOUR CLIENT KEY HERE>' \
@@ -569,8 +761,8 @@ curl -X GET \
 </article>
 </details>
 
-#### Register Card Response
-You will get the **response** like the following:
+#### Register API Sample Response
+Sample Register API response is given below.
 
 ```json
 {
@@ -580,11 +772,15 @@ You will get the **response** like the following:
     "masked_card": "521111-1117"
 }
 ```
-You need to store `saved_token_id` to your database.
+<!-- tabs:end -->
 
-#### Register Card Initials Get Card Token
-You need a `saved_token_id` from [Register Card API Response Step](#register-card-via-midtransnew3ds-js).
-To retrieve card `token_id`, we will be using `MidtransNew3ds.getCardToken` on [MidtransNew3ds JS library](/en/core-api/credit-card?id=include-midtrans-js). Implement the following Javascript on the payment page.
+Store `saved_token_id` received in the response body, to your database.
+
+#### Getting Card Token for the First Transaction
+You need a `saved_token_id` from [Registering the Card](#registering-the-card).
+
+The `token_id` is retrieved using `MidtransNew3ds.getCardToken` on [MidtransNew3ds JS library](https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js). Implement the following JavaScript on the payment page.
+
 ```javascript
 // card data from customer input, for example
 var cardData = {
@@ -609,13 +805,15 @@ var options = {
 // trigger `getCardToken` function
 MidtransNew3ds.getCardToken(cardData, options);
 ```
-If all goes well, we will be able to get card `token_id` inside `onSuccess` callback function. It will be used as one of JSON parameter for [`/charge` API request](en/core-api/advanced-features.md?id=register-card-initials-send-transaction-data-to-api-charge).
+For successful transactions, `token_id` is received inside `onSuccess` callback function. It is used as one of the JSON parameters for [Charge API request](#sending-transaction-data-to-charge-api-for-the-first-transaction).
 
-#### Register Card Initials Send Transaction Data to API Charge
-API request should be done from **Merchant’s backend** to acquire `redirect_url` which will need to proceed to next step, opening 3DS authentication page by providing payment information. There are several components that are required:
+#### Sending Transaction Data to Charge API for the First Transaction
+Charge API request is sent from merchant backend to acquire `redirect_url`, required to open 3DS authentication page.
 
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameters added in the *Request Body* of a Charge API Request are shown below.
 ```json
 {
   "payment_type": "credit_card",
@@ -629,7 +827,7 @@ API request should be done from **Merchant’s backend** to acquire `redirect_ur
   }
 }
 ```
-#### **As CURL**
+#### **Sample Charge API Request**
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -650,24 +848,28 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
-Requirement | Description |
---- | ---
-Server Key | Explained on [previous section](/en/midtrans-account/overview.md)
-`order_id` | Transaction order ID, defined from your side
-`gross_amount` | Total amount of transaction, defined from your side
-`token_id` | Represents customer's credit card information acquired from [Get Card Token Response](/id/core-api/advanced-features.md?id=register-card-initials-get-card-token)
-`authentication` | Flag to enable the 3D secure authentication.
+The parameters that are required for the API Charge request are given below.
 
-#### Register Card Initials Open 3DS Authentication Page
-As part of API response, we now have `redirect_url`. It should be opened (displayed to customer) using [MidtransNew3ds JS library](https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js) on merchant's website frontend.
+| Requirement      | Description                                                  |
+| ---------------- | ------------------------------------------------------------ |
+| Server Key       | The server key. For more details, refer to [Retrieving API Access Keys](/en/midtrans-account/overview.md#retrieving-api-access-keys). |
+| `order_id`       | The order_id of the transaction.                             |
+| `gross_amount`   | The total amount of transaction.                             |
+| `token_id`       | Represents customer's card information acquired from [Getting Card Token for the first transaction](#getting-card-token-for-the-first-transaction). |
+| `authentication` | Flag to enable the 3D secure authentication.                 |
 
-To open 3DS page we can use `MidtransNew3ds.authenticate` or `MidtransNew3ds.redirect` function. Input the `redirect_url` retrieved previously. Please take a look [Open 3DS Authenticate Page JS Implementation Step](/en/core-api/credit-card?id=open-3ds-authenticate-page-js-implementation) for more details.
+#### Opening 3DS Authentication Page for the First Transaction
+To open 3DS authentication page on merchant frontend, display the `redirect_url` retrieved from Charge API response. The redirect URL is displayed using `MidtransNew3ds.authenticate` or `MidtransNew3ds.redirect` function in [MidtransNew3DS JS library](https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js).
 
-#### Register Card Following Transaction
-When it's time to charge another transaction, retrieve `saved_token_id` from database ([Register Card API Response](/id/core-api/advanced-features.md?id=register-card-api-response)).
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
+For more details, refer to [Open 3DS Authentication Page JS Implementation](/en/core-api/credit-card.md#open-3ds-authentication-page-js-implementation).
+
+#### Charge API Request for Future Transactions
+For any future transaction using the same card credentials, retrieve `saved_token_id` saved on the database from [Registering the Card](#registering-the-card) step.
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameters added in the *Request Body* of a [Charge API Request](/en/core-api/credit-card.md#_2-sending-transaction-data-to-charge-api) is shown below.
+
 ```json
 {
   "payment_type": "credit_card",
@@ -681,7 +883,9 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
 }
 ```
 
-#### **As CURL**
+#### **Sample Charge API Requests**
+The JSON attribute `token_id`, included in the Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -706,26 +910,33 @@ curl -X POST \
 
 <!-- <TODO: elaborate Subscriptions API> -->
 
-### Two Clicks Transaction
-You can allow customer to save their card credentials (**except card cvv**) for easier and faster future transactions. Card credentials will be saved securely on Midtrans side. Merchant will only need to store and associate each unique customer with unique `saved_token_id` from initial Charge Response.
+### Two Click Transaction
+You can allow customer to save their card credentials, **except the CVV number**, for easier and faster future transactions. Midtrans saves the card credentials securely. You have to store and associate each customer with a unique `saved_token_id` from the initial Charge API Response.
 
 <details>
 <summary><b>Sequence Diagram</b></summary>
 <article>
-The overall Two Clicks end-to-end payment proccess can be illustrated in following sequence diagram:
+The Two Clicks end-to-end payment process is illustrated in following sequence diagram:
 
 ![one click sequence diagram](../../asset/image/core_api-sequence_two_clicks.png)
 </article>
 </details>
 
-#### Retrieve *token_id*
-You need a `token_id` from [Get Card Token Step](/en/core-api/credit-card.md?id=get-card-token) to charge with One Click feature.
+To configure *Two Clicks* transaction for a customer, follow the steps given below.
 
-#### Two Clicks Initials Charge Request
-Add additional attribute in charge request credit_card object when charging the initial transaction for Two Clicks feature.
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
+#### Retrieving the `token_id`
+The `token_id` is a representation of customer's card information used for the transaction. The `token_id` is retrieved using [MidtransNew3ds JS library](https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js) on merchant frontend. Merchant frontend JavaScript securely transmits card information to Midtrans Core API in exchange of the card `token_id`. This avoids the risk of card information being transmitted to merchant backend.
+
+For more details, refer to [Getting the Card Token](/en/core-api/credit-card#_1-getting-the-card-token).
+
+#### Charge API Request for the First Transaction
+The `token_id` retrieved is added as an attribute in `credit_card` object in the *Request Body* during [Charge API Request](/en/core-api/bank-transfer.md?id=charge-api-request).
+
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameter added in the *Request Body* of a Charge API Request to allow *Two-Click* transaction, is shown below.
+
 ```json
 {
   "payment_type": "credit_card",
@@ -736,12 +947,14 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   "credit_card": {
 	"token_id": "<token_id from Get Card Token Step>",
 	"authentication": true,
-	"save_token_id": true     // <-- To flag that token is saved during initial charge
+	"save_token_id": true     // <-- To flag that token is saved during First charge response
   }
 }
 ```
 
-#### **As CURL**
+#### **Sample Charge API Request For the First Transaction**
+The JSON attribute ` save_token_id`, included in the sample Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -761,9 +974,10 @@ curl -X POST \
   }
 }'
 ```
-<!-- tabs:end -->
 
-#### Two Clicks InitialsTwo Clicks Initials  Charge Response
+#### Sample Charge API Response for the First Transaction
+The Charge API response includes the `redirect_url`.
+
 ```json
 {
     "status_code": "201",
@@ -784,18 +998,22 @@ curl -X POST \
 }
 ```
 
-#### Two Clicks Initials Open 3DS Authentication Page
-As part of API response, we now have `redirect_url`. It should be opened (displayed to customer) using [MidtransNew3ds JS library](https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js) on merchant's website frontend.
+?>***Note***: The `transaction_status` is *Pending*.
 
-To open 3DS page we can use `MidtransNew3ds.authenticate` or `MidtransNew3ds.redirect` function. Input the `redirect_url` retrieved previously. Please take a look [Open 3DS Authenticate Page JS Implementation Step](/en/core-api/credit-card?id=open-3ds-authenticate-page-js-implementation) for more details.
+<!-- tabs:end -->
 
-#### Two Clicks Initials 3DS Authenticate JSON Response
-JSON Attribute | Description |
---- | --- 
-saved_token_id | Token ID of a credit card to be charged for the following transaction	
-saved_token_id_expired_at | Expiry date of the Token ID
+#### Opening 3DS Authentication Page for the First Transaction
+To open 3DS authentication page on merchant frontend, display the `redirect_url` retrieved from Charge API Response for the First Transaction. The redirect URL is displayed using `MidtransNew3ds.authenticate` or `MidtransNew3ds.redirect` function in [MidtransNew3DS JS library](https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js).
 
-You will get the **response and notifications** like the following:
+ When the customer completes the transaction, the *Transaction Status* changes from *Pending* to *Capture*.
+
+ For more details, refer to [Open 3DS Authenticate Page JS Implementation](/en/core-api/credit-card.md#open-3ds-authenticate-page-js-implementation).
+
+
+Midtrans notifies the merchant backend with the new `transaction status` and `saved_token_id`.
+
+#### Sample Response for 3DS authentication for the First Transaction
+
 ```json
 {
   "status_code": "200",
@@ -820,12 +1038,24 @@ You will get the **response and notifications** like the following:
   "channel_response_message": "Approved",
 }
 ```
-You need to store `saved_token_id` to your Database.
+?>***Note***: The *Transaction Status* is updated to *Capture*. <br>Store the `saved_token_id` to your database.
 
-#### Two Clicks Following Transaction Get Card Token
-You need `saved_token_id` which you can get from [Two Clicks Initial Charge Response](/id/core-api/advanced-features.md?id=two-clicks-initials-3ds-authenticate-json-response).
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
 
-To retrieve card `token_id`, we will be using `MidtransNew3ds.getCardToken` function. Implement the following Javascript on our payment page.
+| Parameter                 | Description                                                  | Type   |
+| ------------------------- | ------------------------------------------------------------ | ------ |
+| saved_token_id            | Token ID of a credit card to be charged for recurring transactions from the customer. | String |
+| saved_token_id_expired_at | Expiry date of the Token ID                                  | String |
+
+</article>
+</details>
+
+#### Getting Card Token For Future Transactions
+The `saved_token_id` from the previous step, is used in this step.
+
+To retrieve card `token_id`, use `MidtransNew3ds.getCardToken` function. Implement the following JavaScript on Midtrans payment page.
 ```javascript
 // card data from customer input, for example
 var cardData = {
@@ -850,16 +1080,17 @@ var options = {
 // trigger `getCardToken` function
 MidtransNew3ds.getCardToken(cardData, options);
 ```
-If all goes well, we will be able to get card `token_id` inside `onSuccess` callback function. It will be used as one of JSON parameter for [`/charge` API request](en/core-api/credit-card.md?id=charge-api-request).
+?>***Note***: You need `saved_token_id` retrieved from database.<br>For successful transactions,the `token_id` is received inside `onSuccess` callback function. It will be used as one of the JSON parameters for Charge API request.
 
-### BIN Filter
-BIN filter is a feature that allows the merchant to accept only Credit Cards within specific set of BIN numbers, it is useful for certain bank promo/discount payment by accepting only credit cards issued by that bank. BIN (Bank Identification Number) is the **first 1-6 digits of a card number**, which identifies the bank that issues the card. A bank generally has more than one BIN.
+### BIN (Bank Identification Number) Filter
+BIN (Bank Identification Number) filter is a feature that allows the merchant to accept credit cards within specific set of BIN numbers. It is useful for certain bank promotions or discount payments, by accepting only the credit cards issued by that bank. BIN is the six digits of the card number that identifies the bank, issuing the card. Generally, a bank has more than one BIN.
 
-To use this feature, merchant needs to accumulate the list of BIN that accepts the promotion or simply uses the issuing bank's name. This transaction can only be performed exclusively by using the credit card that is included in the BIN list or BIN under the particular defined issuing bank.
-
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
+To use this feature, accumulate the list of BIN that accepts the promotion or uses the issuing bank's name. This transaction can be performed exclusively by using the credit card that is included in the BIN list or BIN under the particular defined issuing bank.
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameters added in the *Request Body* of a [Charge API Request](en/core-api/credit-card.md#_2-sending-transaction-data-to-charge-api) to allow BIN filter, are shown below.
+
 ```json
 {
   "payment_type": "credit_card",
@@ -875,7 +1106,10 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   }
 }
 ```
-#### **As CURL**
+#### **Sample Charge API Request**
+
+The JSON attributes `bank` and `bins` included in the sample Charge API Request are shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -898,17 +1132,20 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
-?> Note: We already populate BIN number for bni, mandiri, cimb, bca, and other partner bank. You can add the bank name as bins value.
+?> ***Note***: By default, Midtrans populates BIN number for BNI, Mandiri, CIMB, BCA, and other partner banks. You can add the bank name as `bins` value.
 
 ### Installment Payment
 #### Online Installment
-This is the type of Installment where the Card Issuer and Acquiring Bank is the same entity (e.g: BNI Card and BNI Acquiring bank).
 
-To activate the installment feature, merchant are required to have agreement with the bank. For online installments, the bank will issue special MID for installment. By using this installment MID, the transaction will be converted automatically into an installment. Please consult to Midtrans Activation Team for installment MID. If MID is ready, merchant simply need to add the installment parameter.
+*Online Installment* is the type of payment where *Card Issuing Bank* used for making an installment payment and the *Acquiring Bank* are the same. For example, a customer makes an installment payment using BNI Card and the *Acquiring Bank* is also BNI.
 
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
+You should have agreements with the bank to activate the installment feature. For *Online Installment*, the bank will issue special installment Merchant ID (MID). This installment MID is used to automatically convert the transaction into installments. Please consult Midtrans Activation Team for installment MID. If MID is ready, add the installment parameter.
+
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameter added in the *Request Body* of a [Charge API Request](/en/core-api/credit-card.md#_2-sending-transaction-data-to-charge-api) to allow *Online Installment*, is shown below.
+
 ```json
 {
   "payment_type": "credit_card",
@@ -924,7 +1161,9 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   }
 }
 ```
-#### **As CURL**
+#### **Sample Charge API Response**
+The JSON attribute `installment_term`, included in the sample Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -947,16 +1186,32 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+| Parameter        | Description                                                  | Type    |
+| ---------------- | ------------------------------------------------------------ | ------- |
+| token_id         | Represents customer's credit card information acquired from [Get Card Token Response](/en/core-api/credit-card.md?id=get-card-token-response). | String  |
+| authentication   | Flag to enable the 3DS authentication.                 | Boolean |
+| bank             | The name of the *Card Issuing Bank* or *Acquiring Bank*. <br>Else, it will be treated as [Offline Installment](/en/core-api/advanced-features.md#offline-installment). | String  |
+| installment_term | The tenor of installment.                                    | Integer |
+
+</article>
+</details>
+
 #### Offline Installment
-This is the type of Installment where the Card Issuer and Acquiring Bank don't have to be same entity (e.g: BNI Card and Mandiri Acquiring Bank).
+*Offline Installment* is the type of payment where *Card Issuing Bank* used for making an installment payment and the *Acquiring Bank* are not the same. For example, a customer makes an installment payment using BNI Card and the *Acquiring Bank* is Mandiri.
 
-To allow installment feature with banks which do not issue MID Installment, merchant can use offline installment feature. With offline installment feature, the transaction will be charged in full amount and the transaction will be converted into installment later. Please consult to Midtrans Activation Team for installment agreement first.
+You can use *Offline Installment* feature to allow installment feature with banks which do not issue MID. With offline installment feature, initially the transaction will be charged in full amount and later it will be converted into installments. Please consult Midtrans Activation Team for installment agreements.
+This is the type of Installment where the Card Issuer and Acquiring Bank don't have to be same entity, for example BNI Card and Mandiri Acquiring Bank).
 
-Merchant simply need to add the `installment` parameter with combination of bin filter feature. The purpose of bin filter is to limit certain cards from being allowed to do offline installment, based on the agreement between merchant and issuing banks.
 
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameters added in the *Request Body* of a [Charge API Request](en/core-api/credit-card.md#_2-sending-transaction-data-to-charge-api) to allow *Offline Installment*, are shown below.
+
 ```json
 {
   "payment_type": "credit_card",
@@ -972,7 +1227,9 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   }
 }
 ```
-#### **As CURL**
+#### **Sample Charge API Request**
+The JSON attribute `installment` with `bins` filter feature included in the Charge API Request, are shown below. The purpose of `bins` filter is to limit certain cards from being allowed to do offline installment, based on the agreement between you and issuing banks.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -995,23 +1252,27 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
-#### Definition
-Param | Type | Description |
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+Parameter | Description |Type
 --- | --- | ---
-token_id | String | Represents customer's credit card information acquired from [Get Card Token Response](/en/core-api/credit-card.md?id=get-card-token-response).
-authentication | Boolean | Flag to enable the 3D secure authentication.
-bank | String | Acquiring bank. To make sure transaction is going on-us.<br>Else, it will be treated as offline installment.
-installment_term | Integer | Installment Tenor.
-bins | Array | List of credit card's BIN (Bank Identification Number) that is allowed for transaction.
+token_id | Represents customer's credit card information acquired from [Get Card Token Response](/en/core-api/credit-card.md?id=get-card-token-response).|String
+authentication | Flag to enable the 3D secure authentication.|Boolean
+installment_term | The tenor of installment. |Integer
+bins | List of credit card's BIN (Bank Identification Number) that is allowed for transaction. |Array
+
+</article>
+</details>
 
 ### Pre-Authorization Payment
-Pre-authorization feature means customer's fund will not directly deducted after transaction, but it's amount/limit will be temprorary reserved (blocked). Then merchant can initiate "capture" action later via [capture API](https://api-docs.midtrans.com/#capture-transaction). By default fund reservation will be released after 7 days if there is no "capture" action for that transaction.
-
-To use this feature, merchant need to add `"type": "authorize"` parameter.
-
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/credit-card.md?id=charge-api-request)):
+*Pre-Authorization* payment feature will temporarily block the fund from the customer's account. The fund is not immediately deducted after the transaction. You can initiate "capture" action through [Capture API](https://api-docs.midtrans.com/#capture-transaction). By default, fund reservation will be released after 7 days if there is no "capture" action for that transaction.
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameters added in the *Request Body* of a [Charge API Request](en/core-api/credit-card.md#_2-sending-transaction-data-to-charge-api) to pre-authorize a payment, is shown below.
+
 ```json
 {
   "transaction_details": {
@@ -1025,7 +1286,9 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   }
 }
 ```
-#### **As CURL**
+#### **Sample Charge API Request**
+The JSON attribute `type` is included in the sample Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -1047,26 +1310,33 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
-#### Definition
-Param | Type | Description |
---- | --- | ---
-token_id | String | Represents customer's credit card information acquired from [Get Card Token Response](/en/core-api/credit-card.md?id=get-card-token-response).
-bank | String | Acquiring bank. To make sure transaction is going on-us.<br>Else, it will be treated as offline installment.
-authentication | Boolean | Flag to enable the 3D secure authentication.
-type | String | Attribute to enable the pre-authorization feature. Valid value `authorize`.
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+Parameter | Type | Description |Note
+--- | --- | --- | ---
+token_id | String | Represents customer's credit card information acquired from [Get Card Token Response](/en/core-api/credit-card.md?id=get-card-token-response).|--
+authentication | Boolean | Flag to enable the 3D secure authentication.|--
+type | String | Attribute to enable the pre-authorization feature. |Valid value `authorize`.
+
+</article>
+</details>
 
 ## Credit Card - Full PAN
+
 [Credit Card - Full PAN](https://api-docs.midtrans.com/#credit-card-full-pan)
 
 <!-- <TODO: elaborate Full PAN> -->
 
-## Gopay
-### Redirect Customer From Gojek App
-After GoPay payment completed, by default customer will remain on Gojek app, so they need to manually close Gojek app to switch back to merchant web/app. Using parameter `gopay.callback_url` will allow customer to be automatically redirected to merchant web/app from Gojek app.
-
-Example of the JSON param (this param is used during [API Request Step](/en/core-api/e-wallet.md?id=charge-api-request)):
+## GoPay
+### Redirecting Customer from the Gojek App
+After completing payment using GoPay payment method, by default, the customer will remain on Gojek app. They need to manually close Gojek app to switch back to merchant website or application. `gopay.callback_url` parameter will allow customers to be automatically redirected from the Gojek app to the merchant website/application.
 <!-- tabs:start -->
-#### **JSON Param**
+
+#### **JSON Parameters**
+The JSON parameters added in the *Request Body* of a Charge API Request, to redirect the customer is shown below.
+
 ```json
 {
   "payment_type": "gopay",
@@ -1080,7 +1350,9 @@ Example of the JSON param (this param is used during [API Request Step](/en/core
   }
 }
 ```
-#### **As CURL**
+#### **Sample Charge API Request**
+The JSON attribute `callback_url` included in the sample Charge API Request is shown below.
+
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -1100,32 +1372,43 @@ curl -X POST \
 ```
 <!-- tabs:end -->
 
-You can input `callback_url` value with http/https url protocol for website, or Deeplink protocol for mobile App. For example, you can specify deeplink to your app: `"callback_url": "tokoecommerce://gopay_finish/"`
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
 
-> **Note**: 
-> The final redirect url will be appended with query parameter like `?order_id=xxx&result=xxx`. 
-> 
-> For example the final redirect url might looks like this: 
-> ```
-https://tokoecommerce.com/gopay_finish/?order_id=CustOrder-102123123&
-result=success
-```
+| Parameter       | Description                                 | Type    | Values                                                       |
+| --------------- | ------------------------------------------- | ------- | ------------------------------------------------------------ |
+| enable_callback | Flag to enable or disable callback_url      | Boolean | `true` to enable.<br>`false` to disable.                     |
+| callback_url    | The URL to which the customer is redirected | String  | Use http/https URL protocol for websites, or Deeplink protocol for mobile applications. |
 
-Query Parameter | Type | Description
---- | --- | ---
-order_id |  String |  Order ID sent on the Charge Request.  
-result  | String |  Result of the transaction to decide what kind of page to show to customer. Possible values: `success` or `failure`.
+</article>
+</details>
 
-> You could utilize those information to display custom message to your customer on your finish url.
+The final redirect URL is appended with query parameters such as `order_id`, `result=xxx` as shown in the example below.
 
-## Bank Transfer / VA
-### Specify VA Number and VA Description
-By default Midtrans will randomize VA number used for bank transfer transaction. In some cases, you might want to specify/customize VA Number for Bank Transfer payment channels. You can do that with the following parameters.
+| Redirect URL                           | Final Redirect URL                                           |
+| :------------------------------------- | ------------------------------------------------------------ |
+| https://tokoecommerce.com/gopay_finish | https://tokoecommerce.com/gopay_finish/?order_id=CustOrder-102123123&result=success |
 
-Example of the JSON param (this param is used during [API Request Step](/en/snap/integration-guide.md?id=api-request)):
+| Query Parameter | Type   | Description                                                  | Value                   |
+| --------------- | ------ | ------------------------------------------------------------ | ----------------------- |
+| order_id        | String | Order ID sent on the Charge Request.                         | --                      |
+| result          | String | Result of the transaction to decide what kind of page to show to customer. | `success` or `failure`. |
+
+?> ***Note***: You may use the information to display custom message to your customer on your finish URL.
+
+## Bank Transfer/VA
+### Specifying Custom VA Number and VA Description
+Midtrans creates random VA number for transactions using *Bank Transfer* payment method. In some cases, you can customize the VA number. You can do that with the following parameters.
 <!-- tabs:start -->
-#### **BCA**
+
+####  **BCA**
+
+#### JSON Parameters
+The JSON parameters added in the *Request Body* of a Charge API Request, are shown below.
+
 ```json
+
 ...
    "bank_transfer":{
      "bank": "bca",
@@ -1150,17 +1433,28 @@ Example of the JSON param (this param is used during [API Request Step](/en/snap
    }
 ...
 ```
-| Parameter | Type | Description |
---- | --- | ---
-bank | String(255)<br>(***required***) | Bank name which process bank transfer transaction.
-va_number | String(255)<br>(***optional***) | Custom va number assigned by merchant.<br>**Length should be within 1 to 11**.
-inquiry	| JSON Array(10)<br>(***optional***) | Free texts will be displayed on ATM (if supported)<br>when customer attempt to check/inquire the VA number.
-payment	| JSON Array(10)<br>(***optional***) | Free texts will be displayed on ATM (if supported)<br>when customer attempt to pay the VA number.
-id | String(50)<br>(***required***)	| Free text message in Bahasa Indonesia.
-en | String(50)<br>(***required***) | Free text message in English.
-sub_company_code | String<br>(***optional***) | BCA sub company code directed for this transactions<br>**NOTE:** Default is 00000.
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+Parameter| Description | Type |Note
+--- | --- | --- | ---
+bank | The name of the bank which processes the transaction. |String (255)|--
+va_number | Custom VA number assigned by you. |String|Minimum Length: 1<br>Maximum length: 11
+inquiry	| Texts to be displayed on ATM when the customer attempts to enquire the VA number. |Array (10)|--
+Id	| Text message in Bahasa Indonesia. |String (50)|--
+En | Text message in English. |String (50)|--
+payment | Texts to be displayed on ATM when the customer attempts to make payments. |Array (10)|--
+sub_company_code | BCA sub company code directed for this transactions. |String|Default value is 00000.
+
+</article>
+</details>
 
 #### **BNI**
+
+#### JSON Parameters
+The JSON parameters added in the *Request Body* of Charge API Request, are shown below.
+
 ```json
 ...
   "bank_transfer":{
@@ -1169,12 +1463,23 @@ sub_company_code | String<br>(***optional***) | BCA sub company code directed fo
   }
 ...
 ```
-| Parameter | Type | Description |
---- | --- | ---
-bank | String(255)<br>(***required***) | Bank name which process bank transfer transaction.
-va_number | String(255)<br>(***optional***) | Custom va number assigned by merchant. **Length should be within 1 to 8**.
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+Parameter| Description                                                  | Type |Note
+--- | --- | --- | ---
+bank | The name of the bank which processes the transaction using Bank Transfer payment method. |String (255)|--
+va_number | Custom VA number assigned by merchant. |String (255)|Minimum length:1<br>Maximum length:8
+
+</article>
+</details>
 
 #### **Mandiri Bill**
+
+#### JSON Parameters
+The JSON parameters added in the *Request Body* of Charge API Request, are shown below.
+
 ```json
 ...
 	"echannel" : {
@@ -1189,18 +1494,29 @@ va_number | String(255)<br>(***optional***) | Custom va number assigned by merch
 	}
 ...
 ```
-| JSON Attribute | Type | Description |
---- | --- | ---
-bill_info1 | String<br>(***required***) | Label 1. Mandiri only allows 10 characters.<br>Exceeding characters will be **truncated**.
-bill_info2 | String<br>(***required***) | Value for Label 1. Mandiri only allows 30 characters.<br>Exceeding characters will be **truncated**.
-bill_info3 | String<br>(***optional***) | Label 2. Mandiri only allows 10 characters.<br>Exceeding characters will be **truncated**.
-bill_info4 | String<br>(***optional***) | Value for Label 2. Mandiri only allows 30 characters.<br>Exceeding characters will be **truncated**.
-bill_info5 | String<br>(***optional***) | Label 3. Mandiri only allows 10 characters.<br>Exceeding characters will be **truncated**.
-bill_info6 | String<br>(***optional***) | Value for Label 3. Mandiri only allows 30 characters.<br>Exceeding characters will be **truncated**.
-bill_info7 | String<br>(***optional***) | Label 4. Mandiri only allows 10 characters.<br>Exceeding characters will be **truncated**.
-bill_info8 | String<br>(***optional***) | Value for Label 4. Mandiri only allows 30 characters.<br>Exceeding characters will be **truncated**.
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+Parameter| Description |Type|Note
+--- | --- | --- | ---
+bill_info1 | Label 1 |String|Maximum length: 10.<br/>Exceeding characters will be truncated.
+bill_info2 | Value for Label 1 |String|Maximum length: 30<br/>Exceeding characters will be truncated.
+bill_info3 | Label 2 |String|Maximum length: 10 <br/>Exceeding characters will be truncated.
+bill_info4 | Value for Label 2 |String|Maximum length: 30<br/>Exceeding characters will be truncated.
+bill_info5 | Label 3 |String|Maximum length: 10<br/>Exceeding characters will be truncated.
+bill_info6 | Value for Label 3 |String|Maximum length: 30<br/>Exceeding characters will be truncated.
+bill_info7 | Label 4 |String|Maximum length: 10<br/>Exceeding characters will be truncated.
+bill_info8 | Value for Label 4 |String|Maximum length: 30<br/>Exceeding characters will be truncated.
+
+</article>
+</details>
 
 #### **Permata**
+
+#### JSON Parameters
+The JSON parameters added in the *Request Body* of a Charge API Request, are shown below.
+
 ```json
 ...
 	"bank_transfer":{
@@ -1212,34 +1528,50 @@ bill_info8 | String<br>(***optional***) | Value for Label 4. Mandiri only allows
 	}
 ...
 ```
-| Parameter | Type | Description |
---- | --- | ---
-bank | String(255)<br>(***required***) | Bank name which process bank transfer transaction.
-va_number | String(10)<br>(***optional***) | Custom va number assigned by merchant. **Length should be 10**.<br>Only supported for b2b VA type.
-recipient_name | String(20)<br>(***optional***) | Recipient name shown on the payment details.<br>**NOTE:** Default is merchant name.
+<details>
+<summary><b>POST Body JSON Attribute Description</b></summary>
+<article>
+
+Parameter | Description | Type |Note
+--- | --- | --- | ---
+bank | The name of the bank which processes the *Bank Transfer* transaction. |String (255)|--
+va_number | Custom VA number assigned by the merchant. |String (10)|Length should be equal to 10. <br>Only supported for B2B VA type.
+recipient_name | The name of the recipient shown in the payment details.<br> |String (20)|Default value is your name.
+
+</article>
+</details>
+
 <!-- tabs:end -->
 
-Virtual Account number displayed to customer contains two parts. for example, in `{91012}{12435678}` , the first part is the company code and the second part is a unique code. The second part is the part that can be customized.
+Virtual Account number displayed to customer contains two parts; the company code and the unique code. The table given below, explains this with an example.
+
+| Virtual Account Number | Company Code | Unique Code  |
+| ---------------------- | ------------ | ------------ |
+| `{91012}{12435678}`    | `{91012}`    | `{12435678}` |
+
+The unique code can be customized.
+
+Rules for customizing Virtual Account number is given below.
 
 * Only digits are allowed.
-* Different banks have different specs on their custom VA numbers. Please see the documentation on the respective banks.
-* If the number provided is already utilized for another order, then a different unique number will be used instead.
-* If the number provided is longer than required, then the unnecessary digits in the end will be trimmed.
+* Different banks have different specifications on their custom VA numbers. Please see the documentation of the respective banks.
+* If the number provided is already utilized for another order, then a unique number will be used instead.
+* If the number provided is longer than required, then the unnecessary digits in the end will be truncated.
 * If the number provided is shorter than required, then the number will be prefixed with zeros.
 
-Note: On Production mode, not all Bank support custom VA number, it depends on the agreement, please consult with Midtrans Activation team for further info.
+?>***Note***: In *Production* environment, all banks do not support custom VA number. It depends on the agreement. Please consult with Midtrans Activation team for further information.
 
-## Consideration and Limitation
-By using Midtrans API there are some consideration and limitation you need to keep in mind, that will be explained below.
+## Consideration and Limitations
+There are a few limitations to consider while using Midtrans API. These limitations are given below.
 
-### Maximum Request Size Limit
+- ### Maximum Request Size Limit
 
-Midtrans API allow maximum size of **16kb** per request (**\~16000 total characters**). Please strive to keep it under this limit to avoid request failure.
+Midtrans API allows a maximum size of 16kb or 16000 total characters per request. Please try to keep it under the limit to avoid request failures.
 
-Tips: You can try to limit the number of `item_details` from your request, or atleast group it into fewer (or 1 generic) `item_details`.
+?>***Tips***: Limit the number of `item_details` from your request, or group it into fewer `item_details`.
 
-### Card Token ID Expiry Time
+- ### Card Token ID Expiry Time
 
-For regular card transaction, card's `token_id` (for non-recurring, non-one-click, non-two-click token) and also the 3ds `redirect_url` lifetime is **10 minutes**. 
+For regular card transactions, the `token_id` (for non-recurring, non-one-click, non-two-click token) and the 3DS `redirect_url` expires in **10 minutes**.
 
-Because it is designed to be 1 time card token for 1 transaction, to ensure security. Please make sure you complete the card transaction within that time limit to avoid token expired.
+For security reasons, it is designed to generate a unique `token_id` for each transaction. Please make sure to complete the card transaction within the time limit to avoid expired `token_id`.

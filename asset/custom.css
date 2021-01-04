@@ -9,7 +9,7 @@
     --main-transition: 250ms ease 0s;
 
     /* override smaller font size for less crowded feel */
-    font-size: 95%;
+    --base-font-size: 14px;
     /* override to widen sidebar */
     --sidebar-width: 19rem;
 }
@@ -35,7 +35,7 @@ td{
 }/**/
 
 .my-card{
-    font-size: 90%;
+    font-size: 13.5px;
     margin-bottom: 1em;
     padding: 1.7em;
     border-style: solid;
@@ -111,17 +111,11 @@ td{
 .markdown-section pre[data-lang],
 .markdown-section table code:not([class*="lang-"]):not([class*="language-"]),
 table{
-    font-size: 90%;
+    font-size: 13.5px;
 }
 
 iframe{
     border: 0
-}
-
-/* @HACK: Override font size for smaller and denser looking*/
-.sidebar-nav
-{
-    font-size: 90%;
 }
 
 /* @HACK: Override non aesthetic "-" prefix on sidebar h2 link*/
@@ -162,11 +156,6 @@ iframe{
 /* @HACK: Override sidebar nav menu effect*/
 :root{
     --sidebar-nav-indent: 0.7em;
-}
-.sidebar-nav li>a,
-.sidebar-nav li
-{
-    transition: var(--main-transition) !important;
 }
 .sidebar-nav li>a:hover,
 .sidebar-nav li.active>a

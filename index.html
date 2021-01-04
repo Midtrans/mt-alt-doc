@@ -2,6 +2,14 @@
 <html>
 <!-- @@@NOCONTENT -->
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K458FD6');</script>
+    <!-- End Google Tag Manager -->
+
     <meta name="google-site-verification" content="IUkZKtVcIeoIBGWIh2XWp7jH9xuYIpviQWCFIAVmXbs" />
     <!-- verif: beta-docs -->
     <meta name="google-site-verification" content="2FsjXHulCMIalGc3OZqIXIKVThLV9KwcEgYj08iNbp8" />
@@ -70,6 +78,11 @@
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K458FD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div id="app"></div>
     <script>
         window.isUnderMidtransDomain = window.location.hostname.includes('.midtrans.com');
@@ -100,7 +113,7 @@
 
         // Main Docsify setup
         window.$docsify = {
-            logo: 'asset/image/main/midtrans-logo.svg',
+            logo: 'asset/image/main/midtrans-logo.png',
             ga: window.GA_UA_ID,
             loadSidebar: true,
             loadNavbar: true,
@@ -173,9 +186,9 @@
                  */
                 function (hook, vm) {
                     hook.doneEach(function(){
-                        // @HACK: use $docsify.logo as assetPath source, use hard coded .svg extension
+                        // @HACK: use $docsify.logo as assetPath source, detect any extension
                         // might break when $docsify.logo is changed.
-                        let assetPath = window.$docsify.logo.replace(/(.*)\/.*?\.svg/g,"$1/");
+                        let assetPath = window.$docsify.logo.replace(/(.*)\/.+?\..+/g,"$1/");
                         // all sidebar img tag and navbar img tag, except `.emoji``
                         document
                             .querySelectorAll(`.sidebar-nav ul>li img:not(.emoji), .app-nav li>img:not(.emoji)`)
@@ -192,13 +205,18 @@
                 },
                 /**
                  * Custom plugin to replace wrong home-logo href link on hash router mode
+                 * and history mode if first opened from non-homepage url
                  * So it can be detected as `willUseDocsifyHashRouter` upon homepage load
                  */
                 function (hook, vm) {
-                    if($docsify.routerMode != 'hash'){ return false; }
                     hook.doneEach(function(){
-                        let homeLinkEl = document.querySelector('.app-name-link');
-                        homeLinkEl.href += "#/";
+                        if($docsify.routerMode == 'hash'){ 
+                            let homeLinkEl = document.querySelector('.app-name-link');
+                            homeLinkEl.href += "#/";
+                        } else {
+                            let homeLinkEl = document.querySelector('.app-name-link');
+                            homeLinkEl.href = window.predictedHomeUrl;
+                        }
                     });
                 },
                 /**

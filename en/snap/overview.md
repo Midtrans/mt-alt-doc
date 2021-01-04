@@ -1,9 +1,9 @@
 # Snap Overview
 <hr>
 
-Snap is a payment service that allows our partners to use Midtrans payments system, where Midtrans’ payment page pops-up on your web page after checkout. Setting up Snap is easy and there is no monthly fees. The simple and quick integration is suitable for any size of business spanning from small to corporate/unicorn size business.
+*Snap* is a payment service that allows Midtrans partners to use Midtrans payment systems. This allows Midtrans payment page to pop-up on your web page after checkout. Configuring *Snap* is easy and there is no monthly fee. The simple and quick integration process is suitable for small size business or corporate size businesses.
 
- With single integration, Snap user interface allows you to accept payment with [all Midtrans' various payment methods](https://midtrans.com/payments).
+ With single integration, *Snap* user interface allows you to accept payments with any of the [Midtrans payment methods](https://midtrans.com/payments).
 
 ![Snap Overview](./../../asset/image/snap-overview-main.png)
 
@@ -26,43 +26,42 @@ Snap is a payment service that allows our partners to use Midtrans payments syst
 </p>
 
 ## Various Ways to Integrate with Snap {docsify-ignore}
-**Choose** any of **one** integration method below that is suitable to your liking:
+Select the best suitable method to integrate with *Snap* from the list given below.
 
 <div class="my-card">
 
 #### [A. Integration Guide](/en/snap/integration-guide.md)
-Easy to follow step by step basic integration guide. Also includes example for various programming languages.
+Use the simple step-by-step basic integration guide which includes examples for various programming languages.
 </div>
 
 <div class="my-card">
 
 #### [B. Interactive Demo](/en/snap/interactive-demo.md)
-Quickly understand how integration works by looking at an interactive code example, which the output is displayed in real-time. That you can replicate yourself within few minutes.
+Quickly understand how the integration works, by looking at an interactive code example with real-time output. You can quickly replicate the code and learn to integrate.
 </div>
 
 <div class="my-card">
 
 #### [C. Install Snap as CMS Plugin](/en/snap/with-plugins.md)
-Simply install these ready to use plugins to start integration with e-commerce CMS like: Wordpress Woocommerce, Magento, Prestashop, Opencart, WHMCS, etc.
+Simply install these ready to use plugins to start integration with E-commerce CMS like: WordPress WooCommerce, Magento, PrestaShop, OpenCart, WHMCS, and so on.
 </div>
 
 <div class="my-card">
 
 #### [D. Using Ecommerce Platform](/en/snap/platform/overview.md)
-Use 3rd party E-commerce platform solutions (SaaS like Shopify, Sirclo, Jejualan etc.) to quickly integrate with Midtrans.
+Use third-party E-commerce platform solutions such as Shopify, Sirclo, Jejualan and so on, to quickly integrate with Midtrans.
 </div>
 
 <div class="my-card">
 
 #### [E. Sample Code Repo](/en/technical-reference/library-plugin.md#sample-integration-code)
-Collections of integration code examples for various programming languages, available as public Github repositories.
+Use the collections of integration code examples for various programming languages, available as public GitHub repositories.
 </div>
-
 
 ## Advanced Usage {docsify-ignore}
 
 <div class="my-card">
 
 #### [Snap Advanced Feature](/en/snap/advanced-feature.md)
-Learn the various useful features that Snap API provides.
+Learn the various useful features provided by *Snap* API.
 </div>

@@ -26,34 +26,22 @@ The mechanism to generate `Authorization` header value is:
 To generate `Authorization` header value, follow the steps given below.
 
 1. Follow the format of [**Basic Authentication**](https://swagger.io/docs/specification/authentication/basic-authentication/). (example: `Username:Password`)
-
 2. Username and password are separated by `:` character.
-
 3. *Server Key* is used as `Username`, there is no password, so password is blank/empty string.
-
-  For example, if your *Server Key* is `SB-Mid-server-abc123cde456`, then `Username:Password` would be `SB-Mid-server-abc123cde456:`.
-
+  - For example, if your *Server Key* is `SB-Mid-server-abc123cde456`, then `Username:Password` would be `SB-Mid-server-abc123cde456:`.
 4. Encode this value into base64 format.
-
-   For example, base64 of `SB-Mid-server-abc123cde456:` is `U0ItTWlkLXNlcnZlci1hYmMxMjNjZGU0NTY6`. 
-
+  - For example, base64 of `SB-Mid-server-abc123cde456:` is `U0ItTWlkLXNlcnZlci1hYmMxMjNjZGU0NTY6`. 
 5. Add the word `Basic ` as prefix.
-
-   The above value would be `Basic U0ItTWlkLXNlcnZlci1hYmMxMjNjZGU0NTY6`.
-
+  - The above value would be `Basic U0ItTWlkLXNlcnZlci1hYmMxMjNjZGU0NTY6`.
 6. Your Authorization header is ready.
-
-   `Authorization: Basic U0ItTWlkLXNlcnZlci1hYmMxMjNjZGU0NTY6`
+  - `Authorization: Basic U0ItTWlkLXNlcnZlci1hYmMxMjNjZGU0NTY6`
 
 You can use the below tool to try out Authorization Header calculation.
-
 
 
 <details>
 <summary><b>Authorization Header Generator</b></summary>
 <article>
-
-
 
 [Authorization Header Generator](https://jsfiddle.net/wx3hbcen/embedded/result,html/dark ':include :type=iframe width=100% height=600px')
 </article>
@@ -104,8 +92,7 @@ Query Param for auth | `client_key=<YOUR-CLIENT-KEY>`
 <summary>Sample Request in Curl</summary>
 <article>
 
-
 ```bash
 curl 'https://api.sandbox.midtrans.com/v2/token?client_key={YOUR-CLIENT-KEY}&card_cvv=123&gross_amount=20000&currency=IDR&card_number=4811111111111114&card_exp_month=02&card_exp_year=2025'
 ```
-
+</article>

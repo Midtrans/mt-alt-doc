@@ -20,9 +20,9 @@ To configure the billing information, follow the steps given below.
 
 3. Click **Change Billing Information** (3) to change the Billing Information.
 
-   *Current Billing Information* screen is displayed.
-
    ![Dashboard Usage](./../../asset/image/after-payment-dash-usage-11.png)
+
+   *Current Billing Information* screen is displayed.
 
    4. Enter the **Account Name**.
 
@@ -34,15 +34,15 @@ To configure the billing information, follow the steps given below.
 
    8. Click **Save**.
 
+      ![Dashboard Usage](./../../asset/image/after-payment-dash-usage-12.png)
+
       A confirmation message is displayed.
 
    9. Click **OK** to update the billing information.
-
+   
       Upon successful update, *Success saved* message is displayed on the Billing screen.
    
-   ![Dashboard Usage](./../../asset/image/after-payment-dash-usage-12.png)
-   
-   If you want to configure the billing information from the **Billing** menu, you can click **Change Bank Account** then you will be redirected to **Settings > Billing** menu to follow the same steps above.
+   If you want to configure the billing information from the **BILLINGS** menu, you can click **Change Bank Account** then you will be redirected to **Settings > Billing** menu to follow the same steps above.
 
 ### Scheduled Payout
 Midtrans provides feature to schedule automated payout, that can be set as daily, weekly or monthly.

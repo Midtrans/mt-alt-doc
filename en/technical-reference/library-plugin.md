@@ -20,7 +20,7 @@ Our library and plugins are **Open Source!** We are happy to accept any open sou
 |Postman Collection| [Postman](https://app.getpostman.com/run-collection/af068be08b5d1a422796)<br>[Github](https://github.com/Midtrans/Midtrans-Payment-API-Postman-Collections)|
 
 ## Snap Plugin for E-Commerce CMS
-Step by step [user guide is available here](/en/snap/with-plugins)
+?> The [step by step installation guide is available here](/en/snap/with-plugins).
 
 |Platforms | Resources |
 |---|---|

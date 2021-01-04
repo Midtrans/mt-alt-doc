@@ -1,6 +1,6 @@
 <hr>
 
-[![Midtrans Logo](/asset/image/main/midtrans-logo.svg ':size=220')](https://midtrans.com)<hr>
+[![Midtrans Logo](/asset/image/main/midtrans-logo.png ':size=220')](https://midtrans.com)<hr>
 
 # Get Started with Midtrans
 <hr>
@@ -20,7 +20,24 @@ Snap user interface helps to securely accept payments on your website and mobile
 <p style="text-align: center;">
   <button onclick="
   event.target.innerText = `Processing...`;
-  fetch(`https://cors-anywhere.herokuapp.com/https://midtrans.com/api/request_snap_token`)
+  var reqHeaders = new Headers();
+  reqHeaders.append('Accept', 'application/json');
+  reqHeaders.append('Content-Type', 'application/json');
+  reqHeaders.append('Authorization', 'Basic '+btoa('SB-Mid-server-GwUP_WGbJPXsDzsNEBRs8IYA:'));
+  var reqOpts = {
+    method: 'POST',
+    headers: reqHeaders,
+    body: JSON.stringify({
+      'transaction_details':{
+        'order_id':'demo-docs-main-'+Math.round((new Date()).getTime()/1),
+        'gross_amount':10000
+      },
+      'credit_card':{
+        'secure':true
+      }
+    })
+  };
+  fetch('https://cors-anywhere.herokuapp.com/https://app.sandbox.midtrans.com/snap/v1/transactions', reqOpts)
     .then(res=>res.json())
     .then(res=>{
       let snapToken = res.token;
@@ -101,7 +118,7 @@ Here are some popular use-cases that may help you choose the best product for yo
 
 #### Accept payment on your e-commerce website or app or both
 
-Accept payment from your customer within your website or application with Card Transaction, Bank Transfer, Direct Debit, E-Wallet, [and more](https://midtrans.com/payments). Choose [Beautiful Snap user interface](/en/snap/overview.md) or [Customizable Core API](/en/core-api/overview.md) to enable your website and app to accept payment securely in a few simple steps.
+Accept payment from your customer within your website or application with Card Transaction, Bank Transfer, Direct Debit, E-Money, [and more](https://midtrans.com/payments). Choose [Beautiful Snap user interface](/en/snap/overview.md) or [Customizable Core API](/en/core-api/overview.md) to enable your website and app to accept payment securely in a few simple steps.
 
 #### Subscription / Recurring Service
 

@@ -9,7 +9,7 @@ The table given below describes the life cycle of *Transaction Status* and its p
 
 Transaction Status | Description | Possible changes(s)
 --- | --- | ---
-`pending` | Transaction is created and available/waiting to be paid by customer at the payment provider (ATM/Internet banking/E-wallet app/store). | settlement, <br>expire,<br>cancel, <br>deny 
+`pending` | Transaction is created and available/waiting to be paid by customer at the payment provider (ATM/Internet banking/E-money app/store). | settlement, <br>expire,<br>cancel, <br>deny 
 `capture` | Transaction is successful and credit card balance is captured successfully. <br/>If no action is taken by you, the transaction will be successfully settled on the next day and transaction status will change to *settlement*.<br />It is safe to assume a successful payment. | settlement, <br />cancel 
 `settlement` | Transaction is successfully settled. Funds have been received. | refund, chargeback, partial_refund, partial_chargeback
 `deny` | The credentials used for payment are rejected by the payment provider or Midtrans Fraud Detection System (FDS). <br/>To know the reason and details for denied transaction, see the `status_message` field in the response. |
@@ -26,12 +26,9 @@ Transaction Status | Description | Possible changes(s)
 <summary><b>Notes When Using Snap API</b></summary>
 <article>
 
-
-
 When a transaction is created on Snap API, it does not immediately assign any payment status on *Core API GET Status* response. Even if the payment page is activated on Snap API, you might encounter `404` or *Payment not found* response while calling *Core API GET Status*.
 
 This is because the customer did not yet choose any payment method within the Snap payment page (idling or abandoning the Snap payment page). Once the customer proceeds with a payment method, then the transaction status is assigned and is available on *Core API GET Status*. 
-
 </article>
 </details>
 

@@ -12,7 +12,7 @@
 	- [Integration Guide](en/core-api/overview?id=available-ways-to-integrate "Midtrans - Core API Integration Guide Documentation")
 		- [Card](en/core-api/credit-card.md "Midtrans - Core API Credit & Debit Card Documentation")
 		- [Bank Transfer](en/core-api/bank-transfer.md "Midtrans - Core API Bank Transfer Documentation")
-		- [E-Wallet](en/core-api/e-wallet.md "Midtrans - Core API E-Wallet Documentation")
+		- [E-Money](en/core-api/e-wallet.md "Midtrans - Core API E-Money Documentation")
 		- [Direct Debit](en/core-api/direct-debit.md "Midtrans - Core API Direct Debit Documentation")
 		- [Convenience Store](en/core-api/convenience-store.md "Midtrans - Core API Convenience Store Documentation")
 		- [Cardless Credit](en/core-api/cardless-credit.md "Midtrans - Core API Cardless Credit Documentation")

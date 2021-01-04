@@ -8,7 +8,7 @@ Step 1 and Step 2 in [Snap Integration Overview](/en/snap/overview.md) is explai
 <div class="my-card">
 
 #### [Sign Up for Midtrans Account](/en/midtrans-account/overview.md)
-Sign up for a Midtrans Merchant Administration Portal (MAP) account, to get your API Keys for *Sandbox* environment and to test the integration.
+Sign up for a Midtrans Merchant Administration Portal (MAP) account, to get your API Keys for *Sandbox* environment and to test integration.
 </div>
 
 <div class="my-card">
@@ -20,19 +20,19 @@ Retrieve API Keys for *Sandbox* environment that will be used for this guide.
 ## Specifications
 The technical specifications of the demonstration integration are given below.
 - Backend: **NodeJS** (hosted on CodeSandbox)
-- Frontend: **HTML** and **JavaScript**
+- Frontend: **HTML** and **JavaScript**.
 
 ## Usage Explanation
 You will see *Snap* Transaction Token as a visualization of API response on backend integration.
-  1. Click **Proceed to Payment** to test the frontend.
+1. Click **Proceed to Payment** to test the frontend.
 
-  > **Note**: Please wait until the window/iframe below is fully loaded. It may take some time while it tries to build the backend.
+?> ***Note***: Please wait until the window/iframe below is fully loaded. It may take some time while it tries to build the backend.
 
 [CodeSandbox demo Midtrans NodeJS](https://codesandbox.io/embed/serene-bell-yfjjd?fontsize=14&hidenavigation=0&theme=dark ':include :type=iframe width=100% height=600px')
 
-  2. Click **Open Sandbox** to view and edit the full source code. You can modify the sample code or copy it as a reference to your local machine.
+2. Click **Open Sandbox** to view and edit the full source code. You can modify with the sample code or copy it as a reference to your local machine.
 
-  > **Note**: In real-case scenario, the `token_id` may not be displayed to the customer. In the example shown, the `token_id` string is displayed to make it easy to understand the basic integration.
+?>***Note***: In real-case scenario, the `token_id` may not be displayed to the customer. In the example shown, the `token_id` string is displayed to make it easy to understand the basic integration.
 
 <!-- @WIP: Doesnt work yet -->
 <!-- <br>
@@ -77,8 +77,8 @@ Name | Value
 --- | ---
 Card Number | `4811 1111 1111 1114`
 CVV | `123`
-Exp Month | Any month in MM format. For example, `02`
-Exp Year | Any future year, in YYYY format. For example, `2025`
+Exp Month | Any month in MM format. For example, `02`.
+Exp Year | Any future year, in YYYY format. For example, `2025`.
 OTP/3DS | `112233`
 
 For more test payment credentials, refer to [Testing Payments on Sandbox](/en/technical-reference/sandbox-test.md).
