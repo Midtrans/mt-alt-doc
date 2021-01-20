@@ -510,6 +510,15 @@
             themeable: {
                 responsiveTables: false
             }
+        };
+
+        // @HACK: attempt to prevent 404 content when being open on local or via index.html, without proper SPA path routing, caused by `history` routerMode; by using `hash` routerMode.
+        if( document.location.href.endsWith('/index.html') ||
+            document.location.href.includes('/index.html#') ){
+            let currentFolderPath = (document.location.href.split('/index.html'))[0];
+            window.$docsify.basePath = currentFolderPath;
+            window.willUseDocsifyHashRouter = 1;
+            window.$docsify.routerMode = 'hash';
         }
     </script>
     <!-- Mixpanel -->
