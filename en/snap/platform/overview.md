@@ -195,14 +195,13 @@ Done! Now your Shopify online shop is ready to use Midtrans as payment gateway.
 
 <hr>
 
-### Unable to Install Specific Payment Methods
-In the rare case, Shopify can not install a specific payment method as well, to solve this case please follow the step below:
-1. Possible that the payment method already installed, please check step number 3 and 4 [here](#specific-payment-methods), the payment method will be shown there
-2. another alternative:
-	- logout from Shopify
-	- install the payment method by click the link [here](#specific-payment-methods)
-	- login to Shopify
-	- page to install the payment method will appear
+#### Unable to Install Specific Payment Methods
+In the rare case that you are not able to install specific payment methods, such as you are not presented with the install button on Step 2. Please try the following alternatives:
+1. It is possible that the payment method already installed, please manually continue to [step number 3](#specific-payment-methods) by navigating to Settings > Payments menu, the payment method will be shown there.
+2. Another alternative:
+	- Logout from Shopify
+	- Install the desired payment method by clicking the link provided [here](#specific-payment-methods)
+	- Proceed login to Shopify when prompted
 
 <hr>
 
