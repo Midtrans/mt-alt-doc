@@ -181,6 +181,7 @@ Some sample HTTP notifications for a successful transaction on different payment
   "signature_key": "fe5f725ea770c451017e9d6300af72b830a668d2f7d5da9b778ec2c4f9177efe5127d492d9ddfbcf6806ea5cd7dc1a7337c674d6139026b28f49ad0ea1ce5107",
   "settlement_time": "2021-06-23 11:27:50",
   "payment_type": "bank_transfer",
+  "payment_amounts": [],
   "order_id": "bca-va-01",
   "merchant_id": "M004123",
   "gross_amount": "100000.00",
