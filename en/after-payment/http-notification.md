@@ -297,18 +297,20 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 ```json
 {
-  "status_code": "200",
-  "status_message": "midtrans payment notification",
-  "transaction_id": "c0ba3583-5111-45a5-9f1c-84c9de7cb2f6",
-  "order_id": "3176440",
-  "gross_amount": "50000.00",
-  "payment_type": "bca_klikbca",
-  "transaction_time": "2016-06-19 15:58:15",
+  "transaction_time": "2021-06-23 11:50:38",
   "transaction_status": "settlement",
-  "approval_code": "YCRHOM160704",
+  "transaction_id": "c0ba3583-5111-45a5-9f1c-84c9de7cb2f6",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
   "signature_key": "ef0f472fa8a5165dc9f2ff6300832eb28657e88b9f3335ae5ebb27c8ef258d203c6da18ac6cd5738d2e38c54dfec860d8e067bdbc759a1268ab04218ccab93cc",
+  "settlement_time": "2021-06-23 12:17:29",
+  "payment_type": "bca_klikbca",
+  "order_id": "klikbca-01",
+  "merchant_id": "M004123",
+  "gross_amount": "1713600.00",
+  "currency": "IDR",
+  "approval_code": "ABC0101BCA02"
 }
-
 ```
 
 #### **Mandiri ClickPay**
