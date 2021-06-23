@@ -142,6 +142,26 @@ Some sample HTTP notifications for a successful transaction on different payment
 }
 ```
 
+#### **Shopeepay**
+
+```json
+{
+  "transaction_time": "2021-06-23 13:28:05",
+  "transaction_status": "settlement",
+  "transaction_id": "513f1f01-c9da-474c-9fc9-d5c64364b709",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "2496c78cac93a70ca08014bdaaff08eb7119ef79ef69c4833d4399cada077147febc1a231992eb8665a7e26d89b1dc323c13f721d21c7485f70bff06cca6eed3",
+  "settlement_time": "2021-06-23 13:28:21",
+  "payment_type": "shopeepay",
+  "order_id": "shopeepay-01",
+  "merchant_id": "M004123",
+  "gross_amount": "16700.00",
+  "fraud_status": "accept",
+  "currency": "IDR"
+}
+```
+
 #### **Permata VA**
 
 ```json
