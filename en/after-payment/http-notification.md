@@ -313,24 +313,6 @@ Some sample HTTP notifications for a successful transaction on different payment
 }
 ```
 
-#### **Mandiri ClickPay**
-
-```json
-{
-  "approval_code": "166JF5644001",
-  "transaction_time": "2016-06-19 15:56:45",
-  "gross_amount": "156216.00",
-  "order_id": "100248319",
-  "payment_type": "mandiri_clickpay",
-  "signature_key": "1e5d08e7f53cf0d4d07c85ad807fc091e59f579807b5a2e9728cb8d9ab11431d61673450944ef3fa7a87d7d2dbce8e90dc96012fc9950e3eb2d52521d5120a57",
-  "status_code": "200",
-  "transaction_id": "3bdddabe-a4ea-4233-81cc-09578178909f",
-  "transaction_status": "settlement",
-  "fraud_status": "accept",
-  "status_message": "midtrans payment notification"
-}
-```
-
 #### **CIMB Clicks**
 
 ```json
@@ -606,24 +588,6 @@ Some sample HTTP notifications for a successful transaction on different payment
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
 | approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
 | signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-
-#### **Mandiri ClickPay**
-
-#### POST Body
-
-| Element            | Description                                      | Type   | Notes                                                        |
-| ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
-| transaction_time   | The time of transaction with date.               | String | It is in the format, YYYY-MM-DD HH:MM:SS.                    |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
-| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
-| transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
-| status_message     | The status message.                              | String | –                                                            |
 
 #### **CIMB Clicks**
 
