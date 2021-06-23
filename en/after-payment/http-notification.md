@@ -422,17 +422,20 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 ```json
 {
-  "approval_code": "201373311528",
-  "transaction_time": "2016-06-19 16:04:02",
-  "gross_amount": "145000.00",
-  "order_id": "2014111702",
-  "payment_type": "bri_epay",
-  "signature_key": "13b6b8a2da46428812e7685463770e3704ece7fc3242a5f016f068b7b135e12a71afd02259fe4dbd8c97d747ae9cf8e13412842325ea8da4cf6d7177e32b7e31",
-  "status_code": "200",
-  "transaction_id": "f8635cd7-615d-4a6d-a806-c9ca4a56257e",
+  "transaction_time": "2021-06-21 23:31:51",
   "transaction_status": "settlement",
+  "transaction_id": "f8635cd7-615d-4a6d-a806-c9ca4a56257e",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "13b6b8a2da46428812e7685463770e3704ece7fc3242a5f016f068b7b135e12a71afd02259fe4dbd8c97d747ae9cf8e13412842325ea8da4cf6d7177e32b7e31",
+  "settlement_time": "2021-06-21 23:32:40",
+  "payment_type": "bri_epay",
+  "order_id": "bri-epay-01",
+  "merchant_id": "M004123",
+  "gross_amount": "5622200.00",
   "fraud_status": "accept",
-  "status_message": "midtrans payment notification"
+  "currency": "IDR",
+  "approval_code": "ABC0101BCA02"
 }
 ```
 <!-- tabs:end -->
