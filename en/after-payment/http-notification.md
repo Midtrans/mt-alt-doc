@@ -362,16 +362,19 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 ```json
 {
-  "transaction_time": "2018-08-24 16:20:36",
-  "gross_amount": "11000.00",
-  "order_id": "orderid-01",
-  "payment_type": "akulaku",
-  "signature_key": "35c4111539e184b268b7c1cd62a9c254e5d27c992c8fd55084f930b69b09eaafcfe14b0d512c697648295fdb45de777e1316b401f4729846a91b3de88cde3f05",
-  "status_code": "200",
-  "transaction_id": "b3a40398-d95d-4bb9-afe8-9a57bc0786ea",
+  "transaction_time": "2021-06-23 10:55:24",
   "transaction_status": "settlement",
+  "transaction_id": "b3a40398-d95d-4bb9-afe8-9a57bc0786ea",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "35c4111539e184b268b7c1cd62a9c254e5d27c992c8fd55084f930b69b09eaafcfe14b0d512c697648295fdb45de777e1316b401f4729846a91b3de88cde3f05",
+  "settlement_time": "2021-06-23 10:56:55",
+  "payment_type": "akulaku",
+  "order_id": "akulaku-01",
+  "merchant_id": "M004123",
+  "gross_amount": "130000.00",
   "fraud_status": "accept",
-  "status_message": "midtrans payment notification"
+  "currency": "IDR"
 }
 ```
 
