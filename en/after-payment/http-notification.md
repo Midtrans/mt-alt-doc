@@ -276,17 +276,20 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 ```json
 {
-  "approval_code": "91231",
-  "transaction_time": "2016-06-19 15:46:16",
-  "gross_amount": "11000.00",
-  "order_id": "orderid-01",
-  "payment_type": "bca_klikpay",
-  "signature_key": "35c4111539e184b268b7c1cd62a9c254e5d27c992c8fd55084f930b69b09eaafcfe14b0d512c697648295fdb45de777e1316b401f4729846a91b3de88cde3f05",
-  "status_code": "200",
-  "transaction_id": "ada84cd9-2233-4c67-877a-01884eece45e",
+  "transaction_time": "2021-06-23 09:26:08",
   "transaction_status": "settlement",
+  "transaction_id": "ada84cd9-2233-4c67-877a-01884eece45e",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "35c4111539e184b268b7c1cd62a9c254e5d27c992c8fd55084f930b69b09eaafcfe14b0d512c697648295fdb45de777e1316b401f4729846a91b3de88cde3f05",
+  "settlement_time": "2021-06-23 09:26:51",
+  "payment_type": "bca_klikpay",
+  "order_id": "bca-klikpay-01",
+  "merchant_id": "M004123",
+  "gross_amount": "912844.00",
   "fraud_status": "accept",
-  "status_message": "midtrans payment notification"
+  "currency": "IDR",
+  "approval_code": ""
 }
 ```
 
