@@ -146,17 +146,20 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 ```json
 {
-  "status_code": "200",
-  "status_message": "midtrans payment notification",
-  "transaction_id": "6fd88567-62da-43ff-8fe6-5717e430ffc7",
-  "order_id": "H17550",
-  "gross_amount": "145000.00",
-  "payment_type": "bank_transfer",
-  "transaction_time": "2016-06-19 18:23:21",
+  "transaction_time": "2021-06-23 11:18:59",
   "transaction_status": "settlement",
-  "fraud_status": "accept",
+  "transaction_id": "6fd88567-62da-43ff-8fe6-5717e430ffc7",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "0c0df82489931602577d9e434966c0540249b7c0aeaae2b718305af89a11e2bf9b4008aba07d1b3b248b15b4fbecdd15e81dbb2648b974efc4e0656e8c976094",
+  "settlement_time": "2021-06-23 11:20:06",
   "permata_va_number": "8562000087926752",
-  "signature_key": "0c0df82489931602577d9e434966c0540249b7c0aeaae2b718305af89a11e2bf9b4008aba07d1b3b248b15b4fbecdd15e81dbb2648b974efc4e0656e8c976094"
+  "payment_type": "bank_transfer",
+  "order_id": "permata-va-01",
+  "merchant_id": "M004123",
+  "gross_amount": "185000.00",
+  "fraud_status": "accept",
+  "currency": "IDR"
 }
 ```
 
