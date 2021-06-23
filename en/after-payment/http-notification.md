@@ -190,25 +190,6 @@ Some sample HTTP notifications for a successful transaction on different payment
 }
 ```
 
-#### **Mandiri Bill**
-
-```json
-{
-  "status_code": "200",
-  "status_message": "midtrans payment notification",
-  "transaction_id": "883af6a4-c1b4-4d39-9bd8-b148fcebe853",
-  "order_id": "tes",
-  "gross_amount": "1000.00",
-  "payment_type": "echannel",
-  "transaction_time": "2016-06-19 15:10:29",
-  "transaction_status": "settlement",
-  "approval_code": "340093197",
-  "signature_key": "bbceb3724b0b2446c59435795039fed2d249d3438f06bf90c999cc9d383b95170b7b58f9412fba25ce7756da8075ab1d78a48800156380a62dc84eb22b3f7de9",
-  "bill_key": "990000000260",
-  "biller_code": "70012"
-}
-```
-
 #### **BNI VA**
 
 ```json
@@ -265,6 +246,28 @@ Some sample HTTP notifications for a successful transaction on different payment
   "gross_amount": "300000.00",
   "fraud_status": "accept",
   "currency": "IDR"
+}
+```
+
+#### **Mandiri Bill**
+
+```json
+{
+  "transaction_time": "2021-06-23 11:57:49",
+  "transaction_status": "settlement",
+  "transaction_id": "883af6a4-c1b4-4d39-9bd8-b148fcebe853",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "bbceb3724b0b2446c59435795039fed2d249d3438f06bf90c999cc9d383b95170b7b58f9412fba25ce7756da8075ab1d78a48800156380a62dc84eb22b3f7de9",
+  "settlement_time": "2021-06-23 11:58:44",
+  "payment_type": "echannel",
+  "order_id": "mandiri-bill-01",
+  "merchant_id": "M004123",
+  "gross_amount": "30000.00",
+  "fraud_status": "accept",
+  "currency": "IDR",
+  "biller_code": "70012",
+  "bill_key": "990000000260"
 }
 ```
 
