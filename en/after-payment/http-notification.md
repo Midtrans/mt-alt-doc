@@ -317,16 +317,19 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 ```json
 {
-  "status_code": "200",
-  "status_message": "midtrans payment notification",
-  "transaction_id": "226f042f-020e-4829-8bd7-2de64b8673ce",
-  "order_id": "1000156414164125",
-  "gross_amount": "392127.00",
-  "payment_type": "cimb_clicks",
-  "transaction_time": "2016-06-19 16:45:21",
+  "transaction_time": "2021-06-23 11:39:21",
   "transaction_status": "settlement",
-  "approval_code": "RB5031388093",
-  "signature_key": "3bcdf0700d3c8a288f279e4fe27a4012e916cb44120d541f6e4c48c83a107b605fdb063ae7c8744d15891047aeb1fc8d2e95741c0abc5f67e10e0b60244bc441"
+  "transaction_id": "226f042f-020e-4829-8bd7-2de64b8673ce",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "3bcdf0700d3c8a288f279e4fe27a4012e916cb44120d541f6e4c48c83a107b605fdb063ae7c8744d15891047aeb1fc8d2e95741c0abc5f67e10e0b60244bc441",
+  "settlement_time": "2021-06-23 11:40:24",
+  "payment_type": "cimb_clicks",
+  "order_id": "cimb-clicks-01",
+  "merchant_id": "M004123",
+  "gross_amount": "2444700.00",
+  "currency": "IDR",
+  "approval_code": "ABC0101BCA02"
 }
 ```
 
