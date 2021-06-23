@@ -215,26 +215,29 @@ Some sample HTTP notifications for a successful transaction on different payment
 {
   "va_numbers": [
     {
-      "bank": "bni",
-      "va_number": "8578000000111111"
+      "va_number": "3333000000111111",
+      "bank": "bni"
     }
   ],
+  "transaction_time": "2021-06-23 11:41:33",
+  "transaction_status": "settlement",
+  "transaction_id": "9aed5972-5b6a-401e-894b-a32c91ed1a3a",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "fe5f725ea770c451017e9d6300af72b830a668d2f7d5da9b778ec2c4f9177efe5127d492d9ddfbcf6806ea5cd7dc1a7337c674d6139026b28f49ad0ea1ce5107",
+  "settlement_time": "2021-06-23 11:42:03",
+  "payment_type": "bank_transfer",
   "payment_amounts": [
     {
-      "paid_at": "2016-06-19 20:12:22",
-      "amount": "20000.00"
+      "paid_at": "2021-06-23 11:42:02",
+      "amount": "150000.00"
     }
   ],
-  "transaction_time": "2016-06-19 19:12:22",
-  "gross_amount": "20000.00",
-  "order_id": "1466323342",
-  "payment_type": "bank_transfer",
-  "signature_key": "fe5f725ea770c451017e9d6300af72b830a668d2f7d5da9b778ec2c4f9177efe5127d492d9ddfbcf6806ea5cd7dc1a7337c674d6139026b28f49ad0ea1ce5107",
-  "status_code": "200",
-  "transaction_id": "9aed5972-5b6a-401e-894b-a32c91ed1a3a",
-  "transaction_status": "settlement",
+  "order_id": "bni-va-01",
+  "merchant_id": "M004123",
+  "gross_amount": "150000.00",
   "fraud_status": "accept",
-  "status_message": "midtrans payment notification"
+  "currency": "IDR"
 }
 ```
 
