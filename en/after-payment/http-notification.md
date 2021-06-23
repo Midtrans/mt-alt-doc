@@ -358,18 +358,21 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 ```json
 {
-  "status_code": "200",
-  "status_message": "midtrans payment notification",
-  "transaction_id": "991af93c-1049-4973-b38f-d6052c72e367",
-  "order_id": "order04",
-  "gross_amount": "162500.00",
-  "payment_type": "cstore",
-  "transaction_time": "2016-06-20 11:44:07",
+  "transaction_time": "2021-06-23 13:13:21",
   "transaction_status": "settlement",
-  "approval_code": "59061607081045705101",
+  "transaction_id": "991af93c-1049-4973-b38f-d6052c72e367",
+  "store": "indomaret",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
   "signature_key": "a198f93ac43cf98171dcb4bd0323c7e3afbee77a162a09e2381f0a218c761a4ef0254d7650602971735c486fea2e8e9c6d41ee65d6a53d65a12fb1c824e86f9f",
-  "payment_code": "25709650945026",
-  "store": "indomaret"
+  "settlement_time": "2021-06-23 13:13:56",
+  "payment_type": "cstore",
+  "payment_code": "300063000630006300",
+  "order_id": "indomaret-01",
+  "merchant_id": "M004123",
+  "gross_amount": "336000.00",
+  "currency": "IDR",
+  "approval_code": "ABC0101BCA02"
 }
 ```
 
