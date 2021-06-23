@@ -20,6 +20,7 @@ Transaction Status | Description | Possible changes(s)
 `chargeback` | Transaction is marked to be charged back. | 
 `partial_refund` | Transaction is marked to be partially refunded. | 
 `partial_chargeback` | Transaction is marked to be partially charged back. | 
+`authorize` | Only available specifically only if you are using pre-authorize feature for card transactions (an advanced feature that you will not have by default, so in most cases are safe to ignore). Transaction is successful and card balance is reserved (authorized) successfully. You can later perform API “capture” to change it into `capture`, or if no action is taken will be auto released. Depending on your business use case, you may assume `authorize` status as a successful transaction. | capture, <br>deny, <br>cancel, <br>expire
 
 #### Reversal Case
 \*Note: Known specific to payment methods of Permata Bank Transfer, Mandiri Bill Payment, and Indomaret; In some very rare cases, there is a possibility where `settlement` can later change into `deny`, also known as "Reversal". It may happen usually within the span of 1-5 minutes. It is caused by reversal triggered by the corresponding payment provider (issuing/acquiring bank), due to the nature of their payment networks. This status change will trigger [HTTP(s) notification/webhook](/en/after-payment/http-notification.md) from Midtrans to your server.

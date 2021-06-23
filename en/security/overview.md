@@ -51,3 +51,10 @@ Midtrans is always open to inputs or suggestions related our security processes.
 ### Keep Your Server Key Secured
 
 The *Server Key* you obtained from your Midtrans account is strictly informed only to you as a Merchant. The *Server Key* should be kept secret. To learn more about how to secure your *Server Key*, please refer to [this article](https://blog.midtrans.com/bagaimana-cara-menyimpan-server-key-dengan-aman/).
+
+### Others
+With the various Security protections provided above,
+
+Implementing SSL certificate pinning on your end is not recommended. If you want to implement SSL certificate pinning, please make sure to [understand the considerations explained in this article.](/en/other/faq/technical.md#what-should-be-considered-when-merchant-want-to-do-ssl-certificate-pinning)
+
+In most cases Mutual (2-way) TLS Authentication (mTLS) should not be needed, and is not recommended due to maintenance complexity. In case you really need to proceed with implementing it, please consult with your Midtrans Business PIC first. 

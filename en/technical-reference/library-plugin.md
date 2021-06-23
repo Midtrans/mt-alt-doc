@@ -16,7 +16,7 @@ Our library and plugins are **Open Source!** We are happy to accept any open sou
 |Node JS|[NPM](https://www.npmjs.org/package/midtrans-client)<br>[Github](https://github.com/Midtrans/midtrans-nodejs-client)| |
 |Python|[PyPI](https://pypi.org/project/midtransclient/1.0.6/)<br>[Github](https://github.com/Midtrans/midtrans-python-client)| |
 |Java|[Bintray](https://bintray.com/midtrans/midtrans-java/com.midtrans)<br>[Java Doc](https://midtrans.github.io/midtrans-java/index.html)<br>[Github](https://github.com/Midtrans/midtrans-java)| |
-|Go|[Github](https://github.com/veritrans/go-midtrans)| |
+|Go|[Github](https://github.com/Midtrans/midtrans-go)| |
 |Postman Collection| [Postman](https://app.getpostman.com/run-collection/af068be08b5d1a422796)<br>[Github](https://github.com/Midtrans/Midtrans-Payment-API-Postman-Collections)| |
 |TypeScript\*|[Github](https://github.com/restuwahyu13/midtrans-node)| \*Community contribution. <br>Credits to [restuwahyu13](https://github.com/restuwahyu13)
 

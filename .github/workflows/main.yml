@@ -1,0 +1,26 @@
+# # currently deactivated, as firebase deployment is not needed
+# # ref: https://medium.com/@puuga/deploy-to-firebase-hosting-with-github-actions-f795785fde6b
+# name: deploy_to_firebase_hosting
+
+# # Trigger deploy when: commit is pushed to the specified branches
+# on:
+#   push:
+#     branches:
+#       # Push events on master branch
+#       - master
+
+# jobs:
+#   deploy_to_firebase_hosting:
+
+#     runs-on: ubuntu-latest
+    
+#     steps:
+#       - name: Checkout the repository
+#         uses: actions/checkout@master
+      
+#       - name: Deploy to Firebase
+#         uses: w9jds/firebase-action@master
+#         with:
+#           args: deploy --only hosting
+#         env:
+#           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

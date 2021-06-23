@@ -269,6 +269,7 @@ param = {
 charge_response = core_api.charge(param)
 ```
 
+<!-- @TODO: add Golang code example tab here-->
 #### **Other**
 
 - Please check Midtrans [available **language libraries**](/en/technical-reference/library-plugin.md)

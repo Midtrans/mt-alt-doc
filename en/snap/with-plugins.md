@@ -176,6 +176,10 @@ The table given below shows the fields and the URL.
 </details>
 
 For more details and configurations, refer to [Midtrans WooCommerce wiki documentation](https://github.com/veritrans/SNAP-Woocommerce/wiki).
+
+#### WooCommerce Midtrans Plugin FAQ
+Available [on this page](/en/other/faq/technical.md#cms-plugins).
+
 <hr><br><br>
 
 ## Magento

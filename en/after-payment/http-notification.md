@@ -1,9 +1,11 @@
-# HTTP(S) Notification / Webhooks
+# HTTP(S) Notification / Webhooks of Payment Status
 <hr>
 
 HTTP(S) POST notifications or Webhooks are sent to your server when the customer completes the payment process or when transaction status changes. These notifications help you to update payment status or take suitable actions in real-time.
 
 Midtrans HTTP(S) POST Notification can be configured by configuring the *Payment Notification URL* from SETTINGS on *Dashboard*.
+
+?> Currently this explanation is valid for Midtrans Payment related products. If you are looking for Iris Disbursement [please check on Iris docs](https://iris-docs.midtrans.com/#getting-notifications), although the basic concepts are the same.
 
 ## Configuring HTTP Notifications On MAP
 
@@ -124,15 +126,19 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 ```json
 {
-  "status_code": "200",
-  "status_message": "midtrans payment notification",
-  "transaction_id": "1c28dbbb-8596-48e4-85d7-9f1382db8a1f",
-  "order_id": "order03",
-  "gross_amount": "275000.00",
-  "payment_type": "gopay",
-  "transaction_time": "2016-06-19 15:54:42",
+  "transaction_time": "2021-06-15 18:45:13",
   "transaction_status": "settlement",
-  "signature_key": "973d175e6368ad844b5817882489e6b22934d796a41a0573c066b1e64532dc0001087b87d877a3eac37cba20a733e1305f5e62739e65ff501d5d33c5ac62530f"
+  "transaction_id": "513f1f01-c9da-474c-9fc9-d5c64364b709",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "2496c78cac93a70ca08014bdaaff08eb7119ef79ef69c4833d4399cada077147febc1a231992eb8665a7e26d89b1dc323c13f721d21c7485f70bff06cca6eed3",
+  "settlement_time": "2021-06-15 18:45:28",
+  "payment_type": "gopay",
+  "order_id": "Order-5100",
+  "merchant_id": "G141532850",
+  "gross_amount": "154600.00",
+  "fraud_status": "accept",
+  "currency": "IDR"
 }
 ```
 
@@ -434,6 +440,9 @@ Some sample HTTP notifications for a successful transaction on different payment
 | transaction_time   | Time at which the transaction happened.          | String | –                                                            |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
 | signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| fraud_status             | The fraud status of the transaction.                         | String | For more details, refer to [Fraud Status](#status-definition).    |
+| merchant_id              | Your merchant ID.                                            | String | –                                                            |
+| currency                 | The unit of currency used for the transaction.               | String | –                                                            |
 
 #### **Permata VA**
 
@@ -692,13 +701,15 @@ Please note that not every payment methods may return `fraud_status` field. Some
 
 Transaction Status | Fund Received | Description 
 --- | --- | ---
-`capture` | ✅ | Transaction is successful and card balance is captured successfully. <br/>If no action is taken by you, the transaction will be successfully settled on the same day or the next day or within your agreed settlement time with your parner bank. Then the  transaction status changes to  *settlement*. <br/>It is safe to assume a successful payment. 
+`capture` | ✅ | Transaction is successful and card balance is captured successfully. <br/>If no action is taken by you, the transaction will be successfully settled on the same day or the next day or within your agreed settlement time with your partner bank. Then the  transaction status changes to  *settlement*. <br/>It is safe to assume a successful payment. 
 `settlement` | ✅ | The transaction is successfully settled. Funds have been credited to your account. 
 `pending` | 🕒 | The transaction is created and is waiting to be paid by the customer at the payment providers like Direct debit, Bank Transfer, E-money, and so on. 
 `deny` | ❌ | The credentials used for payment are rejected by the payment provider or Midtrans Fraud Detection System (FDS). <br/>To know the reason and details for the denied transaction, see the `status_message` in the response. 
-`cancel` | ❌ | The transaction is canceled. It can be triggered by you.<br/> You can trigger *Cancel* status in the following cases:<br/> 1. If you cancel the transaction after *Capture* status.<br/> 2. If you deny a transaction after *Challenge* status.<br/>If you fail to respond to a transaction with *Challenge* status within one day, it is automatically canceled by Midtrans. 
+`cancel` | ❌ | The transaction is canceled. It can be triggered by merchant.<br/> You can trigger *Cancel* status in the following cases:<br/> 1. If you cancel the transaction after *Capture* status.<br/> 2. If you deny a transaction after *Challenge* status.<br/>If you fail to respond to a transaction with *Challenge* status within one day, it is automatically canceled by Midtrans. 
 `expire` | ❌ | Transaction is not available for processing, because the payment was delayed. 
-`refund` | ↩️ | Transaction is marked to be refunded. Refund status is triggered by you. 
+`refund` | ↩️ | Transaction is marked to be refunded. Refund status can be triggered by merchant. 
+`partial_refund` | ↩️ | Transaction is marked to be refunded partially (if you choose to refund in amount less than the paid amount). Refund status can be triggered by merchant. 
+`authorize` | 🕒 | Only available specifically only if you are using pre-authorize feature for card transactions (an advanced feature that you will not have by default, so in most cases are safe to ignore). Transaction is successful and card balance is reserved (authorized) successfully. You can later perform API “capture” to change it into `capture`, or if no action is taken will be auto released. Depending on your business use case, you may assume `authorize` status as a successful transaction.
 
 #### **Fraud Status**
 
@@ -761,6 +772,10 @@ You can verify authenticity using the [GET status API Request](/en/after-payment
 
 ?> **Tips**: Official Midtrans language library will perform "Verify Directly to Midtrans API" mechanism automatically within the built in `notification` function. As well as official Midtrans CMS plugin.
 <!-- tabs:end -->
+
+Verifying notification/response data is recommended for the kind of data flow that is coming to you from an unknown source. This also includes frontend callback data, as frontend data can be modified by the user, you should verify it by querying the Midtrans API. For example, javascript callback data of payment status triggered by Snap.js should be verified via API get-status to Midtrans.
+
+For API requests that are performed synchronously (from your) backend-to-backend (to Midtrans API), the response should already be trustworthy. You don’t have to re-query the Midtrans API, unless you want to check for latest updates at some later time.
 
 ## Responding HTTP Notification from Midtrans
 

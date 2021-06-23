@@ -1,5 +1,6 @@
 # Testing Payment on Sandbox
 <hr>
+Sandbox Environment can be used to create "testing" transactions (usually performed from your development/testing environment). All transaction made within this environment mode is not "real", and does not require "real payment/fund". This environment is created automatically when you are signing up, and free to use.
 
 In the Sandbox environment, Midtrans uses web-based simulator to simulate a response from payment provider or bank's system. This helps to test different scenarios that can happen on production, without actually doing real payments.
 
@@ -138,7 +139,7 @@ It is used for testing a specific scenario where the card is not eligible for on
 | Alfamart        | Midtrans will generate a dummy Alfamart Payment Code. To perform a test transaction, use the [Alfamart Simulator](https://simulator.sandbox.midtrans.com/alfamart/index). |
 | Kioson          | Midtrans will generate a dummy Kioson Payment Code. To perform a test transaction, use the [Kioson Simulator](https://simulator.sandbox.midtrans.com/kioson/index). |
 
-**Note on Alfamart:** *If you are unable to find out what to input in `Product Code` field, please contact us via support@midtrans.com with subject: `Sandbox Alfamart Product Code` and mention your Merchant ID.*
+?> ***Note on Alfamart:*** *If you are unable to find out what to input in `Product Code` field, please contact us at support@midtrans.com with subject: `Sandbox Alfamart Product Code` and mention your Merchant ID.*
 
 ### Direct Debit
 
@@ -151,11 +152,13 @@ It is used for testing a specific scenario where the card is not eligible for on
 |KlikBCA | Midtrans will register user id filled in KlikBCA input. To perform a test transaction, use the [KlikBca Simulator](https://simulator.sandbox.midtrans.com/bca/klikbca/index).|
 
 
-?> ***Note on Alfamart:*** *If you are unable to find out what to input in `Product Code` field, please contact us at support@midtrans.com with subject: `Sandbox Alfamart Product Code` and mention your Merchant ID.*
-
-
 ### Cardless Credit 
 
 |Payment Methods | Description|
 |----------|------------|
 |Akulaku | Midtrans will redirect to Akulaku simulator page.|
+
+### Note & Limitation
+
+!> **Note: Do not attempt to pay with a real-world payment-provider/bank** to a transaction created in the Sandbox environment. **Sandbox transactions cannot accept real payment, and should be paid only with the sandbox simulator** explained in this page. Midtrans will not be able to help you recover any real-world payment funds if you make this mistake.
+

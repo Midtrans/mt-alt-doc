@@ -519,10 +519,10 @@ To configure the Payment Notification URL, follow the steps given below.
 </div>
 
 ## Specifying VA Number
-Virtual Account number which is displayed to customer, contains two parts. for example, in `{91012}{12435678}` , the first part is the company code and the second part is a unique code. The second part can be customized (For **Permata** B2B agreement model is supported). Following conditions need to be followed while customizing VA number:
+Virtual Account number which is displayed to customer, contains two parts. for example, in `{91012}{12435678}` , the first part is the company-prefix-number and the second part is a unique-va-number. The second part can be customized. Following conditions need to be followed while customizing VA number:
 
 * Only digits are allowed.
-* Different banks have different specifications for their custom VA numbers. Please go through the documentation of the respective banks.
+* Different banks have different specifications for their custom VA numbers. Please go through the documentation of the respective banks. Note: for **Permata, only B2B VA type** support custom VA numbers.
 * If the number provided is already utilized for another order, then a different unique number will be used instead.
 * If the number provided is longer than required, then the unnecessary digits in the end will be trimmed.
 * If the number provided is shorter than required, then the number will be prefixed with zeros.
@@ -538,7 +538,9 @@ Please add **bank_transfer** parameter during [Charge API Request](/en/core-api/
   "bank_transfer":{
     "bank": "bca",
     "va_number": "12345678911",
-    "sub_company_code": "00000" //NOTE: Don't use it if you don't know
+    "bca": {
+      "sub_company_code": "00000" //NOTE: Don't send this field unless BCA give you sub company code
+    }
   }
 ...
 ```
@@ -579,7 +581,7 @@ Please add **bank_transfer** parameter during [Charge API Request](/en/core-api/
 Parameter | Type | Required | Description
 --- | --- | --- | ---
 BCA `va_number`| String | Optional | Length should be within 1 to 11.
-BCA `sub_company_code` | String | Optional | BCA sub company code directed for this transactions. <br>NOTE: Don't use it if you don't know.
+BCA `sub_company_code` | String | Optional | BCA sub company code directed for this transactions. <br>NOTE: Don't send this field unless BCA give you sub company code.
 Permata `va_number` | String | Optional | Length should be 10. Only supported for b2b VA type.
 BNI `va_number` | String | Optional | Length should be within 1 to 8.
 BRI `va_number` | String | Optional | Length should be within 1 to 13.

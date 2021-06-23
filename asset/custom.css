@@ -73,7 +73,7 @@ td{
 .my-card>h4>a:nth-child(2):after,
 .my-card>h5>a:nth-child(2):after
 {
-    content: " »";
+    content: " ›";
 }
 
 .my-btn{
@@ -127,3 +127,4 @@ iframe{
 h2>a>span {
     padding-top: 2em;
 }
+/* @TODO: move all this to `_content.scss` file to centralize custom styles */

@@ -183,12 +183,12 @@ Snap.js supports callbacks. It can be used to trigger your custom JavaScript imp
 * `onError`: Function that will be triggered when there is a payment failure after several attempts.
 * `onClose`: Function that will be triggered when customer has closed the Snap popup.
 
-Example of the Snap.js callback option usage while calling `snap.pay(...)` is given below. This parameter is used during [Snap frontend implementation](/en/snap/integration-guide.md#_2-show-snap-payment-page-on-frontend).
+Example of the Snap.js callback option usage while calling `window.snap.pay(...)` is given below. This parameter is used during [Snap frontend implementation](/en/snap/integration-guide.md#_2-show-snap-payment-page-on-frontend).
 
 <!-- tabs:start -->
 #### **Frontend JS**
 ```javascript
-snap.pay('SNAP_TRANSACTION_TOKEN', {
+window.snap.pay('SNAP_TRANSACTION_TOKEN', {
   onSuccess: function(result){
     /* You may add your own implementation here */
     alert("payment success!"); console.log(result);
@@ -430,9 +430,11 @@ curl -X POST \
 
 Parameter|Description| Type | Required
 ---|---|---|---
-`start_time` |Timestamp in `YYYY-MM-DD HH:MM:SS +0700`.<br/>If not specified, transaction time will be used as start time (when customer confirm payment channel). Time Zone is Western Indonesian Time (WIT). | String(255) | Optional
+`start_time` |Timestamp in `YYYY-MM-DD HH:MM:SS +0700`.<br/>If not specified, transaction time will be used as start time (when customer confirm payment channel). Time Zone is Western Indonesian Time (WIT). | String(255) | Optional\*
 `duration` |Expiry duration | Integer | Required
 `unit` |Expiry unit. Options: `day, hour, minute` (plural term also accepted). | String | Required
+
+\*The `start_time` parameter is optional, but if you don’t include it, asynchronous payment methods like Bank Transfer, Gopay, etc. (payment methods that have `pending` status) will start the expiry duration only when the customer has proceeded to select & confirm payment on Snap payment screen. Thus the total expiry duration may not be as you were expecting due to Snap payment screen not immediately completed by customer. To avoid this, it is recommended to include the `start_time` on the API request.
 
 ### Custom Fields
 Custom fields allow you to send your own (custom) data to Snap API, and then it will be sent back from Midtrans to your backend on HTTP notification. It will be displayed on Dashboard under the *order detail*.
@@ -1026,13 +1028,13 @@ Option | Description | Type | Required
 --- | --- | --- | ---
 gopayMode | Choose the UI mode for GoPay. <br/>Supported values are `deeplink`, `qr`, and `auto`. Set to auto by default. | String | Optional
 
-Example of the Snap.js callback option usage (this parameter is used during [Snap frontend implementation](/en/snap/integration-guide.md#_2-show-snap-payment-page-on-frontend)), while calling `snap.pay(...)` is given below.
+Example of the Snap.js callback option usage (this parameter is used during [Snap frontend implementation](/en/snap/integration-guide.md#_2-show-snap-payment-page-on-frontend)), while calling `window.snap.pay(...)` is given below.
 
 <!-- tabs:start -->
 
 #### **Frontend JS**
 ```javascript
-snap.pay('SNAP_TRANSACTION_TOKEN', {
+window.snap.pay('SNAP_TRANSACTION_TOKEN', {
   gopayMode: "deeplink"
 })
 ```
@@ -1063,7 +1065,7 @@ Example of the JSON parameter used during [backend API request step](/en/snap/in
   },
   "bca_va": {
     "va_number": "12345678901",
-    "sub_company_code": "00000"
+    "sub_company_code": "00000" //NOTE: Don't send this field unless BCA give you sub company code
   },
   "bni_va": {
     "va_number": "12345678"
@@ -1108,9 +1110,9 @@ curl -X POST \
 
 <!-- tabs:end -->
 
-Virtual Account number displayed to customer contains two parts. for example, in `{91012}{12435678}` , the first part is the company code and the second part is a unique code. The second part is the part that can be customized.
+Virtual Account number displayed to customer contains two parts. for example, in `{91012}{12435678}` , the company-prefix-number and the second part is a unique-va-number. The second part is the part that can be customized.
 * Only digits are allowed.
-* Different banks have different specifications on their custom VA numbers. Please see the documentation of the respective banks.
+* Different banks have different specifications on their custom VA numbers. Please see the documentation of the respective banks. Note: for **Permata, only B2B VA type** support custom VA numbers.
 * If the number provided is already utilized for another order, then a different unique number will be used instead.
 * If the number provided is longer than required, then the unnecessary digits in the end will be trimmed.
 * If the number provided is shorter than required, then the number will be prefixed with zeros.

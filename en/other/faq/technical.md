@@ -812,26 +812,76 @@ You will need to make sure that your app's WebView configuration allows opening 
 Please follow according to the app platform your app is being implemented in:
 
 ##### Android
+If your app is native Android app, You need to override `shouldOverrideUrlLoading` functions of your WebView object as follows.
 
-If your app is native Android app, based on [this community resource](https://stackoverflow.com/a/32714613), You need to modify your WebView `shouldOverrideUrlLoading` functions as follows:
+```java
+@SuppressWarnings("deprecation")
+@Override
+public boolean shouldOverrideUrlLoading(WebView view, String url) {
+    final Uri uri = Uri.parse(url);
+    return handleWebviewCustomUri(uri);
+}
+// Include above override only if you need backward-compatibility with Android API level <24
+// If you only build for Android API level >=24, start from line below
+
+@TargetApi(Build.VERSION_CODES.N)
+@Override
+public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+    final Uri uri = request.getUrl();
+    return handleWebviewCustomUri(uri);
+}
+
+private boolean handleWebviewCustomUri(final Uri uri) {
+    final String url = uri.toString();
+    
+    // detect these specified deeplinks to be handled by OS
+    if (url.contains("gojek://") 
+    	|| url.contains("shopeeid://") 
+    	|| url.contains("//wsa.wallet.airpay.co.id/")) 
+    {
+        final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+        // `true` means for the specified url, will be handled by OS by starting Intent
+        return true;
+    } else {
+        // `false` means any other url will be loaded normally by the WebView
+        return false;
+    }
+}
+```
+Based on [this community resource](https://stackoverflow.com/a/32714613).
+
+<details>
+<summary>Alternative Code</summary>
+<article>
+Alternative (old) sample codes, use this if you are targeting Android API level <24
+that may trigger deprecation warning if used target API level >=24
+
 ```java
 @Override
 public boolean shouldOverrideUrlLoading(WebView view, String url) {
     LogUtils.info(TAG, "shouldOverrideUrlLoading: " + url);
     Intent intent;
-    // allow these deeplink to be handled by OS
-    if (url.contains("gojek://") || url.contains("shopeeid://")) {
+    // detect these deeplink to be handled by OS
+    if (url.contains("gojek://") 
+    	|| url.contains("shopeeid://") 
+    	|| url.contains("https://wsa.wallet.airpay.co.id/")) 
+    {
         intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
 
         return true;
+    } else {
+        // `false` means any other url will be loaded normally by the WebView
+        return false;
     }
 }
 ```
+</article>
+</details>
 
 ##### iOS
-
 If your app is native iOS app, you will need to add `LSApplicationQueriesSchemes` key to your app's `Info.plist`
 
 ```xml
@@ -841,6 +891,37 @@ If your app is native iOS app, you will need to add `LSApplicationQueriesSchemes
 <string>shopeeid</string>
 </array>
 ```
+
+##### iOS Webview Specific
+If you are implementing ShopeePay method and presenting it within Webview on iOS and encounter issue. Configure/override your WebView like below:
+
+```obj-c
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+ NSURL *url = navigationAction.request.URL;
+ NSString *urlString = (url) ? url.absoluteString : @"";
+ 
+ // detect these ShopeePay links to be handled by OS
+ if ([urlString containsString:@"//wsa.wallet.airpay.co.id/"]
+ 	|| [urlString containsString:@"shopeeid://"]) 
+ {
+  // will be opened by the OS level
+  [[UIApplication sharedApplication] openURL:url];
+  // prevent webview from opening it
+  decisionHandler(WKNavigationActionPolicyCancel);
+  return;
+ }
+ 
+ // detect protocol/URL-Scheme that is not http(s)
+ else if (url.scheme && ![url.scheme hasPrefix:@"http"]) {
+  [[UIApplication sharedApplication] openURL:url];
+  decisionHandler(WKNavigationActionPolicyCancel);
+  return;
+ }
+ decisionHandler(WKNavigationActionPolicyAllow);
+}
+```
+Based [on this resource](https://laptrinhx.com/ios-wkwebview-cannot-handle-url-scheme-and-app-store-links-1368412119/).
 
 ##### Web Browser or Progressive Web App (PWA)
 If the customer is transacting through Mobile Web Browser or PWA, and the Gojek App fails to open, please make sure that you are not trying to open `gojek://` deeplink via JavaScript. Some web browsers **may block** link opening or redirection through JavaScript, because browsers consider it as malicious pop-up.
@@ -910,7 +991,6 @@ For more reference, please visit:
 - https://stackoverflow.com/questions/35531679/react-native-open-links-in-browser
 
 ##### Flutter
-
 If your app is Flutter based app, if you are using WebView, referring to [this community resource](https://stackoverflow.com/a/60515494), you will need to implement this listener of the WebView in order to override Deeplink URL to be opened by the device's OS:
 ```javascript
 _subscription = webViewPlugin.onUrlChanged.listen((String url) async {
@@ -932,10 +1012,28 @@ _subscription = webViewPlugin.onUrlChanged.listen((String url) async {
 For more reference, please visit:
 - https://github.com/fluttercommunity/flutter_webview_plugin/issues/43
 
+##### If None Works
+The main goal is that to configure your WebView to allow opening the deeplink/universal link of the destination payment app. This usually require you to override/config your WebView to listen for specific URL prefixes, then invoke the URL to be opened on the OS level (e.g: via Android's `intent` or iOS `openURL`). 
+
+If none of the sample code above works for you, please follow this same goal but you will need to figure out how to implement it on the framework/platform that you are using. You may need to consult with the documentation, or the community resources for that particular framework/platform.
+
+If it still fails, you should consider integrating with native Midtrans Mobile SDK. 
+
+If you are using Snap, you can try presenting the Snap payment page **via the Web Browser not via embedded Webview**. The browser should take care of the redirection properly on OS level.
+
+##### Limitation and Risk
+Please not that as consequences of implementing custom URLs listener/whitelist/handler like above sample codes may means:
+- You may need to update your implementation to add more URLs to handle, e.g: when adding new payment methods.
+- The URLs from the payment provider may changes without prior notice, so you may need to update your implementation when that happens.
+
+These limitation and risk unfortunately are due to the nature of how WebView, deeplink, and universal link works on each mobile platforms. Midtrans, payment provider, or merchant have no direct control over how they behave. We only follow the rule of the platforms.
+
 #### Failure to redirect the customer to Gojek GoPay, Shopee Pay, and other e-Money payment provider app. What should I do?
-Refer to the question given [above](#customer-fails-to-be-redirected-to-gojek-deeplink-on-mobile-app-what-should-i-do).
+Refer to the section [above](#customer-fails-to-be-redirected-to-gojek-deeplink-on-mobile-app-what-should-i-do).
 
 It applies to other E-Money payment providers too. For example, if the issue happens to `shopeeid://` app deeplink, then proceed with the suggestion above to allow deeplink whitelist, and add `shopeeid://` to the configuration.
+
+Also please refer to [this section if none of them works](#if-none-works).
 
 #### I am using GoPay `callback_url` but the customer is not redirected to expected URL/deeplink. What is wrong?
 For GoPay transaction, you can specify the `callback_url`. After attempting GoPay payment within Gojek app, the customer will be redirected to `callback_url` whether the result is failure or success. If the customer did not get redirected properly, please check the points given below.
@@ -972,10 +1070,10 @@ Yes, *Snap* can be configured to specifically display QR, deeplink, or automatic
 
 To configure *Snap* to always display QR, you can use the option `options.gopayMode` on `snap.js`. For example,
 
-* If using `snap.js` pop-up mode, add `gopayMode` on second parameter when calling `snap.pay`:
+* If using `snap.js` pop-up mode, add `gopayMode` on second parameter when calling `window.snap.pay`:
 
 ```javascript
-snap.pay('<SNAP_TRANSACTION_TOKEN>', {
+window.snap.pay('<SNAP_TRANSACTION_TOKEN>', {
   gopayMode: "qr"
   // possible value gopayMode: `qr`, `deeplink`, `auto`
 })
@@ -1184,6 +1282,52 @@ Alternatively, only if needed, you can also:
 - Opt to use [Register Card API](/en/core-api/advanced-features?id=recurring-transaction-with-register-card-api) to save the card on Midtrans first, before attempting to perform recurring.
 - If you really want to perform non-3DS transactions, you can also opt to have an agreement with the acquiring bank to grant you a non-3DS MID. Please contact Midtrans Activation Team to learn more.
 
+<!-- END OF Category --><hr>
+### CMS Plugins
+#### WooCommerce: unable to pay getting error message transaction_details.order_id sudah digunakan
+
+When you are using Midtrans WooCommerce payment plugin, then if your customer encounter error messages that says `transaction_details.order_id sudah digunakan`, or you are getting validation error email notification with that same message, follow suggestion below.
+
+This is most of the time is because your WooCommerce website is re-using previous Order ID that has been paid previously. The Order ID is auto generated by WooCommerce system, and is usually sequential number (e.g. 1,2,3,4 ... 99,100, etc.), this **Order ID sequence can get reset back to 1 (or any beginning number) if somehow you re-installed your Wordrpess/WooCommerce website, restored from a outdated backup database, or misconfigured it**. Midtrans API does not allow duplicated Order ID, to prevent reconciliation confusion.
+
+So the solution is you will have to configure your WooCommerce website Order ID sequence to use Order ID sequence number that have not been used previously.
+
+This can be done by modifying the Wordpress SQL database. You can do so by using GUI tools like PhpMyAdmin (or other). Follow these steps with PhpMyAdmin:
+
+> Note: Please be careful when modifying database, do this at your own risk, you may want to backup first although this is relatively simple operation. 
+
+1. On PhpMyAdmin login to the SQL database, with your SQL username & password.
+2. Find and select/click your wordpress database.
+3. Find and select/click table named `wp_posts`.
+![faq-wc](./../../../asset/image/faq/faq-wc-1.png)
+4. Click `Operations` on the top menu of PhpMyAdmin.
+![faq-wc](./../../../asset/image/faq/faq-wc-2.png)
+5. You will see `Table Options` form, select the `AUTO_INCREMENT` field, and change the value to some big number, e.g: `50001` (that will be the sequential Order ID begin number. Make sure the number is have not been used as Order ID).
+![faq-wc](./../../../asset/image/faq/faq-wc-3.png)
+6. Press `enter` on your keyboard to execute.
+7. You will see success message when you do it correctly.
+![faq-wc](./../../../asset/image/faq/faq-wc-4.png)
+
+Alternative steps without GUI (PhpMyAdmin): 
+- If you are familiar with SQL query, instead of step above you can navigate to the `wp_posts` table with SQL query, and execute the following sample query:
+
+```sql
+
+ALTER TABLE `wp_posts` auto_increment = 50001;
+```
+
+After executing above steps, the Order ID that will be generated by WooCommerce will now start from the number you input above. This will solve the issue you are facing.
+
+#### WooCommerce: getting issue on payment page within the WooCommerce website
+If on some rare case you encounter frontend issue on the Midtrans payment page within your WooCommerce website (e.g: webpage constantly getting refreshed, unusable UI, etc. This usually caused by conflicting WP plugins, or WP misconfiguration), follow suggestion below.
+
+Configure payment page to be redirection-mode:
+- On your Wordpress/WooCommerce admin panel, navigate to Midtrans payment plugin configuration (under menu **WooCommerce > Settings > Payments > Midtrans**).
+- Activate the checkbox labeled `Enable payment page redirection`, 
+- Scroll to bottom, click `Save changes` to save the configuration page.
+- Now customer will be redirected to Midtrans hosted payment webpage, instead of payment popup within your website.
+
+This is also applicable if you don't prefer the payment page to be a popup within your website, and prefer for customer to be redirected to Midtrans hosted payment web page, you can use the configuration above.
 <!-- END OF Category --><hr>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

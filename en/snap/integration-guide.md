@@ -305,6 +305,50 @@ transaction = snap.create_transaction(param)
 transaction_token = transaction['token']
 ```
 
+#### **Go**
+
+Import [**Midtrans Go**](https://pkg.go.dev/github.com/midtrans/midtrans-go) module package to your project. Via terminal:
+```bash
+go get -u github.com/midtrans/midtrans-go
+```
+and/or on your project code:
+```golang
+import (
+    "github.com/midtrans/midtrans-go"
+    "github.com/midtrans/midtrans-go/coreapi"
+    "github.com/midtrans/midtrans-go/snap"
+    "github.com/midtrans/midtrans-go/iris"
+)
+```
+
+Sample request
+```golang
+// 1. Initiate Snap client
+var s = snap.Client
+s.New("YOUR-SERVER-KEY", midtrans.Sandbox)
+// Use to midtrans.Production if you want Production Environment (accept real transaction).
+
+// 2. Initiate Snap request param
+req := & snap.RequestParam{
+    TransactionDetails: midtrans.TransactionDetails{
+      OrderID:  "YOUR-ORDER-ID-12345",
+      GrossAmt: 100000,
+    }, 
+    CreditCard: &snap.CreditCardDetails{
+      Secure: true,
+    },
+    CustomerDetail: &midtrans.CustomerDetails{
+      FName: "John",
+      LName: "Doe",
+      Email: "john@doe.com",
+      Phone: "081234567890",
+    },
+  }
+
+// 3. Execute request create Snap transaction to Midtrans Snap API
+snapResp, _ := s.CreateTransaction(req)
+```
+
 #### **Postman**
 
 Postman is an API development tool which is used to build, test and modify APIs. You can view our Postman Collection with the steps given below.
@@ -365,7 +409,7 @@ Client Key | The *Client Key*. For more details refer to [Retrieving API Access 
 `snap.js` url | `https://app.sandbox.midtrans.com/snap/snap.js`
 transaction `token` | Retrieved from backend in [previous step](#_1-acquiring-transaction-token-on-backend)
 
-Enter your *Client Key* as the value of `data-client-key` attribute in snap.js script tag. Start the payment process by calling `snap.pay` with transaction `token`.
+Enter your *Client Key* as the value of `data-client-key` attribute in snap.js script tag. Start the payment process by calling `window.snap.pay` with transaction `token`.
 
 ```html
 <html>
@@ -383,7 +427,7 @@ Enter your *Client Key* as the value of `data-client-key` attribute in snap.js s
       var payButton = document.getElementById('pay-button');
       // For example trigger on button clicked, or any time you need
       payButton.addEventListener('click', function () {
-        snap.pay('SNAP_TRANSACTION_TOKEN'); // Replace it with your transaction token
+        window.snap.pay('SNAP_TRANSACTION_TOKEN'); // Replace it with your transaction token
       });
     </script>
   </body>

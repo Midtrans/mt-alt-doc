@@ -1444,7 +1444,7 @@ The JSON parameters added in the *Request Body* of a Charge API Request, are sho
           ]
      },
      "bca": {
-        "sub_company_code": "00000"
+        "sub_company_code": "00000" // NOTE: Don't send this field unless BCA give you sub company code
      }
    }
 ...
@@ -1461,7 +1461,7 @@ inquiry	| Texts to be displayed on ATM when the customer attempts to enquire the
 Id	| Text message in Bahasa Indonesia. |String (50)|--
 En | Text message in English. |String (50)|--
 payment | Texts to be displayed on ATM when the customer attempts to make payments. |Array (10)|--
-sub_company_code | BCA sub company code directed for this transactions. |String|Default value is 00000.
+sub_company_code | BCA sub company code directed for this transactions. NOTE: Don't send this field unless BCA give you sub company code |String|Default value is 00000.
 
 </article>
 </details>
@@ -1559,9 +1559,9 @@ recipient_name | The name of the recipient shown in the payment details.<br> |St
 
 <!-- tabs:end -->
 
-Virtual Account number displayed to customer contains two parts; the company code and the unique code. The table given below, explains this with an example.
+Virtual Account number displayed to customer contains two parts; the company-prefix-number and the second part is a unique-va-number. The table given below, explains this with an example.
 
-| Virtual Account Number | Company Code | Unique Code  |
+| Virtual Account Number | Company Number | Unique VA Number  |
 | ---------------------- | ------------ | ------------ |
 | `{91012}{12435678}`    | `{91012}`    | `{12435678}` |
 
@@ -1570,7 +1570,7 @@ The unique code can be customized.
 Rules for customizing Virtual Account number is given below.
 
 * Only digits are allowed.
-* Different banks have different specifications on their custom VA numbers. Please see the documentation of the respective banks.
+* Different banks have different specifications on their custom VA numbers. Please see the documentation of the respective banks. Note: for **Permata, only B2B VA type** support custom VA numbers.
 * If the number provided is already utilized for another order, then a unique number will be used instead.
 * If the number provided is longer than required, then the unnecessary digits in the end will be truncated.
 * If the number provided is shorter than required, then the number will be prefixed with zeros.
