@@ -241,6 +241,34 @@ Some sample HTTP notifications for a successful transaction on different payment
 }
 ```
 
+#### **BRI VA**
+
+```json
+{
+  "va_numbers": [
+    {
+      "va_number": "123456789123456789",
+      "bank": "bri"
+    }
+  ],
+  "transaction_time": "2021-06-23 11:53:34",
+  "transaction_status": "settlement",
+  "transaction_id": "9aed5972-5b6a-401e-894b-a32c91ed1a3a",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "fe5f725ea770c451017e9d6300af72b830a668d2f7d5da9b778ec2c4f9177efe5127d492d9ddfbcf6806ea5cd7dc1a7337c674d6139026b28f49ad0ea1ce5107",
+  "settlement_time": "2021-06-23 11:53:34",
+  "payment_type": "bank_transfer",
+  "payment_amounts": [],
+  "order_id": "bri-va-01",
+  "merchant_id": "M004123",
+  "gross_amount": "300000.00",
+  "fraud_status": "accept",
+  "currency": "IDR"
+}
+```
+
+
 #### **BCA Klikpay**
 
 ```json
