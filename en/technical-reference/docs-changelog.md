@@ -1,6 +1,10 @@
 # Docs Changelog
 <hr>
 
+#### 2021/06/24
+- update all payment type notification sample
+- Update the definition table
+
 #### 2021/06/16
 - clarify custom va limitation, especially Permata
 - add note on mTLS on security
