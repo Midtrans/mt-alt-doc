@@ -1,6 +1,6 @@
 # GoPay QRIS POS Integration
 
-Integration process of GoPay QRIS with custom software/hardware/POS/IoT will be explained below.
+Integration process of GoPay / QRIS with custom software/hardware/POS/IoT will be explained below.
 
 ## Overview
 Overview of the transaction flow in sequence diagram:
@@ -32,7 +32,7 @@ curl -X POST \
   -H 'Authorization: Basic <YOUR SERVER KEY ENCODED in Base64>' \
   -H 'X-Override-Notification: <YOUR BACKEND URL TO RECEIVE NOTIFICATION>' \
   -d '{
-  "payment_type": "gopay",
+  "payment_type": "qris",
   "transaction_details": {
     "order_id": "order102",
     "gross_amount": 789000
@@ -49,38 +49,25 @@ We will get the **API response** like the following.
 ```javascript
 {
     "status_code": "201",
-    "status_message": "GO-PAY billing created",
-    "transaction_id": "e48447d1-cfa9-4b02-b163-2e915d4417ac",
-    "order_id": "SAMPLE-ORDER-ID-01",
-    "gross_amount": "10000.00",
-    "payment_type": "gopay",
-    "transaction_time": "2017-10-04 12:00:00",
+    "status_message": "QRIS transaction is created",
+    "transaction_id": "1015a919-b03f-450a-bc85-b38202a79a96",
+    "order_id": "order102",
+    "merchant_id": "G490526303",
+    "gross_amount": "789000.00",
+    "currency": "IDR",
+    "payment_type": "qris",
+    "transaction_time": "2021-06-23 15:25:24",
     "transaction_status": "pending",
-    "actions": [{
+    "fraud_status": "accept",
+    "actions": [
+        {
             "name": "generate-qr-code",
             "method": "GET",
-            "url": "https://api.midtrans.com/v2/gopay/e48447d1-cfa9-4b02-b163-2e915d4417ac/qr-code"
-        },
-    {
-            "name": "deeplink-redirect",
-            "method": "GET",
-            "url": "gojek://gopay/merchanttransfer?tref=1509110800474199656LMVO&amount=10000&activity=GP:RR&callback_url=someapps://callback?order_id=SAMPLE-ORDER-ID-01"
-        },
-        {
-            "name": "get-status",
-            "method": "GET",
-            "url": "https://api.midtrans.com/v2/e48447d1-cfa9-4b02-b163-2e915d4417ac/status"
-        },
-        {
-            "name": "cancel",
-            "method": "POST",
-            "url": "https://api.midtrans.com/v2/e48447d1-cfa9-4b02-b163-2e915d4417ac/cancel",
-            "fields": []
+            "url": "https://api.midtrans.com/v2/qris/1015a919-b03f-450a-bc85-b38202a79a96/qr-code"
         }
     ],
-    "channel_response_code": "200",
-    "channel_response_message": "Success",
-  "currency": "IDR"
+    "qr_string": "00020101021226620014COM.GO-JEK.WWW011993600914349052630340210G4905263030303UKE51440014ID.CO.QRIS.WWW0215AID0607336128660303UKE5204341453033605802ID5904Test6007BANDUNG6105402845409789000.0062475036c032f87c-f773-4619-aefa-675e1f06f9210703A016304A623",
+    "acquirer": "gopay"
 }
 ```
 
@@ -93,38 +80,46 @@ Inside the `actions` array there is `generate-qr-code` action:
 {
   "name": "generate-qr-code",
   "method": "GET",
-  "url": "https://api.midtrans.com/v2/gopay/e48447d1-cfa9-4b02-b163-2e915d4417ac/qr-code"
+  "url": "https://api.midtrans.com/v2/qris/1015a919-b03f-450a-bc85-b38202a79a96/qr-code"
 }
 ```
 
-We can use the `url` to get the QR code image. The easiest way is to "hotlink" the image url, if the POS device support displaying HTML, put it in image tag `<img src="[QR CODE URL]">`, or display it on a similar component without downloading.
+We can use the `url` to get the QR code image. The easiest way is to "hotlink" the image url, if the POS device support displaying HTML, put it in image tag `<img src="[QR CODE URL]">`, or display it on a similar component without downloading. 
 
-If the POS device does not support such scenario, download the QR code image from that url, then display it on the device.
+Alternatively if that not possible, you can also download the QR code image from that url, then display it on the device.
 
-Once QR displayed to customer, customer can scan and proceed to pay via Gojek app on their mobile device. Customer will see success or failure screen inside their Gojek app after attempting payment.
+If the POS device does not support such scenarios above, you can also use the `qr_string` value from API response, convert the `qr_string` value into QR code image manually using any method that the POS device may support.
+
+Once the QR Code is displayed to customer, customer can scan and proceed to pay via Gojek app (or any QRIS compatible payment app) on their mobile device. Customer will see success or failure screen inside the app after attempting payment.
 
 ## 3. Handle HTTP notification
 
+Although customers may show you the success payment screen on their payment app, you should verify the payment status from Midtrans before concluding the payment is successful. Do not deliver good/service to customers, if payment status on Midtrans is not `settlement`/success. This section will explain how you will be able to get payment status from Midtrans.
+
 ### Notification
 
-HTTP notification from Midtrans to Partner's backend will be triggered on event of `transaction_status` getting updated (e.g payment received), to ensure merchant is securely informed. Including if GoPay transaction success or expired (left unpaid).
+HTTP notification from Midtrans to Partner's backend will be triggered on event of `transaction_status` getting updated (e.g payment received), to ensure merchant is securely informed. Including if the payment transaction success or expired (left unpaid).
 
 HTTP POST request with JSON body will be sent to **X-Override-Notification** url sent on step 1, this is the sample JSON body that will be received by Partner's backend:
 
 ```javascript
 {
-  "transaction_time": "2019-09-04 19:08:21",
+  "transaction_type": "on-us",
+  "transaction_time": "2021-06-23 15:45:42",
   "transaction_status": "settlement",
-  "transaction_id": "8b82e549-2a48-47a9-8cb1-fb36060b88f3",
+  "transaction_id": "1015a919-b03f-450a-bc85-b38202a79a96",
   "status_message": "midtrans payment notification",
   "status_code": "200",
-  "signature_key": "7b91a66336ab53c2ee197cf5d0e38fed014b1f94e617f4c5f6ca3b81800d9c783c570b972ed9ac190bcc08daac27ced4720e6dea9947c6826761972bc66e32f2",
-  "settlement_time": "2019-09-04 19:08:37",
-  "payment_type": "gopay",
-  "order_id": "20190904190821463338875755684689",
-  "gross_amount": "100.00",
+  "signature_key": "5d40504728eb96686bd5926299768a6496547f70dbd1e19d583ef4e780fe9dd5c38d0db45ec0f06dafa5c56caa6cf8358ead1523882b5fb3e102c52345d41850",
+  "settlement_time": "2021-06-23 15:46:00",
+  "payment_type": "qris",
+  "order_id": "order102",
+  "merchant_id": "G490526303",
+  "issuer": "gopay",
+  "gross_amount": "789000.00",
   "fraud_status": "accept",
-  "currency": "IDR"
+  "currency": "IDR",
+  "acquirer": "gopay"
 }
 ```
 
@@ -132,7 +127,7 @@ If the `transaction_status` is `settlement` and `fraud_status` is `accept`, it m
 
 If the `transaction_status` is `expire` and `fraud_status` is `accept`, it means the transaction is **expire** (left unpaid until time limit exceeded), which means payment fail.
 
-Refer [here on more details of how to handle HTTP Notification](https://api-docs.midtrans.com/#handing-notifications).
+You can also get some other information that you may find relevant from the example above, e.g. `order_id`, `settlement_time`, `gross_amount`, `issuer`, etc. Refer [here on more details of how to further handle HTTP Notification](https://api-docs.midtrans.com/#handing-notifications).
 
 ### Get Transaction Status
 
@@ -144,7 +139,7 @@ Merchant can also implement auto check status mechanism on a specified interval,
 
 ## Finish!
 
-The GoPay payment integration guide is now complete. Below are some further references.
+The GoPay / QRIS payment integration guide is now complete. Below are some further references.
 
 ## Description
 

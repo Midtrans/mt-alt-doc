@@ -8,6 +8,7 @@
 - update gopay notif sample
 - update golang library link to new version
 - further explains what kind of data flow need to be verified, notification page
+- update POS integration guide, to use newer QRIS payment type
 
 #### 2021/06/11
 - faq: add woocommerce frontend popup payment page issue
