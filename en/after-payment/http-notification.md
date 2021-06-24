@@ -503,7 +503,7 @@ Some sample HTTP notifications for a successful transaction on different payment
 | payment_type             | The type of payment method used.                             | String | –                                                            |
 | order_id                 | The order id of the transaction.                             | String | –                                                            |
 | merchant_id              | Your merchant ID.                                            | String | –                                                            |
-| masked_card              | The first six-digit and last four-digit of customer's credit card number. | String | –                                                            |
+| masked_card              | The first six-digit and last four-digit of customer's credit card number. | String | –                                               |
 | gross_amount             | Total amount for which the transaction was done.             | String | –                                                            |
 | fraud_status             | The fraud status of the transaction.                         | String | For more details, refer to [Fraud Status](#status-definition).    |
 | eci                      | The 3D secure ECI code for a card transaction.               | String | –                                                            |
@@ -511,7 +511,7 @@ Some sample HTTP notifications for a successful transaction on different payment
 | channel_response_message | The response from payment channel.                           | String | –                                                            |
 | channel_response_code    | The response code from the payment channel.                  | String | –                                                            |
 | card_type                | The type of card used for the transaction.                   | String | Possible values are Credit, Debit.                           |
-| bank                     | Name of the bank through which the transaction was processed. | String | –                                                            |
+| bank                     | Name of the bank through which the transaction was processed.| String | –                                                            |
 | approval_code            | The approval code from the bank.                             | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
 
 #### **GoPay**
@@ -520,18 +520,65 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| status_message     | The status message.                              | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
 | transaction_time   | Time at which the transaction happened.          | String | –                                                            |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
 | signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-| fraud_status             | The fraud status of the transaction.                         | String | For more details, refer to [Fraud Status](#status-definition).    |
-| merchant_id              | Your merchant ID.                                            | String | –                                                            |
-| currency                 | The unit of currency used for the transaction.               | String | –                                                            |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+
+
+#### **QRIS**
+
+#### POST Body 
+
+| Element            | Description                                      | Type   | Notes                                                        |
+| ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
+| transaction_type   | To determine how the transaction is being acquired. | String | Possible values are: on-us or off-us.                     |
+| transaction_time   | Time at which the transaction happened.          | String | –                                                            |
+| transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
+| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| issuer             | The provider that is making the payment over the QR. | String | –                                                        |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+| acquirer           | The provider creating the QR and accepting the payment. | String | Possible values: airpay shopee, gopay.                |
+
+
+#### **Shopeepay**
+
+#### POST Body 
+
+| Element            | Description                                      | Type   | Notes                                                        |
+| ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
+| transaction_time   | Time at which the transaction happened.          | String | –                                                            |
+| transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
+| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+
 
 #### **Permata VA**
 
@@ -539,17 +586,21 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| status_message     | The status message.                              | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
 | transaction_time   | Time at which the transaction happened.          | String | –                                                            |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
-| permata_va_number  | The Permata VA number.                           | String | –                                                            |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
 | signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| permata_va_number  | The Permata VA number.                           | String | –                                                            |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+
 
 #### **BCA VA**
 
@@ -557,18 +608,73 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 | Element            | Description                                      | Type   | Notes                                                        |
 | :----------------- | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| bank               | The name of the acquiring bank which process the transaction.| String | –                                                            |
 | va_number          | The virtual account number.                      | String | –                                                            |
+| bank               | The name of the acquiring bank which process the transaction.| String | –                                                |
 | transaction_time   | Time at which the transaction happened.          | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
-| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
 | status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
+| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| payment_amounts    | Payment details such as the amount paid and the time of payment. | String | It is in the format, *YYYY-MM-DD* *HH:MM:SS.*|
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+
+
+#### **BNI VA**
+
+#### POST Body 
+
+| Element            | Description                                      | Type   | Notes                                                        |
+| :----------------- | -------------------------------------------------| ------ | ------------------------------------------------------------ |
+| va_number          | VA number.                                       | String | –                                                            |
+| bank               | Name of the bank.                                | String | –                                                            |
+| transaction_time   | Time at which the transaction happened.          | String | –                                                            |
+| transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
+| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| payment_amounts    | Payment details such as the amount paid and the time of payment. | String | It is in the format, *YYYY-MM-DD* *HH:MM:SS.*|
+| paid_at            | The time and date at which the payment was done. | String | –                                                            |
+| amount             | The amount paid.                                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+
+
+#### **BRI VA**
+
+#### POST Body 
+
+| Element            | Description                                      | Type   | Notes                                                        |
+| :----------------- | -------------------------------------------------| ------ | ------------------------------------------------------------ |
+| va_number          | VA number.                                       | String | –                                                            |
+| bank               | Name of the bank.                                | String | –                                                            |
+| transaction_time   | Time at which the transaction happened.          | String | –                                                            |
+| transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
+| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| payment_amounts    | Payment details such as the amount paid and the time of payment. | String | It is in the format, *YYYY-MM-DD* *HH:MM:SS.*|
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+
 
 #### **Mandiri Bill**
 
@@ -576,59 +682,45 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| status_message     | The status message.                              | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
 | transaction_time   | Time at which the transaction happened.          | String | –                                                            |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
 | signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-| bill_key           | The bill key number.                             | String | –                                                            |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
 | biller_code        | The code for the biller.                         | String | –                                                            |
+| bill_key           | The bill key number.                             | String | –                                                            |
 
-#### **BNI VA**
-
-#### POST Body 
-
-| Element            | Description                                                  | Type   | Notes                                                        |
-| :----------------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| bank               | Name of the bank.                                            | String | –                                                            |
-| va_number          | VA number.                                                   | String | –                                                            |
-| payment_amounts    | Payment details such as the amount paid and the time of payment. | String | It is in the format, *YYYY-MM-DD* *HH:MM:SS.*                |
-| paid_at            | The time and date at which the payment was done.            | String | –                                                            |
-| amount             | The amount paid.                                             | String | –                                                            |
-| transaction_time   | Time at which the transaction happened.                      | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done.             | String | –                                                            |
-| order_id           | The order id of the transaction.                             | String | –                                                            |
-| payment_type       | The type of payment method used.                             | String | –                                                            |
-| signature_key      | The Signature Key.                                           | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-| status_code        | The transaction status code.                                 | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.              | String | –                                                            |
-| transaction_status | The transaction status of the transaction.                   | String | For more details, refer to [Transaction Status](#status-definition). |
-| fraud_status       | The fraud status of the transaction.                         | String | For more details, refer to [Fraud Status](#status-definition).    |
-| bank               | Name of the bank through which the transaction was processed. | String | –                                                            |
-| status_message     | The status message.                                          | String | –                                                            |
 
 #### **BCA Klikpay**
 
 #### POST Body 
 
+
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
 | transaction_time   | The time of transaction with date.               | String | It is in the format, YYYY-MM-DD HH:MM:SS.                    |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
-| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
 | status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
+| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
+
 
 #### **KlikBCA**
 
@@ -636,16 +728,20 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| status_message     | The status message.                              | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
 | transaction_time   | Time at which the transaction happened.          | String | –                                                            |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
 | signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
+
 
 #### **CIMB Clicks**
 
@@ -653,16 +749,20 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| status_message     | The status message.                              | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
 | transaction_time   | The time of transaction with date.               | String | It is in the format, YYYY-MM-DD HH:MM:SS.                    |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
 | signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
+
 
 #### **Danamon Online Banking**
 
@@ -670,17 +770,21 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| status_message     | The status message.                              | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
 | transaction_time   | The time of transaction with date.               | String | It is in the format, YYYY-MM-DD HH:MM:SS.                    |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
-| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
 | signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
+
 
 #### **Indomaret**
 
@@ -688,18 +792,22 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| status_message     | The status message.                              | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
 | transaction_time   | The time of transaction with date.               | String | It is in the format, YYYY-MM-DD HH:MM:SS.                    |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied. |
-| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-| payment_code       | 14 digit payment code.                           | String | –                                                            |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
 | store              | Name of the store.                               | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
+| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| payment_code       | 14 digit payment code.                           | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied. |
+
 
 #### **Alfamart**
 
@@ -707,54 +815,65 @@ Some sample HTTP notifications for a successful transaction on different payment
 
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| status_message     | The status message.                              | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
 | transaction_time   | The time of transaction with date.               | String | It is in the format, YYYY-MM-DD HH:MM:SS.                    |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied. |
-| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-| payment_code       | 14 digit payment code.                           | String | –                                                            |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
 | store              | Name of the store.                               | String | –                                                            |
+| status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
+| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| payment_code       | 14 digit payment code.                           | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
 
 #### **Akulaku**
 
 #### POST Body 
 
+
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
 | transaction_time   | Time at which the transaction happened.          | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
-| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
 | status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
+| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+
 
 #### **BRI Epay**
 
 #### POST Body 
 
+
 | Element            | Description                                      | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
-| merchant_id        | Your merchant ID.                                | String | –                                                            |
 | transaction_time   | Time at which the transaction happened.          | String | –                                                            |
-| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
-| order_id           | The order id of the transaction.                 | String | –                                                            |
-| payment_type       | The type of payment method used.                 | String | –                                                            |
-| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
-| status_code        | The transaction status code.                     | String | –                                                            |
-| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
 | transaction_status | The transaction status of the transaction.       | String | For more details, refer to [Transaction Status](#status-definition). |
-| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| transaction_id     | The transaction id of the specific transaction.  | String | –                                                            |
 | status_message     | The status message.                              | String | –                                                            |
+| status_code        | The transaction status code.                     | String | –                                                            |
+| signature_key      | The Signature Key.                               | String | This is a very important data that tells you that the notification is sent from Midtrans. For more details, refer to [Verifying Authenticity of Notification](#verifying-notification-authenticity). |
+| settlement_time    | Time at which the transaction status confirmed to become settlement.| String | –                                         |
+| payment_type       | The type of payment method used.                 | String | –                                                            |
+| order_id           | The order id of the transaction.                 | String | –                                                            |
+| merchant_id        | Your merchant ID.                                | String | –                                                            |
+| gross_amount       | Total amount for which the transaction was done. | String | –                                                            |
+| fraud_status       | The fraud status of the transaction.             | String | For more details, refer to [Fraud Status](#status-definition).    |
+| currency           | The unit of currency used for the transaction.   | String | –                                                            |
+| approval_code      | The approval code from the bank.                 | String | This can be used to refund a transaction. *approval_code* does not exist on transactions with transaction status: Denied |
 <!-- tabs:end -->
 
 </article>
