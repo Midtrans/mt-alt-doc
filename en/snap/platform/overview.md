@@ -26,6 +26,14 @@ Step by step guide to integrate Snap to the platform of your choice, is explaine
 
 ## Shopify
 
+?> Limitation & Disclaimer:<br>
+As [announced by Shopify](https://shopify.dev/apps/payments/hosted-payment-sdk), Shopify planned to deprecate the previous payment integration platform (Hosted Payment SDK)  by March 31, 2022. Shopify has urged Midtrans (and other payment gateways) to migrate to their new [Payment Platform integration](https://shopify.dev/beta/payments-apps/). In compliance with it, Midtrans has migrated to the new platform, as a result of the new mechanism, __you__ as a __Midtrans’ merchants will need to migrate by installing Midtrans as Shopify Payment App__.<br><br>
+__If by March 31, 2022 you have not done so__, Midtrans payment integration (installed using the previous mechanism) __may no longer work for your Shopify store__.<br><br>
+Due to the current limitation of the Shopify’s new payment platform, here is limitation that should be expected:<br>
+__Only supports Production environment__ (real payment mode), not Sandbox environment yet (test payment mode). Due to the complexity of the new platform to connect with Midtrans’ sandbox environment.<br><br>
+You can try to contact Shopify regarding the limitation, should you have any concern about them.<br><br>
+Later when the Shopify platform starts to uplift the limitations, only then Midtrans will be able to start adding other async payment methods support. Sandbox environment mode is also planned to be supported (but, likely as a separate payment app).
+
 Please complete the steps given below:
 
 1. Create an online store with [Shopify](https://shopify.com).
@@ -101,11 +109,6 @@ On **Sandbox** mode:
 	![Connected to Midtrans](./../../../asset/image/shopify-new-08-success-install.png ':size=400')
 
 12. To start accepting payment, click __Activate Midtrans Payment Gateway__.
-
-	?> Note:<br>
-	If you install Midtrans test application, you will see Test Mode feature.<br>
-	Select the Enable test mode check box if you want to test transaction without actual payment (using test credentials provided by Midtrans).
-	![Connected to Midtrans](./../../../asset/image/shopify-new-9-test-mode.png ':size=400')
 
 13. Done! Now your Shopify online shop is ready to use Midtrans as payment gateway. Your customer will see __Midtrans Payment Gateway__ as payment method on the checkout page.
 	![Midtrans show in checkout page](./../../../asset/image/shopify-new-10-order.png ':size=400')
