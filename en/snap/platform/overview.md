@@ -116,6 +116,8 @@ On **Sandbox** mode:
 
 ### Integrating Midtrans to Shopify Platform (deprecated): 
 
+?> Shopify planned to [deprecate the previous payment integration platform](#shopify), please follow how to integrate the new shopify app [here](#integrating-midtrans-to-shopify-platform)
+
 To integrate Midtrans to Shopify platform, follow the steps given below.
 
 1. Login to Midtrans [Merchant Administration Portal](https://account.midtrans.com/login).
@@ -194,7 +196,9 @@ With this integration, your customer will be redirected to Snap Redirect payment
 ### Available Payment Methods
 All payment methods available on Snap, are explained on [this page](https://midtrans.com/payments), and are available for integration.
 
-### Specific Payment Methods
+### Specific Payment Methods (deprecated)
+
+?> Shopify planned to [deprecate the previous payment integration platform](#shopify), the specific payment methods will not available anymore.
 
 You can optionally follow these steps, if **you prefer to have the payment methods displayed on your shopify checkout page** instead.
 
@@ -273,7 +277,10 @@ Done! Now your Shopify online shop is ready to use Midtrans as payment gateway.
 
 <hr>
 
-#### Unable to Install Specific Payment Methods
+#### Unable to Install Specific Payment Methods (deprecated)
+
+?> Shopify planned to [deprecate the previous payment integration platform](#shopify), this workaround was not relevant for the new shopify app
+
 In the rare case that you are not able to install specific payment methods, such as you are not presented with the install button on Step 2. Please try the following alternatives:
 1. It is possible that the payment method already installed, please manually continue to [step number 3](#specific-payment-methods) by navigating to Settings > Payments menu, the payment method will be shown there.
 2. Another alternative:
