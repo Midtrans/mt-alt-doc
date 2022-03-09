@@ -37,7 +37,7 @@ Later when the Shopify platform starts to uplift the limitations, only then Midt
 Please complete the steps given below:
 
 1. Create an online store with [Shopify](https://shopify.com).
-2. Register for [Midtrans account](https://account.midtrans.com/register).
+2. Register for [Midtrans account](https://dashboard.midtrans.com/register).
 3. Complete the account registration form. For any help, you can contact [Midtrans activation team](mailto:activation@midtrans.com). Use **SHOPIFY - URL Name** as a subject header and mention your registered _Midtrans Merchant ID_.
 
 Note: 
@@ -120,7 +120,7 @@ On **Sandbox** mode:
 
 To integrate Midtrans to Shopify platform, follow the steps given below.
 
-1. Login to Midtrans [Merchant Administration Portal](https://account.midtrans.com/login).
+1. Login to Midtrans [Merchant Administration Portal](https://dashboard.midtrans.com/login).
 
 	You will find your online shop name with *Sandbox/Production environment*. Please make sure that you are in __Production environment__.
 
@@ -236,7 +236,7 @@ For example:
 5. Enter Midtrans **Merchant ID** and **Server Key**.
 	![shopify](./../../../asset/image/shopify-16.png ':size=400')
 
-	Get it from [Merchant Administration Portal](https://account.midtrans.com).
+	Get it from [Merchant Administration Portal](https://dashboard.midtrans.com).
 	You will find your online shop name with *Sandbox/Production* *environment*. Please make sure that you are in __Production environment__.
 
 	![Login MAP](./../../../asset/image/snap-prep-env-diff.jpg ':size=400')
@@ -244,7 +244,7 @@ For example:
 	under **Settings -> Access Keys**.
 	![access key](./../../../asset/image/sirclo-2.png)
 
-6. Setup Notification URL on [Merchant Administration Portal](https://account.midtrans.com/login).
+6. Setup Notification URL on [Merchant Administration Portal](https://dashboard.midtrans.com/login).
 
 	You will find your online shop name with *Sandbox/Production* *environment*. Please make sure that you are in __Production environment__.
 
@@ -442,14 +442,14 @@ Merchant cancels/refunds order via Shopify. | Cancel/Refund | Canceled/Refunded
 Please complete the following steps:
 
 1. Create an online store with Sirclo.
-2. Register to [Midtrans account](https://account.midtrans.com/register).
+2. Register to [Midtrans account](https://dashboard.midtrans.com/register).
 3. Complete the account registration form. For any help, you can contact [Midtrans activation team](mailto:activation@midtrans.com). Use __SIRCLO - URL Name__ as a subject header and mention your registered _Midtrans Merchant ID_. 
 
 ### Integrating Midtrans to Sirclo Platform:
 
 To integrate Midtrans to Sirclo platform, follow the steps given below.
 
-1. Login to Midtrans [Merchant Administration Portal](https://account.midtrans.com/login).
+1. Login to Midtrans [Merchant Administration Portal](https://dashboard.midtrans.com/login).
 
 	You will find your online shop name with *Sandbox/Production* *environment*. Please make sure that you are in __Production environment__.
 
@@ -512,14 +512,14 @@ To integrate Midtrans to Sirclo platform, follow the steps given below.
 Please complete the following steps:
 
 1. Create an online store account with [Jejualan](https://jejualan.com/daftar), and choose Beta, Gamma, or Delta in order to use Midtrans service.
-2. Register to [Midtrans account](https://account.midtrans.com/register).
+2. Register to [Midtrans account](https://dashboard.midtrans.com/register).
 3. Complete the account registration form. For any help, you can contact [Midtrans activation team](mailto:activation@midtrans.com). Use __Jejualan – URL Name__ as subject header and mention your registered _Midtrans Merchant ID_. 
 
 ### Integrating Midtrans to Jejualan Platform:
 
 To integrate Midtrans to Jejualan platform, follow the steps given below.
 
-1. Login to Midtrans [Merchant Administration Portal](https://account.midtrans.com/login).
+1. Login to Midtrans [Merchant Administration Portal](https://dashboard.midtrans.com/login).
 
 	You will find your online shop name with *Sandbox/Production* environment. Please make sure that you are in __Production environment__.
 
