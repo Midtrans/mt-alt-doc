@@ -112,6 +112,40 @@ Midtrans Snap payment page will be displayed to the customer. Payment methods th
 
 With this integration, your customer will be redirected to Snap Redirect payment page. Customer payment data is safely managed by Midtrans hosted payment web page, outside of your Shopify store web domain.
 
+<hr>
+
+### Account Settings
+You can manage your account settings
+
+1. In the displayed Midtrans Payment Gateway page, click __Manage__.
+![Manage](./../../../asset/image/shopify-new-11-manage.png ':size=400')
+
+2. You will be redirect to the Midtrans account settings, you can update Midtrans Merchant ID, enable specific payment methods, and activate online offline installment.
+![Account Settings](./../../../asset/image/shopify-new-12-settings.png ':size=400')
+
+3. Sample if you only enable credit card payment method
+![Enable Payment Method](./../../../asset/image/shopify-new-13-enable-specific-payment-methods-1.png ':size=400')
+![Snap UI](./../../../asset/image/shopify-new-14-enable-credit-card-method.png ':size=400')
+
+4. Sample if you enable credit card, gopay, and bank transfer payment methods
+![Enable Payment Method](./../../../asset/image/shopify-new-15-enable-specific-payment-methods-2.png ':size=400')
+![Snap UI](./../../../asset/image/shopify-new-16-enable-some-methods.png ':size=400')
+
+<hr>
+
+### Deactivate Midtrans Payment Gateway
+
+If you deside to not use Midtrans Payment Gateway, then you can deactivate it. When you deactivate the app, it's removed from your list of available payment methods, but it's still available if you need it for cases such as order returns.
+
+1. In the Supported payment methods section, find the provider in the list.
+
+2. Click Manage.
+
+3. Click Deactivate to disable the provider.
+
+4. Click Deactivate Payments App.
+
+<hr>
 
 ## Sirclo
 
