@@ -15,10 +15,6 @@ Step by step guide to integrate Snap to the platform of your choice, is explaine
 </div>
 <div class="my-card">
 
-#### [ Shopify Old Method](#shopify-old-method)
-</div>
-<div class="my-card">
-
 #### [ Sirclo](#sirclo)
 </div>
 <div class="my-card">
@@ -29,290 +25,6 @@ Step by step guide to integrate Snap to the platform of your choice, is explaine
 <hr><br><br>
 
 ## Shopify
-
-?> As [announced by Shopify](https://shopify.dev/apps/payments/hosted-payment-sdk), Shopify planned to deprecate the previous payment integration platform (Hosted Payment SDK) by June 30, 2022. Shopify has urged Midtrans (and other payment gateways) to migrate to their new [Payment Platform integration](https://shopify.dev/beta/payments-apps/). In compliance with it, Midtrans has migrated to the new platform, as a result of the new platform, __you__ as a __Midtrans’ merchants will need to migrate by installing Midtrans as Shopify Payment App__.<br><br>
-__If by June 30, 2022 you have not done so__, Midtrans payment integration (installed using the previous platform) __may no longer work for your Shopify store__.<br><br>
-Due to the changes introduced by Shopify’s new payment platform, there are some changes (compared to previous integration version) and limitations that should be expected. Visit [Known Limitations](#known-limitations) under Advanced section to see the details.
-
-Please complete the steps given below:
-
-1. Create an online store with [Shopify](https://shopify.com) if you haven't.
-2. Register for [Midtrans account](https://dashboard.midtrans.com/register).
-3. Complete the account registration form. For any help, you can contact [Midtrans activation team](mailto:activation@midtrans.com). Use **SHOPIFY - URL Name** as a subject header and mention your registered _Midtrans Merchant ID_.
-
-Note: 
-
-- You can try with Shopify Trial plan to test payment integration in *Sandbox mode*. 
-- You may be required by Shopify to have an active paid-plan in order to allow your customer to do checkout on *Production mode*.
-
-### Integrating Midtrans to Shopify Platform
-
-To integrate Midtrans to Shopify platform, follow the steps given below.
-
-1. Login to Midtrans [Merchant Administration Portal](https://dashboard.midtrans.com/login).
-
-	You will find your online shop name with *Sandbox/Production environment*. Please make sure that you are in __Production environment__.
-
-	![Login MAP](./../../../asset/image/snap-prep-env-diff.jpg ':size=400')
-
-2. Select __Settings -> Configuration__.
-
-	![Setting](./../../../asset/image/dashboard-configuration.png)
-
-On **Production** mode:
-
-| URL Role | Redirect URL|
-|----------|-------------|
-| Payment Notification URL | `https://pixel.midtrans.com/payments/notification` |
-| Finish Redirect URL | [your-site-url] |
-| Error Redirect URL | [your-site-url] |
-| Unfinish Redirect URL | [your-site-url] |
-
-3. Select __Settings -> Access Keys__.
-
-	Copy Midtrans __Merchant ID__ and __Server Key__ (Will be used for the next step).
-
-	![access key](./../../../asset/image/sirclo-2.png)<br>
-
-4. Login to your [Shopify Store](https://www.shopify.com/login).
-
-5. On your Shopify Store admin page, go to __Settings -> Payments__.
-
-	![Settings menu](./../../../asset/image/shopify-new-01-settings.png ':size=400')
-	![Payment providers menu](./../../../asset/image/shopify-new-02-payments.png ':size=400')
-
-6. Under __Supported payment methods__, click __Add payment methods__.
-	![Third-party providers](./../../../asset/image/shopify-new-03-supported-payment-methods.png ':size=400')
-
-7. Input __Midtrans Payment Gateway__ in the search bar, __Midtrans Payment Gateway__ will be shown, then click activate button.
-	![Search Midtrans](./../../../asset/image/shopify-new-04-search-midtrans.png ':size=400')
-
-8. In the displayed Midtrans Payment Gateway page, click __Connect__.
-	![Midtrans Page](./../../../asset/image/shopify-new-05-connect.png ':size=400')
-
-9. You can review the displayed information, then click __Install app__ to install.
-	![Install Midtrans](./../../../asset/image/shopify-new-06-install.png ':size=400')
-
-10. You will be redirect to the Onboarding page, please fill by your Midtrans __Merchant ID__ and __Server Key__. Then click __Register__.
-	![Register](./../../../asset/image/shopify-new-07-register.png ':size=400')
-
-11. You will be redirect back to Shopify, and the page will indicates that your Shopify store is connected to Midtrans Payment Gateway.
-	![Connected to Midtrans](./../../../asset/image/shopify-new-08-success-install.png ':size=400')
-
-12. To activate, click __Activate Midtrans Payment Gateway__. You can also tick/untick desired payment method icons that will be shown in the payment button on your checkout page.
-
-13. Done! Now your Shopify online shop is ready to start accepting payments with Midtrans as payment gateway. Your customer will see __Midtrans Payment Gateway__ as payment method on the checkout page.
-	![Midtrans show in checkout page](./../../../asset/image/shopify-new-10-order.png ':size=400')
-
-Midtrans Snap payment page will be displayed to the customer. Payment methods that are available on Snap product, are explained on [this page](https://midtrans.com/payments). These methods are available for integration. 
-
-![shopify](./../../../asset/image/shopify-new-19-snap-page.png ':size=400')
-
-With this integration, your customer will be redirected to Snap Redirect payment page. Customer payment data is safely managed by Midtrans hosted payment web page, outside of your Shopify store web domain.
-
-<hr>
-
-### Payment App Account Settings
-**Optionally**, you can further manage/edit your Midtrans Payment App account settings. Although **for most-usecase, you are not required** to do this.
-
-1. On your store admin page, navigate to **Settings > Payment**, then on the listed payment with Midtrans as the provider, click **Manage**.
-2. In the displayed Midtrans Payment Gateway page, click __Manage__.
-![Manage](./../../../asset/image/shopify-new-11-manage.png ':size=400')
-
-3. You will be redirect to the Midtrans account settings, you can update Midtrans Merchant ID, enable specific payment methods, and activate online offline installment.
-![Account Settings](./../../../asset/image/shopify-new-12-settings.png ':size=400')
-
-4. Sample if you only enable credit card payment method
-![Enable Payment Method](./../../../asset/image/shopify-new-13-enable-specific-payment-methods-1.png ':size=400')
-![Snap UI](./../../../asset/image/shopify-new-14-enable-credit-card-method.png ':size=400')
-
-5. Sample if you enable credit card, gopay, and bank transfer payment methods
-![Enable Payment Method](./../../../asset/image/shopify-new-15-enable-specific-payment-methods-2.png ':size=400')
-![Snap UI](./../../../asset/image/shopify-new-16-enable-some-methods.png ':size=400')
-
-<hr>
-
-### Advanced
-
-<br>
-
-<details>
-<summary>Matching Order ID Between Shopify and Midtrans</summary>
-<article>
-Order ID created on Midtrans Dashboard for each transaction is based from payment-id auto generated by Shopify platform, to ensure uniqueness per transaction. It can be different with the order id shown on Shopify platform.
-
-To find order on Shopify platform, based on Order ID from Midtrans, first find the transaction Order ID from Midtrans *Dashboard* on **Transactions**.
-![shopify](./../../../asset/image/shopify-new-17-order-id-on-midtrans.png ':size=400')
-
-##### From Order menu
-1. On your Shopify admin area (administration page), go to __Orders__. 
-2. In the search bar, search using the custom term **receipt.payment_id:** and the **order ID** value from Midtrans. For example: **receipt.payment_id:order_id_from_midtrans**
-3. Click on the shown order.
-
-![shopify](./../../../asset/image/shopify-new-17-search-order-on-shopify.png ':size=400')
-
-##### Order detail
-
-From the order details' `Timeline` you can also review the order status history. You can also click one of them to expand to see more details. You will see the Midtrans order ID under `Information from the gateway => Payment`.
-![shopify](./../../../asset/image/shopify-new-17-search-order-id-on-detail-order.png ':size=400')
-
-
-##### From Exported Order
-You can also find the order ID on the exported CSV file using Shopify export feature: __Export Orders.__ Then search **Payment ID column** within the CSV file
-
-![shopify](./../../../asset/image/shopify-new-18-export-order.png ':size=400')
-</article>
-</details>
-
-
-<details>
-<summary>Customize Shopify Order Confirmation Email Template</summary>
-<article>
-
-When customer is proceeding to check out from your Shopify store into Midtrans Snap payment page, order is "confirmed" on Shopify side, and they will send "order confirmation" email notification to customer.
-
-But you may find the wording of the email is confusing for customer, for example: 
-> Hi John, we're getting your order ready to be shipped. We will notify you when it has been sent.
-
-You may notice that email is being sent **before customer completes the payment**, so it may not be true that the order is ready for shipping, **the order needs to be paid first**. Unfortunately that's how the default Shopify "order confirmation notification" behavior works. We can try to customize the message to be less confusing. 
-
-Shopify explained how to customize notification [on their documentation here](https://help.shopify.com/en/manual/sell-online/notifications/edit-template). We try to summarize it for you.
-
-1. Login to your Shopify admin page.
-2. Go to `Settings > Notifications`.
-3. Click `Order Confirmation`.
-4. Search for `{% capture email_body %}` text.
-5. Input or copy this sentence just below/after that text:
-```
-If you have completed your payment, then you are done. If you have not completed your payment, please complete it soon to avoid auto-cancelation.<br><br>
-```
-You can customize the message to your own preference. Or even modify it as "payment reminder".
-![shopify](./../../../asset/image/shopify-18.png ':size=400')
-6. Click `Save`. You can also `Preview` the email.
-7. Done.
-![shopify](./../../../asset/image/shopify-19.png ':size=400')
-
-</article>
-</details>
-
-<details>
-<summary>Additional Notes</summary>
-<article>
-
-##### Cancel and Refund via Shopify admin panel
-Within Shopify admin panel's order details view, there are actions of `cancel` and `refund`. When triggering `cancel` or `refund`, Midtrans order status will try to sync with the Shopify status, if it met the criteria for payment cancel or refund.
-
-For example:
-- Refunding `paid` order on Shopify, will also make Midtrans order status to be marked as `refund`/`cancel`.
-
-Limitations:
-- Not all payment methods support online `refund` on Midtrans side, capability is mostly limited to Card & e-money/QRIS transaction.
-- Will only works if your Midtrans account is allowed to trigger online refund.
-- Shopify's refund UI/UX can be a little bit confusing, after clicking refund it may not tell you whether the refund is successful or not. It only shows `refund processing` which **should not be confused as an indication of success**. You can follow the refund status from the Shopify Order’s timeline. If it is marked as `pending` or failure, the refund is not successful.
-- It is more recommended to manage payment refund & cancellation from Midtrans Dashboard instead. As it will have a better indication of refund success and failure.
-- `cancel` or `refund` action triggered on Midtrans dashboard/API, may or may not be synced to Shopify due to some limitation.
-
-?> The more accurate payment status is the one shown on Midtrans dashboard. You should refer to it in case there are discrepancies on Shopify's side. Because in some rare case payment status syncing to Shopify's system may fail, and Shopify's order details UI can be confusing to read.
-
-##### Note on Canceling Order
-Canceling a paid order will auto trigger attempt to refund/cancel payment on Payment Gateway (Midtrans) side. That is the flow of Shopify that Merchant and Payment Gateway follows. Please avoid canceling a paid order when you mean to edit/customize the item or size.
-
-As per Shopify docs, `cancel order` are not supposed to be used to change item/size:
-https://help.shopify.com/en/manual/orders/refund-cancel-order#cancel-an-order
-
-Merchants supposed to `edit order` if they need to change the item/size:
-https://help.shopify.com/en/manual/orders/edit-orders
-
-Or archive the order, if they really need to remove it from order list:
-https://help.shopify.com/en/manual/orders/manage-orders#archive-a-fulfilled-order
-
-##### Item Stock & Status
-Few points to understand about order status & item stock management that is managed automatically with this integration:
-- Item stock will be reduced whenever order status become `pending` on Shopify side.
-- Item stock will be reduced immediately after the customer reaches Snap payment page, regardless of whether he/she will proceed to actual payment or not. This is to prevent "oversell" issue, by reserving the item stock for the duration of this payment. 
-  - Example of "oversell" issue prevented by this mechanism: This happens when item stock is 1 left, but there are 2 (or more) customers racing to complete the payment, if both complete the payments, and both are accepted by Shopify, then the item stock will be negative. Which will cause issues on its own. So to prevent this, item stock is reserved (and marked as pending on Shopify side) as early as the customer is redirected to the payment page.
-- Card transaction with `deny` status will be updated as failed on Shopify by Midtrans after two hours if left without any success attempt. If success pay attempt is found, it will be updated as success on Shopify.
-- Abandoned Snap payment page (customer left without proceeding with any payment method) will be updated as expired on Shopify after two hours. Order may not show up in Midtrans Dashboard.
-- When customer reaches Snap payment page (status `pending` and stock reduced). Shopify may send email to customer which says "order ready to be shipped", although from Shopify side it is still waiting for payment. Refer to section above about this behavior.
-- It is recommended to **avoid manual order status changes (manual intervention)** from Shopify Admin Panel at least between period of the order first created as `pending` and it finally become `paid/canceled` (about 0-26 hours), in order for payment integration with Midtrans to perform smoothly. Which the order status and item stock will be managed automatically based on the flow explained on this page.
-  - Manual order status changes may cause unexpected behaviour in terms of order status & item stock management, such as order status stuck at certain state. Do this at your own risk. Midtrans may not be in position to help/explain with the consequences.
-
-##### Basic Status Mapping
-Condition | Midtrans Status | Shopify Payment Status
---- | --- | ---
-Customer redirected to Snap payment page. | \- | Payment Pending
-Customer proceeds with asynchronous payment <br>For example: Bank Transfer, Gopay. | Pending | Payment Pending
-Customer proceeds with asynchronous payment <br>but does not pay until expiry time reached.<sup>[1]</sup> | Expire | Expired
-Customer successfully makes payment. | Settlement/Capture | Paid
-Customer abandoned Snap payment page <br>without proceeding with payment. | \- | Expired
-Customer abandoned or denied card transaction. | Deny | Expired
-Merchant cancels/refunds order via Shopify. | Cancel/Refund | Canceled/Refunded
-
-<br>
-
-<sup>[1]</sup> The expiry time calculation starts at the moment when the customer proceeds with the payment method (not necessarily from when redirected to Snap payment page). The payment expiry will then follow what is defined on Snap Preference for each payment method, you can [customize the Snap Preference](/en/after-payment/dashboard-usage.md#configuring-custom-payment-expiry-settings-on-snap) to your needs. When the payment expiry time is reached and the customer does not complete the payment, the transaction will be updated to `Expired` on Shopify side & `Expire` on Midtrans side. 
-
-</article>
-</details>
-
-<hr>
-
-#### Known Limitations
-Due to the changes introduced by Shopify’s new payment platform, here are some changes (compared to previous integration version) and limitations that should be expected:
-
-##### How can I integrate my store with the Midtrans Sandbox Environment?
-To integrate your store with the Midtrans Sandbox environment, you will be required to install a separate/additional app (with similar steps of installation). We'll update our docs with the details once it is ready.
-
-##### Is auto restock items upon abandoned payment still supported?
-Unfortunately due to Shopify's new payment platform, "auto restock items upon abandoned payment" may not be available in this integration version. In previous integration, if a customer left the Snap payment page without proceeding with any payment method, order will be updated as canceled on Shopify after two hours, and will be restocked. For this new integration, restock is not yet available, for an alternative, you need to cancel the order manually from Shopify admin, to release the stock that previously was allocated for customers.
-
-##### Is it possible to have each payment method displayed as a separate payment button on my store’s checkout page?
-Unfortunately due to Shopify's new payment platform, this is no longer possible (unlike previous integration).
-
-##### Is it possible to add more payment method icons to be displayed on the checkout page?
-We are working and communicating with Shopify to try to add more payment method icons.
-
-##### Is it possible to change the text-label of the payment button instead of the generic Midtrans Payment Gateway text?
-In Shopify's new payment platform, this doesn’t seem to be possible.
-
-##### Is there anything Midtrans plan to do about the missing features compared to previous integration?
-We do understand your concern that you want to bring the best customer experience to your store, Midtrans indeed also share a similar vision. So we are trying to figure out if we can bring back those or similar features. However please note that Midtrans integration is strictly bound to the limitations & behaviors of Shopify's new payment platform, so most of the time we’ll also need to communicate with Shopify and need their support to improve on the limitations. We’ll update our docs when we have any improvements ready.
-
-##### Is it possible to have card online installment & offline installment feature activated at the same time?
-It is not currently possible to have both features activated, as activating both features may result in unexpected behavior regarding the installment acquirer result. Please choose only one of either feature activated.
-
-##### As a Shopify store owner who already integrated with Midtrans using the previous integration method, what am I required to do?
-According to Shopify’s mandate, you will be required to integrate using the current/new integration method, please follow the steps given in (Integrating Midtrans to Shopify Platform)[#integrating-midtrans-to-shopify-platform] section.
-
-##### What will happen during the transition period where both integration methods can be installed? Anything else the store owner is required to do?
-We are further clarifying with the Shopify team, we’ll update the docs once we have further details.
-
-##### What will happen during the end of the transition period where the old integration method is deactivated? Anything else the store owner is required to do?
-We are further clarifying with the Shopify team, we’ll update the docs once we have further details.
-<hr>
-
-#### Deactivating Midtrans Payment Gateway
-If you decide to not use Midtrans Payment Gateway, then you can deactivate it. When you deactivate the app, it's removed from your list of available payment methods, but it's still available if you need it for cases such as order returns.
-
-1. In the Supported payment methods section, find the provider in the list.
-2. Click Manage.
-3. Click Deactivate to disable the provider.
-4. Click Deactivate Payments App.
-
-<!-- @TODO: explain if payment page closed, it may lost forever -->
-<!-- @TODO: explain shopify void & refund feature -->
-<!-- @TODO: explain item stock deduction / restock scenarios -->
-
-
-<hr><br><br>
-
-## Shopify Old Method (Deprecated)
-
-### Integrating Midtrans to Shopify Platform: 
-
-<details>
-<summary>Shopify Old Method (Deprecated)</summary>
-<article>
 
 Please complete the steps given below:
 
@@ -640,22 +352,20 @@ Merchant cancels/refunds order via Shopify. | Cancel/Refund | Canceled/Refunded
 <!-- @TODO: explain shopify void & refund feature -->
 <!-- @TODO: explain item stock deduction / restock scenarios -->
 
-</article>
-</details>
 
 ## Sirclo
 
 Please complete the following steps:
 
 1. Create an online store with Sirclo.
-2. Register to [Midtrans account](https://dashboard.midtrans.com/register).
+2. Register to [Midtrans account](https://account.midtrans.com/register).
 3. Complete the account registration form. For any help, you can contact [Midtrans activation team](mailto:activation@midtrans.com). Use __SIRCLO - URL Name__ as a subject header and mention your registered _Midtrans Merchant ID_. 
 
 ### Integrating Midtrans to Sirclo Platform:
 
 To integrate Midtrans to Sirclo platform, follow the steps given below.
 
-1. Login to Midtrans [Merchant Administration Portal](https://dashboard.midtrans.com/login).
+1. Login to Midtrans [Merchant Administration Portal](https://account.midtrans.com/login).
 
 	You will find your online shop name with *Sandbox/Production* *environment*. Please make sure that you are in __Production environment__.
 
@@ -718,14 +428,14 @@ To integrate Midtrans to Sirclo platform, follow the steps given below.
 Please complete the following steps:
 
 1. Create an online store account with [Jejualan](https://jejualan.com/daftar), and choose Beta, Gamma, or Delta in order to use Midtrans service.
-2. Register to [Midtrans account](https://dashboard.midtrans.com/register).
+2. Register to [Midtrans account](https://account.midtrans.com/register).
 3. Complete the account registration form. For any help, you can contact [Midtrans activation team](mailto:activation@midtrans.com). Use __Jejualan – URL Name__ as subject header and mention your registered _Midtrans Merchant ID_. 
 
 ### Integrating Midtrans to Jejualan Platform:
 
 To integrate Midtrans to Jejualan platform, follow the steps given below.
 
-1. Login to Midtrans [Merchant Administration Portal](https://dashboard.midtrans.com/login).
+1. Login to Midtrans [Merchant Administration Portal](https://account.midtrans.com/login).
 
 	You will find your online shop name with *Sandbox/Production* environment. Please make sure that you are in __Production environment__.
 
