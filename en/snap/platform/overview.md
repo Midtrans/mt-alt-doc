@@ -30,15 +30,9 @@ Step by step guide to integrate Snap to the platform of your choice, is explaine
 
 ## Shopify
 
-?> Limitation & Disclaimer:<br>
-As [announced by Shopify](https://shopify.dev/apps/payments/hosted-payment-sdk), Shopify planned to deprecate the previous payment integration platform (Hosted Payment SDK) by June 30, 2022. Shopify has urged Midtrans (and other payment gateways) to migrate to their new [Payment Platform integration](https://shopify.dev/beta/payments-apps/). In compliance with it, Midtrans has migrated to the new platform, as a result of the new mechanism, __you__ as a __Midtrans’ merchants will need to migrate by installing Midtrans as Shopify Payment App__.<br><br>
-__If by June 30, 2022 you have not done so__, Midtrans payment integration (installed using the previous mechanism) __may no longer work for your Shopify store__.<br><br>
-Due to the current limitation of the Shopify’s new payment platform, here is limitation that should be expected:<br>
-__Only supports Production environment__ (real payment mode), not Sandbox environment yet (test payment mode). Due to the complexity of the new platform to connect with Midtrans’ sandbox environment.<br>
-__Restock Feature is not yet available__, in previous integration, if customer left Snap page without proceeding with any payment method, order will be updated as canceled on Shopify after two hours, and will be restocked. For this new integration, restock is not yet available, for an alternative, you need to cancel the order manually from Shopify admin, to release the stock that previously is allocated for customer.
-<br><br>
-You can try to contact Shopify regarding the limitation, should you have any concern about them.<br><br>
-Later when the Shopify platform starts to uplift the limitations, only then Midtrans will be able to start adding restock feature. Sandbox environment mode is also planned to be supported (but, likely as a separate payment app).
+?> As [announced by Shopify](https://shopify.dev/apps/payments/hosted-payment-sdk), Shopify planned to deprecate the previous payment integration platform (Hosted Payment SDK) by June 30, 2022. Shopify has urged Midtrans (and other payment gateways) to migrate to their new [Payment Platform integration](https://shopify.dev/beta/payments-apps/). In compliance with it, Midtrans has migrated to the new platform, as a result of the new platform, __you__ as a __Midtrans’ merchants will need to migrate by installing Midtrans as Shopify Payment App__.<br><br>
+__If by June 30, 2022 you have not done so__, Midtrans payment integration (installed using the previous platform) __may no longer work for your Shopify store__.<br><br>
+Due to the changes introduced by Shopify’s new payment platform, there are some changes (compared to previous integration version) and limitations that should be expected. Visit [Known Limitations](#known-limitations) under Advanced section to see the details.
 
 Please complete the steps given below:
 
@@ -105,7 +99,7 @@ On **Production** mode:
 11. You will be redirect back to Shopify, and the page will indicates that your Shopify store is connected to Midtrans Payment Gateway.
 	![Connected to Midtrans](./../../../asset/image/shopify-new-08-success-install.png ':size=400')
 
-12. To activate, click __Activate Midtrans Payment Gateway__.
+12. To activate, click __Activate Midtrans Payment Gateway__. You can also tick/untick desired payment method icons that will be shown in the payment button on your checkout page.
 
 13. Done! Now your Shopify online shop is ready to start accepting payments with Midtrans as payment gateway. Your customer will see __Midtrans Payment Gateway__ as payment method on the checkout page.
 	![Midtrans show in checkout page](./../../../asset/image/shopify-new-10-order.png ':size=400')
@@ -118,36 +112,23 @@ With this integration, your customer will be redirected to Snap Redirect payment
 
 <hr>
 
-### Account Settings
-You can manage your account settings
+### Payment App Account Settings
+**Optionally**, you can further manage/edit your Midtrans Payment App account settings. Although **for most-usecase, you are not required** to do this.
 
-1. In the displayed Midtrans Payment Gateway page, click __Manage__.
+1. On your store admin page, navigate to **Settings > Payment**, then on the listed payment with Midtrans as the provider, click **Manage**.
+2. In the displayed Midtrans Payment Gateway page, click __Manage__.
 ![Manage](./../../../asset/image/shopify-new-11-manage.png ':size=400')
 
-2. You will be redirect to the Midtrans account settings, you can update Midtrans Merchant ID, enable specific payment methods, and activate online offline installment.
+3. You will be redirect to the Midtrans account settings, you can update Midtrans Merchant ID, enable specific payment methods, and activate online offline installment.
 ![Account Settings](./../../../asset/image/shopify-new-12-settings.png ':size=400')
 
-3. Sample if you only enable credit card payment method
+4. Sample if you only enable credit card payment method
 ![Enable Payment Method](./../../../asset/image/shopify-new-13-enable-specific-payment-methods-1.png ':size=400')
 ![Snap UI](./../../../asset/image/shopify-new-14-enable-credit-card-method.png ':size=400')
 
-4. Sample if you enable credit card, gopay, and bank transfer payment methods
+5. Sample if you enable credit card, gopay, and bank transfer payment methods
 ![Enable Payment Method](./../../../asset/image/shopify-new-15-enable-specific-payment-methods-2.png ':size=400')
 ![Snap UI](./../../../asset/image/shopify-new-16-enable-some-methods.png ':size=400')
-
-<hr>
-
-### Deactivate Midtrans Payment Gateway
-
-If you deside to not use Midtrans Payment Gateway, then you can deactivate it. When you deactivate the app, it's removed from your list of available payment methods, but it's still available if you need it for cases such as order returns.
-
-1. In the Supported payment methods section, find the provider in the list.
-
-2. Click Manage.
-
-3. Click Deactivate to disable the provider.
-
-4. Click Deactivate Payments App.
 
 <hr>
 
@@ -274,7 +255,49 @@ Merchant cancels/refunds order via Shopify. | Cancel/Refund | Canceled/Refunded
 </article>
 </details>
 
-<hr><br><br>
+<hr>
+
+#### Known Limitations
+Due to the changes introduced by Shopify’s new payment platform, here are some changes (compared to previous integration version) and limitations that should be expected:
+
+##### How can I integrate my store with the Midtrans Sandbox Environment?
+To integrate your store with the Midtrans Sandbox environment, you will be required to install a separate/additional app (with similar steps of installation). We'll update our docs with the details once it is ready.
+
+##### Is auto restock items upon abandoned payment still supported?
+Unfortunately due to Shopify's new payment platform, "auto restock items upon abandoned payment" may not be available in this integration version. In previous integration, if a customer left the Snap payment page without proceeding with any payment method, order will be updated as canceled on Shopify after two hours, and will be restocked. For this new integration, restock is not yet available, for an alternative, you need to cancel the order manually from Shopify admin, to release the stock that previously was allocated for customers.
+
+##### Is it possible to have each payment method displayed as a separate payment button on my store’s checkout page?
+Unfortunately due to Shopify's new payment platform, this is no longer possible (unlike previous integration).
+
+##### Is it possible to add more payment method icons to be displayed on the checkout page?
+We are working and communicating with Shopify to try to add more payment method icons.
+
+##### Is it possible to change the text-label of the payment button instead of the generic Midtrans Payment Gateway text?
+In Shopify's new payment platform, this doesn’t seem to be possible.
+
+##### Is there anything Midtrans plan to do about the missing features compared to previous integration?
+We do understand your concern that you want to bring the best customer experience to your store, Midtrans indeed also share a similar vision. So we are trying to figure out if we can bring back those or similar features. However please note that Midtrans integration is strictly bound to the limitations & behaviors of Shopify's new payment platform, so most of the time we’ll also need to communicate with Shopify and need their support to improve on the limitations. We’ll update our docs when we have any improvements ready.
+
+##### Is it possible to have card online installment & offline installment feature activated at the same time?
+It is not currently possible to have both features activated, as activating both features may result in unexpected behavior regarding the installment acquirer result. Please choose only one of either feature activated.
+
+##### As a Shopify store owner who already integrated with Midtrans using the previous integration method, what am I required to do?
+According to Shopify’s mandate, you will be required to integrate using the current/new integration method, please follow the steps given in (Integrating Midtrans to Shopify Platform)[#integrating-midtrans-to-shopify-platform] section.
+
+##### What will happen during the transition period where both integration methods can be installed? Anything else the store owner is required to do?
+We are further clarifying with the Shopify team, we’ll update the docs once we have further details.
+
+##### What will happen during the end of the transition period where the old integration method is deactivated? Anything else the store owner is required to do?
+We are further clarifying with the Shopify team, we’ll update the docs once we have further details.
+<hr>
+
+#### Deactivating Midtrans Payment Gateway
+If you decide to not use Midtrans Payment Gateway, then you can deactivate it. When you deactivate the app, it's removed from your list of available payment methods, but it's still available if you need it for cases such as order returns.
+
+1. In the Supported payment methods section, find the provider in the list.
+2. Click Manage.
+3. Click Deactivate to disable the provider.
+4. Click Deactivate Payments App.
 
 <!-- @TODO: explain if payment page closed, it may lost forever -->
 <!-- @TODO: explain shopify void & refund feature -->
