@@ -194,7 +194,7 @@ curl -X POST \
 
 | Element             | Description                                                  | Type   | Required |
 | ------------------- | ------------------------------------------------------------ | ------ | -------- |
-| payment_type        | The *Bank Transfer* payment method.                          | String | Required |
+| payment_type        | The *E-channel* payment method.                          | String | Required |
 | transaction_details | The details of the transaction like the order_id and gross_amount. | -      | Required |
 | order_id            | The order ID of the transaction.                             | String | Required |
 | gross_amount        | The total amount of transaction, defined from your side.     | String | Required |
@@ -592,6 +592,18 @@ Please add **bank_transfer** parameter during [Charge API Request](/en/core-api/
   }
 ...
 ```
+
+#### **Mandiri Bill**
+```json
+...
+  "echannel" : {
+    "bill_info1" : "Payment:",
+    "bill_info2" : "Online purchase",
+    "bill_key" : "081211111111"
+}
+...
+```
+
 <!-- tabs:end -->
 
 #### VA Number Specification
@@ -603,6 +615,7 @@ BCA `sub_company_code` | String | Optional | BCA sub company code directed for t
 Permata `va_number` | String | Optional | Length should be 10. Only supported for b2b VA type.
 BNI `va_number` | String | Optional | Length should be within 1 to 8.
 BRI `va_number` | String | Optional | Length should be within 1 to 13.
+Mandiri Bill `bill_key` | String | Optional | Length should be within 6 to 12.
 
 ?>***Note***: In *Production* environment, not every bank may support custom VA number (e.g. Permata), as the default state. It depends on the type of VA configured for your merchant account & your business agreement with the bank. Please consult Midtrans Activation team for further information.
 
