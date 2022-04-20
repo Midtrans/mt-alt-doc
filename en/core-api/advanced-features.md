@@ -1504,16 +1504,17 @@ The JSON parameters added in the *Request Body* of Charge API Request, are shown
 
 ```json
 ...
-	"echannel" : {
-	    "bill_info1" : "Payment For:",
-	    "bill_info2" : "Tuition fee",
-	    "bill_info3" : "Name:",
-	    "bill_info4" : "Budi Utomo",
-	    "bill_info5" : "Class:",
-	    "bill_info6" : "Computer Science",
-	    "bill_info7" : "ID:",
-	    "bill_info8" : "VT-12345"
-	}
+  "echannel": {
+      "bill_info1": "Payment For:",
+      "bill_info2": "Tuition fee",
+      "bill_info3": "Name:",
+      "bill_info4": "Budi Utomo",
+      "bill_info5": "Class:",
+      "bill_info6": "Computer Science",
+      "bill_info7": "ID:",
+      "bill_info8": "VT-12345",
+      "bill_key": "081211111111"
+}
 ...
 ```
 <details>
@@ -1530,6 +1531,7 @@ bill_info5 | Label 3 |String|Maximum length: 10<br/>Exceeding characters will be
 bill_info6 | Value for Label 3 |String|Maximum length: 30<br/>Exceeding characters will be truncated.
 bill_info7 | Label 4 |String|Maximum length: 10<br/>Exceeding characters will be truncated.
 bill_info8 | Value for Label 4 |String|Maximum length: 30<br/>Exceeding characters will be truncated.
+bill_key | Custom bill key assigned by you |String|Maximum length: 12<br/> If longer than maximum then Midtrans will trim the remaining least significant bits.
 
 </article>
 </details>
