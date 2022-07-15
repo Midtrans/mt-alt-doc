@@ -522,6 +522,19 @@ To configure the Payment Notification URL, follow the steps given below.
 
 </div>
 
+## 4. Switching to Production Mode
+In this section, you will learn how switching from Sandbox environment to Production environment, in order to start accepting real world payment for your business. This is also known as "Going Live".
+
+<br>
+
+<div class="my-card">
+
+#### [Going Live](/en/technical-reference/going-live.md)
+Best practices to build a production-ready
+
+</div>
+
+
 ## Specifying VA Number
 Virtual Account number which is displayed to customer, contains two parts. for example, in `{91012}{12435678}` , the first part is the company-prefix-number and the second part is a unique-va-number. The second part can be customized. Following conditions need to be followed while customizing VA number:
 
