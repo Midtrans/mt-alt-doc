@@ -440,6 +440,18 @@ To configure the Payment Notification URL, follow the steps given below.
 #### [HTTP(S) Notification/Webhooks](/en/after-payment/http-notification.md)
 </div>
 
+## 4. Switching to Production Mode
+In this section, you will learn how switching from Sandbox environment to Production environment, in order to start accepting real world payment for your business. This is also known as "Going Live".
+
+<br>
+
+<div class="my-card">
+
+#### [Going Live](/en/technical-reference/going-live.md)
+Best practices to build a production-ready
+
+</div>
+
 ## Additional Notes
 If GoPay deeplink is being used on smartphone application (Android/iOS app), you need to include additional configurations to ensure that your app will be able to redirect customer to Gojek app. Please make sure that the WebView allows opening `gojek://` deeplink protocol.
 
