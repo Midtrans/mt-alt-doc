@@ -667,6 +667,18 @@ The table given below, describes the `transaction_status`.
 
 For more details, refer to [Midtrans Transaction Status Cycle Description](/en/after-payment/status-cycle.md).
 
+## 5. Switching to Production Mode
+In this section, you will learn how switching from Sandbox environment to Production environment, in order to start accepting real world payment for your business. This is also known as "Going Live".
+
+<br>
+
+<div class="my-card">
+
+#### [Going Live](/en/technical-reference/going-live.md)
+Best practices to build a production-ready
+
+</div>
+
 ## Next Step:
 <br>
 
