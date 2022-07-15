@@ -38,7 +38,7 @@ The table given below describes the fields that can be configured from the Merch
 
 !> Make sure that the Notification URL **can be reached from Public Internet**. Midtrans **cannot send notifications to localhost**, URL protected with authorization or password, URL behind VPN, unusual destination port, and so on. You may also need to make sure the [following IP address](/en/technical-reference/ip-address#notification-ip-address) is not blocked from your infrastructure. If you just want to make sure the notification is authentic, you can implement [Verifying Notification Authenticity section](#verifying-notification-authenticity) below.
 
-?> **Tips**: If you are still running/developing your notification handler on localhost, you can utilize the services (such as [Ngrok](https://ngrok.com/), [Serveo](http://serveo.net/), [Localhost.Run](http://localhost.run/), and so on) to expose your localhost server to public Internet. Once you have obtained the Internet accessible URL, you can add it to the *Notification URL* field on *Dashboard*.
+?> **Tips**: If you are still running/developing your notification handler on localhost, you can utilize the services (such as [Ngrok](https://ngrok.com/), [Tsocket](http://tsocket.org/), [Localhost.Run](http://localhost.run/), and so on) to expose your localhost server to public Internet. Once you have obtained the Internet accessible URL, you can add it to the *Notification URL* field on *Dashboard*.
 
 ## Sample HTTP Notifications Sent From Midtrans
 
@@ -461,7 +461,7 @@ Some sample HTTP notifications for a successful transaction on different payment
 }
 ```
 
-#### **BRI Epay**
+#### **BRImo**
 
 ```json
 {
@@ -853,7 +853,7 @@ Some sample HTTP notifications for a successful transaction on different payment
 | currency           | The unit of currency used for the transaction.   | String | –                                                            |
 
 
-#### **BRI Epay**
+#### **BRImo**
 
 #### POST Body 
 
@@ -969,6 +969,8 @@ For API requests that are performed synchronously (from your) backend-to-backend
 
 ?> ***Note:*** Midtrans may not be able to help you with any **financial loss caused if merchants fail to [verify payment status authenticity](#verifying-notification-authenticity)**. Payment status has to be verified coming from Midtrans before you decide to take financial action on it (e.g. delivering good/service to customer when payment status is success). Failing to do so can be considered a security/financial liability on the merchant side.
 
+?> ***Note:*** On top of that, you should also **use a valid SSL/HTTP(s)** on your notification URL endpoints for extra security.
+
 ## Responding HTTP Notification from Midtrans
 
 To confirm that you received the notification, your notification URL or backend must respond to the HTTP notification with HTTP `status code: 200`. On most backend or web frameworks you can achieve that by printing a string similar to *OK*. This will automatically sends HTTP `status code: 200` to Midtrans. 
@@ -1002,36 +1004,36 @@ Your server can respond with the following status and error codes, which will tr
 <summary><b>Best Practices</b></summary>
 <article>
 
-- Always use an HTTPS endpoint. It is secure and there cannot be Man-in-the-Middle (MITM) attacks because we validate the certificates match with the hosts. Also do not use self signed certificates.
-- Use standard port (80/443) for notification callback URL.
-- Always implement notification in an idempotent way. In extremely rare cases, we may send multiple notifications for the same transaction event. It should not cause duplicate entries at your end, The simple way of achieving this is to use *order_id* as the key to track the entries.
-- Always check the signature hash of the notification, This will confirm that the notification was actually sent by Midtrans, because we encode the *Server Key*. Nobody else can build this signature hash.
-- Always check the following three fields for confirming success transactions:
-	- `status_code`: Should be 200 for successful transactions
-	- `fraud_status`: ACCEPT
-	- `transaction_status` : *settlement* or *capture*
-- We strive to send the notification immediately after the transaction has occurred. In extremely rare cases, it may be delayed because of transaction spikes. If you have not received a notification, please use the *GET Status API* to check for current status of the transaction.
-- It is safe to call *GET Status API* to get the latest status of a transaction or an order.
-- The HTTP timeout is configured for 15 seconds. Please respond as soon as possible, ideally, within 5 seconds, to reduce the load on Midtrans' infrastructure. 
-- In extremely rare cases we may send the HTTP notifications out of order - a `settlement` status for a notification before the notification for `pending` status. It's important that such later notifications are ignored. Here's the state transition diagram that you could use. But it is recommended to use *GET Status API* to confirm the actual status.
-- We send the notification body as JSON, please parse the JSON with a JSON parser. Always expect new fields will be added to the notification body, so parse it in a non strict format. This prevents the parser from throwing an exception for new fields. It should gracefully ignore the new fields. This allows us to extend our notification system for newer use cases without breaking old clients.
-- Always use the right HTTP Status code for responding to the notifications. 
-- we handle retry for error cases differently based on the status code.
-	- for `2xx`: No retries, it is considered success
-	- for `500`: Retry only once
-	- for `503`: Retry 4 times
-	- for `400/404`: Retry 2 times
-	- for `301/302/303`: No retries. We suggest the notification endpoint should be update in setting instead of reply these status code.
-	- for `307/308`: Follow the new URL with POST method and same notification body. Max redirect is 5 times
-	- for all other failures: Retry 5 times
-- We do retry at most 5 times with following policy.
-- Different retry intervals are:
-  - First time - two minutes
-  - Second time - ten minutes
-  - Third time - 30 minutes (0.5 hours)
-  - Fourth time - 90 minutes (1.5 hours)
-  - Fifth time - 210 minutes (3.5 hours)
-- Put a random time shift for each time retry base on above interval. For example, the first time retry might be 33s (at most 2m) after the job failed.
+- **Use HTTPS endpoint**. For better security & to avoid Man-in-the-Middle (MITM) attacks. We validate the certificates match with the hosts. Do not use self signed SSL certificates.
+- **Use standard port (80/443)** for notification URL.
+- **Implement notification handling in an idempotent way.** In extremely rare cases, we may send multiple notifications for the same transaction event. Your endpoint should avoid processing it as duplicate entries, one way of achieving this is to use *order_id* as the key to track the entries.
+- **Verify the signature key hash of the notification**, This will confirm that the notification was actually sent by Midtrans and not any body else. *Server Key* is used to verify the signature, which only Midtrans and you should have the access to it.
+- Check the following three fields when confirming success transactions:
+	- `status_code`: Should be 200 for successful transactions.
+	- `fraud_status`: If exists, the value should be ACCEPT. If not exists then you can ignore it.
+	- `transaction_status` : *settlement* or *capture* for successful transactions.
+- We strive to send the notification immediately after the transaction has occurred. However, in extremely rare cases, it may be delayed due to issues (e.g. high load, incidents, network latency, etc.). If you think you are have not receive notification in time, you can use the [GET Status API](/en/after-payment/get-status.md) to check for current status of the transaction.
+- Midtrans will wait for up-to **15 seconds** when sending notification, before considering the request timeout/failed. Your endpoint should **respond as soon as possible, ideally within 5 seconds**, to reduce the load on Midtrans' & your own infrastructure.
+- In extremely rare cases that the payment status notifications received out of order - `settlement` status comes before `pending` status. You should call [GET Status API](/en/after-payment/get-status.md) to get the latest/actual status of the transaction. Or you can ignore the `pending` notifications in such cases. 
+- HTTP Notification body is in **JSON format**. Which should allow additional JSON fields to be added in the future. Your implementation **should allow new fields to be later added** to the notification body, so parse the JSON fields in a non strict way (especially if you are using some JSON parser library that strictly does not allow new fields to be added). Avoid JSON parser behavior that will throw error/exceptions when encountering new fields, instead it should gracefully ignore the new fields. This allows us to improve our notification system for newer use cases without breaking compatibility.
+- Always use the **right HTTP Status code for responding HTTP notifications** requests. 
+- Midtrans will retry when encountering HTTP error status codes, & differently based on it.
+	- for `2xx`: No retries, it is considered successfully received.
+	- for `500`: Retry only once.
+	- for `503`: Retry 4 times.
+	- for `400/404`: Retry 2 times.
+	- for `301/302/303`: No retries, these redirect status codes is not supported. We suggest you to update the Notification endpoint URL. Do not intentionally reply with them.
+	- for `307/308`: Follow the new URL with POST method and same notification body. Max redirect is 5 times.
+	- for all other failures: Retry 5 times.
+- Midtrans retry **at most 5 times** with following policy.
+- Different retry intervals based on number of retry attempt:
+  - First time - 2 minutes.
+  - Second time - 10 minutes.
+  - Third time - 30 minutes (0.5 hours).
+  - Fourth time - 90 minutes (1.5 hours).
+  - Fifth time - 210 minutes (3.5 hours).
+- Midtrans put a random time shift for each attempt based on above interval. For example, the first retry time might be 33s (up to 2m) after previous attempt.
+<!-- @TODO: link the get status api references -->
 </article>
 </details>
 
@@ -1230,3 +1232,9 @@ If your backend/notification url only supports TLS v1.3, you may not be able to 
 You can check the TLS protocol version being supported by your backend by using tools such as: https://www.digicert.com/help/ . Input your notification url there, and check the supported TLS protocol version.
 
 Our notification engine team is working to bring future support of TLS v1.3. Until it happens, please follow the recommendation above.
+
+### Note on custom HTTP(s) Notification Headers
+Midtrans currently does not support custom HTTP(s) header to be added on our HTTP(s) Notification request. It means if your notification URL endpoint require extra HTTP(s) header to accept request (such as requiring Basic Auth or custom API key headers), it will not be supported. Your notification URL endpoint must allow regular HTTP(s) request without any custom headers.
+
+### Security Aspect
+If you have concern regarding the security aspect, please refer to [Verifying Authenticity section](#verifying-notification-authenticity). As long as you are using a valid HTTPs endpoint & verifying notification authenticity, it should be secure enough already (e.g. from any MiTM attack attempt, etc.).

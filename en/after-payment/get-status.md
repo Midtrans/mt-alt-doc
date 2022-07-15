@@ -76,7 +76,9 @@ The sample response from `[ORDER_ID]/status` endpoint is shown below.
   "settlement_time": "2020-01-10 16:15:31",
   "status_message": "Success, transaction is found",
   "merchant_id": "M004123",
-  "card_type": "credit"
+  "card_type": "credit",
+  "three_ds_version": "2",
+  "challenge_completion": true
 }
 ```
 
@@ -87,6 +89,8 @@ The table given below describes elements in the response.
 | approval_code            | The approval code for the transaction.                       | String |
 | bank                     | Name of the bank through which the transaction was done.     | String |
 | card_type                | The type of card used for the transaction.                   | String |
+| three_ds_version         | The version of 3DS used for the transaction, for Card payment. Example values `"1"` or `"2"` | String |
+| challenge_completion     | Whether the 3DS 2 challenge input was completed by customer, for Card payment. Example values `true` or `false`. Field may not exist if 3DS 2  challenge input was not prompted. | Boolean |
 | channel_response_code    | The response code from the payment channel.                  | String |
 | channel_response_message | The response message from the payment channel is specified.  | String |
 | currency                 | The type of currency in which the transaction was done is shown here. | String |

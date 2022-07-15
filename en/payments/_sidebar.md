@@ -19,6 +19,7 @@
 	- [Advanced Feature](en/core-api/advanced-features.md "Midtrans - Core API Advanced Feature Documentation")
 	- [API Methods ↗](https://api-docs.midtrans.com/#api-methods)
 - [**![](asset/image/main/midtrans-icons-paymentlink.svg)Payment Link**<small>&nbsp;(no code needed)</small>](en/payment-link/overview.md "Midtrans - Payment Link Documentation")
+  - [Optional: Integration via API](en/payment-link/with-api.md "Midtrans - Payment Link via API Documentation")
 - **Plugins**
 - [![](asset/image/main/midtrans-icons-installcmsplugin.svg)**Install as CMS Plugin**](en/snap/with-plugins.md "Midtrans - Snap CMS Plugin / Module Documentation")
 - [![](asset/image/main/midtrans-icons-ecommerce.svg)**Ecommerce Platform**](en/snap/platform/overview.md "Midtrans - Snap Ecommerce Platform Integration Documentation")

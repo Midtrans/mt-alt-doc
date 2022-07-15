@@ -1,9 +1,9 @@
 # Snap Overview
 <hr>
 
-*Snap* allows you (as a merchant) to easily integrate with Midtrans payment system to start accepting payments. Snap payment page can be displayed as a seamless pop-up within your web/app during checkout, or as a (Midtrans hosted) web page url redirect. Using *Snap* is easy and there is no monthly fee. The simple and quick integration process is suitable for small size business or corporate size businesses.
+*Snap* allows you (as a merchant) to **easily integrate with Midtrans payment system to start accepting payments**. Snap payment page can be displayed as a **seamless pop-up** within your web/app during checkout, **or** as a (Midtrans hosted) **web page url redirect**. Using *Snap* is easy and requires no monthly fee. The quick integration process is **easy for small size business** to get-started, and **highly customizable to meet the needs of large size business**.
 
- With single integration, *Snap* user interface allows you to accept payments with any of the [Midtrans payment methods](https://midtrans.com/payments).
+With single integration, *Snap* user interface allows you to accept payments with any of the [Midtrans payment methods](https://midtrans.com/payments).
 
 ![Snap Overview](./../../asset/image/snap-overview-main.png)
 
@@ -14,7 +14,7 @@
 ?> ***Tips***: Snap can also be embedded within your mobile app [using WebView](/en/snap/integration-guide.md#display-snap-via-mobile-apps-webview). Check [demo of Snap displayed in a WebView](https://sample-demo-dot-midtrans-support-tools.et.r.appspot.com/snap-webview)
 
 ## Various Ways to Integrate with Snap {docsify-ignore}
-Select the best suitable method to integrate with *Snap* from the list given below.
+**Learn on how-to** integrate with *Snap*, **select one from any of methods below** that you most prefer.
 
 <div class="my-card">
 

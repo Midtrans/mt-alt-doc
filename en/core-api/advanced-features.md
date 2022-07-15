@@ -606,7 +606,10 @@ curl -X POST \
 To allow installment feature with banks which do not issue Installment MID, merchant can use offline installment feature. With offline installment feature, the transaction will initially be charged in full amount and will be converted into installment later. To activate the installment feature, you are required to have agreement with the bank. Please consult Midtrans Activation Team for installment MID.
 
 
-You have to add the `installment_term` parameter with combination of `bins` whitelist feature. The purpose of BINs whitelist is to limit certain cards from making offline installment, based on the agreement between you and issuing banks.
+You have to add the `installment` parameter with combination of `bins` filter feature. The purpose of BIN filter is to allow only certain acceptable cards to proceed with offline installment payment, based on the agreement between you and issuing banks.
+
+Usually you will also need to add `bank` parameter to specify which card acquirer bank should be used for the offline installment payment.
+
 <!-- tabs:start -->
 
 #### **JSON Parameters**
@@ -623,7 +626,8 @@ The JSON parameters added in the *Request Body* of a [Charge API Request](en/cor
     "token_id": "<token_id from Get Card Token Step>",
     "authentication": true,
     "installment_term": 12,          
-    "bins": ["48111111", "3111", "5"]
+    "bins": ["48111111", "3111", "5"],
+    "bank": "mandiri"
   }
 }
 ```
@@ -646,7 +650,8 @@ curl -X POST \
     "token_id": "<token_id from Get Card Token Step>",
     "authentication": true,
     "installment_term": 12,
-    "bins": ["48111111", "3111", "5"]
+    "bins": ["48111111", "3111", "5"],
+    "bank": "mandiri"
   }
 }'
 ```
@@ -1038,6 +1043,8 @@ For more details, refer to [Open 3DS Authentication Page JS Implementation](/en/
 </details>
 
 You will receive `saved_token_id` & `saved_token_id_expired_at` from the response (it also available in the JSON of HTTP notification). `saved_token_id` is unique for each customer's card. Store this `saved_token_id` in your database and associate that card token to your customer.
+
+!> Important: Be sure to store the card's `saved_token_id_expired_at`. When that date time has been surpassed, the card's `saved_token_id` will be no longer usable, it means the card is expired. In that case you will need to ask your customer to re-do the card saving process with their re-newed card.
 
 #### Charge API Request for Recurring Transactions
 
@@ -1504,16 +1511,17 @@ The JSON parameters added in the *Request Body* of Charge API Request, are shown
 
 ```json
 ...
-	"echannel" : {
-	    "bill_info1" : "Payment For:",
-	    "bill_info2" : "Tuition fee",
-	    "bill_info3" : "Name:",
-	    "bill_info4" : "Budi Utomo",
-	    "bill_info5" : "Class:",
-	    "bill_info6" : "Computer Science",
-	    "bill_info7" : "ID:",
-	    "bill_info8" : "VT-12345"
-	}
+  "echannel": {
+      "bill_info1": "Payment For:",
+      "bill_info2": "Tuition fee",
+      "bill_info3": "Name:",
+      "bill_info4": "Budi Utomo",
+      "bill_info5": "Class:",
+      "bill_info6": "Computer Science",
+      "bill_info7": "ID:",
+      "bill_info8": "VT-12345",
+      "bill_key": "081211111111"
+}
 ...
 ```
 <details>
@@ -1530,6 +1538,7 @@ bill_info5 | Label 3 |String|Maximum length: 10<br/>Exceeding characters will be
 bill_info6 | Value for Label 3 |String|Maximum length: 30<br/>Exceeding characters will be truncated.
 bill_info7 | Label 4 |String|Maximum length: 10<br/>Exceeding characters will be truncated.
 bill_info8 | Value for Label 4 |String|Maximum length: 30<br/>Exceeding characters will be truncated.
+bill_key | Custom bill key assigned by you |String|Maximum length: 12<br/> If longer than maximum then Midtrans will trim the remaining least significant bits.
 
 </article>
 </details>

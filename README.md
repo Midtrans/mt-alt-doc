@@ -16,9 +16,19 @@
 </article>
 </details>
 
-## Usage
+## Running The Project
 
 - Download/clone and extract this folder to your local machine.
+- Then run the project via [Docker Compose explained in this section](#advanced-usage-using-docker-and-compose).
+- Or, install [Netlify CLI](https://docs.netlify.com/cli/get-started/)
+	- Then run the project via `netlify dev`.
+	- But you will be required to login with Netlify CLI. You can login with our team credentials.
+
+<details>
+<summary>Old/Previous Method - (Click to Expand)</summary>
+<article>
+
+Less preferred method (as it may have quirks/limitations):
 - Run any local webserver and make sure you can open the `index.html` from the webserver. (See example below this paragraph for some reference).
 - Open web browser and point it to where the folder where `index.html` file is located. i.e: `localhost/technical-documentation-site/`
 	- If that didn't load / didn't work properly: 
@@ -30,10 +40,6 @@
 	- Preview using Githack: https://raw.githack.com/Midtrans/technical-documentation-site/master/#/
 		- You can also change `master` with any branch you want to preview
 		- Note: Githack is free service so it might not be always available
-
-<details>
-<summary>Example Web Server - (Click to Expand)</summary>
-<article>
 
 ### Example Web Server
 For example (choose one of it, not all):
@@ -184,23 +190,15 @@ Variants:
 	- Each pull request to this branch will also trigger Netlify to deploy as preview branch. So you can preview how it will looks like before merging to deployment branch.
 - Commit pushed to `master` branch will trigger [branch deployment](https://docs.netlify.com/site-deploys/overview/#definitions) to `https://master--midtrans-docs.netlify.app/`.
 
-<details>
-<summary>Optional Advanced Usage - (Click to expand)</summary>
-<article>
+## Advanced Usage: Using Docker (and Compose)
 
-## Optional Advanced Usage: Using Docker (and Compose)
+<details>
+<summary>Advanced Usage - (Click to expand)</summary>
+<article>
 
 This section is **not required**, but if you prefer using Docker, or want to deploy as container.
 
-- Using `nginx:alpine` image
-- By default, docker file will `COPY` the necessary files from project dir at build time.
-	- Changes on runtime will not be reflected.
-	- Probably ideal for deployment, but not for development.
-	- Usage:
-		- Build image: `docker build -t <username-or-anything>/staticsite:1.0 .`.
-		- Run as container: `docker run -itd --name <container-name> --publish 20080:80 <username-or-anything>/staticsite:1.0`.
-		- It will be accessible under `localhost:20080` on host machine.
-- For development easier to use **docker-compose**:
+For development easier to use **docker-compose**:
 	- Because it will use `volume`, so changes is realtime.
 	- Usage:
 		- Run with docker compose `docker-compose up -d`.
@@ -212,6 +210,16 @@ This section is **not required**, but if you prefer using Docker, or want to dep
 	- Advanced:
 		- ssh to container: `docker exec -it nginx_static /bin/sh` on runtime
 		- restart nginx to apply new config on ssh: `/usr/sbin/nginx -s reload`
+
+For deployment (maybe? Untested, as Netlify is used in production):
+- Docker image used: `nginx:alpine`
+- By default, docker file will `COPY` the necessary files from project dir at build time.
+	- Changes on runtime will not be reflected.
+	- Probably ideal for deployment, but not for development.
+	- Usage:
+		- Build image: `docker build -t <username-or-anything>/staticsite:1.0 .`.
+		- Run as container: `docker run -itd --name <container-name> --publish 20080:80 <username-or-anything>/staticsite:1.0`.
+		- It will be accessible under `localhost:20080` on host machine.
 </article>
 </details>
 

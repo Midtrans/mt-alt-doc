@@ -104,6 +104,8 @@ Accept payments by integrating Midtrans to third-party ecommerce solutions (Shop
   </div>
 </div>
 
+?> For more detailed comparison between payment products, refer to [Payments Product Overview.](/en/payments/overview.md)
+
 <hr/>
 
 ## Technical Reference <!-- {docsify-ignore} -->

@@ -4,12 +4,12 @@
 
 <hr>
 
-?>***Note:*** This payment method is compatible with [QR Code Indonesian Standard (QRIS)](https://www.bi.go.id/id/ruang-media/siaran-pers/Pages/SP_216219.aspx), and can be paid with **any QRIS compatible e-Money or banking app**.
+?>***Note:*** This payment method is compatible with [QR Code Indonesian Standard (QRIS)](https://www.bi.go.id/QRIS/default.aspx), and can be paid with **any QRIS compatible e-Money or banking app**.
 
-GoPay is an *E-Money* payment method by Gojek. Users can pay using the Gojek apps, or any QRIS compatible app. The user flow is different for web browser (on a computer or a tablet) and smartphone:
+GoPay is an *E-Money* payment method by Gojek. Users can pay using the Gojek-GoPay app, or any QRIS compatible app. The user flow is different for web browser (on a computer or a tablet) and smartphone:
 
-1. **QR Code** - This is the user flow on a web browser (on a computer or a tablet). User is shown a QR code and asked to scan using any QRIS compatible app, such as Gojek app.
-2. **Deeplink** - This is the user flow on a SmartPhone/mobile device. User gets redirected to the Gojek apps to finish payment.
+1. **QR Code** - This is the user flow on a web browser (on a computer or a tablet). User is shown a QR code and asked to scan using any QRIS compatible app, such as Gojek-GoPay app.
+2. **Deeplink** - This is the user flow on a SmartPhone/mobile device. User gets redirected to the Gojek-GoPay app to finish payment.
 
 ?>***Note:*** Please make sure to create your [Midtrans account](/en/midtrans-account/overview.md), before proceeding with this section.
 
@@ -40,7 +40,7 @@ Basic integration process of GoPay is explained in this section.
 To integrate with *E-Money* Payment method, follow the steps given below.
 
 ## 1. Sending Transaction Data to API Charge
-API request should be done from merchant backend to acquire QR code and deeplink URL to Gojek app. The table given below describes the various elements required for sending the transaction data to the *Charge API*.  
+API request should be done from merchant backend to acquire QR code and deeplink URL to Gojek-GoPay app. The table given below describes the various elements required for sending the transaction data to the *Charge API*.  
 
 | Requirement    | Description                                                  |
 | -------------- | ------------------------------------------------------------ |
@@ -360,58 +360,69 @@ You will get the `actions` attribute to complete the transaction.
 </details>
 
 ## 2. Altering Payment Flow Depending on the Device Used
-The user flow is different on a computer or a tablet and a smartphone.
+Depending on which platform (Desktop or Mobile) you are integrating this payment method for your customer to pay, the payment flow will be different between *computer/tablet* versus *smartphone/mobile*. Choose from the flows below accordingly.
 ### Show QR Code Image (on computer or tablet)
-To display transaction QR Code image, use the URL from `generate-qr-code` actions retrieved from API response. Simplest way is to **"hotlink"** the image URL. If the frontend is HTML, put the URL in image tag `<img src="[QR CODE URL]">`, or display it on a similar component without downloading.
-If the frontend does not support such scenario, download the QR code image from that URL, then display it on frontend.
+To display transaction QR Code image, use the URL from `generate-qr-code` actions retrieved from API response. Simplest way is to **"hotlink"** the image URL. If the frontend is HTML, put the URL in image tag `<img src="THE_QR_CODE_URL_HERE">`, or display it on a similar component downloading.
 
-Instruction Example for **QR Code** :
+If the frontend does not support such scenario, you may need to locally download the QR code image from that URL, then display it on your frontend.
 
-1. Tap **Pay using GoPay**.
-2. Click **Pay Now**. QR code will be displayed.
-3. Open any **QRIS compatible app**, installed in your phone, for example Gojek.
-4. Scan the **QR code**.
+Once the QR Code for payment is displayed to customer, it will be available for customer to pay.
+
+?> Read [here to simulate/test success payment on Sandbox](/en/technical-reference/sandbox-test.md#e-money).
+
+Payment flow example for customer on Production environment:
+
+1. On Merchant web/app, choose **GoPay/QRIS** as payment method.
+2. Continue checkout until the payment QR code displayed.
+3. Open any **QRIS compatible app**, installed in your phone, for example Gojek-GoPay.
+4. Use "Scan to Pay" feature to scan the **QR code**.
 5. Click **Pay**, after checking and verifying your payment details.
-6. Verify your **Security PIN** and finish your transaction.
+6. You may be prompted to input **Security PIN** to finish your transaction.
 
 ![GoPay QR Instruction](./../../asset/image/core-api_gopay-qr-pay.png)
 
-### Creating Redirect Link to Gojek Apps (on smartphone)
-To redirect the customer to Gojek app, use URL from `deeplink-redirect` actions retrieved from API response. Then customer can be redirected via server-side redirect, using JavaScript, such as `window.location=[DEEPLINK URL]`, or using HTML link, `<a href="[DEEPLINK URL]">Pay with GoPay</a>`.
+### Redirecting to Gojek-GoPay App Deeplink (on smartphone)
+To redirect the customer to Gojek-GoPay app, use URL from `deeplink-redirect` actions retrieved from API response. Then customer can be redirected via server-side redirect, using JavaScript, such as `window.location=[DEEPLINK URL]`, or using HTML link, `<a href="[DEEPLINK URL]">Pay with GoPay</a>`.
 
-The steps for **Deeplink** are as given below.
+?> Read [here to simulate/test success payment on Sandbox](/en/technical-reference/sandbox-test.md#e-money).
 
-1. Tap **Pay using GoPay**.
-2. You will be redirected to **Gojek** app.
+Payment flow example for customer on Production Environment:
+
+1. On Merchant web/app, choose **GoPay** as payment method.
+2. Continue checkout until you are redirected to **Gojek-GoPay** app.
 3. Click **Pay**, after checking and verifying your payment details.
-4. Verify your **Security PIN** and finish your transaction.
+4. You may be prompted to input **Security PIN** to finish your transaction.
 
 ![GoPay QR Instruction](./../../asset/image/core-api_gopay-deeplink-pay.png)
 
-?> Read [here to simulate/test success payment](/en/technical-reference/sandbox-test.md#e-money).
+#### Implementing Finish Redirect Callback Handler
+In addition to app deeplink flow above, you can optionally implement finish redirect callback. Which after payment, the customer will be redirected back from Gojek-GoPay to your app.
 
-### Implementing GoPay Deeplink Callback
-In addition to the standard mobile apps flow, you may opt in to implement a deeplink callback to redirect customer back from Gojek to their apps.
-Add `gopay` parameter in the [Charge API request](#sample-request).
+Add the following parameters within the `gopay` object in the [Charge API request](#sample-request).
 ```json
   "gopay": {
       "enable_callback": true,
-      "callback_url": "someapps://callback" //you can also use web url like https://myshop.com/finish
+      "callback_url": "tokokuapp://gopay-finish"
   }
+  //you can also use web url like "https://myshop.com/gopay-finish"
 ```
 | JSON Attribute | Description |
 | -------------- | ----------- |
-| enable_callback | To determine appending callback URL in the deeplink. Default value: `false`. |
-| callback_url | To determine where Gojek apps will redirect after successful payment. Can be HTTP or deeplink URL. Default value: `callback_url` in dashboard settings. |
+| enable_callback | To determine whether customer will be redirected to the callback URL after payment. Default value: `false`. |
+| callback_url | To determine where Gojek-GoPay app will redirect customer after payment. Can be HTTP or app deeplink URL. Default value: `callback_url` in dashboard settings. |
 
-You need to prepare an implementation of `callback_url` on your web/app. Customer will be redirected to this URL once payment is completed, with some parameters as the result. It should accept two query parameters which are explained in the table given below.
+You will need to implement callback url handler on your web/app. Customer will be redirected to this URL once payment is completed. The redirect will also automatically appended with query parameters below.
 
 | Parameter | Description |
 | --------- | ----------- |
 | order_id | Order ID sent on the Charge Request|
 | result | Result of the transaction to decide what kind of page to show to customer. Possible values: `success` or `failure`|
 
+The final url will become for example `tokokuapp://gopay-finish?order_id=123&result=success`. So make sure your app can handle the finish redirect url properly.
+
 ?>***Note*** : To update the **Transaction Status** on merchant backend/database, **do not** solely rely on frontend callbacks. For security reasons, to make sure that the **Transaction Status** is authentically coming from Midtrans, you can update **Transaction Status** by waiting for [HTTP Notification](/en/after-payment/http-notification.md) or timely call [API Get Status](/en/after-payment/get-status) on your backend.
+
+If you don't implement finish redirect callback, after payment completed, customer can manually dismiss GoPay success/failure screen, then navigate back to your app manually.
 
 ## 3. Handling Post-Transaction
 When the transaction status changes, Midtrans notifies you at the *Redirect URL* and sends HTTP notification to the merchant backend. This ensures that you are updated of the transaction status securely.
@@ -452,12 +463,26 @@ Best practices to build a production-ready
 
 </div>
 
+
+#### Transaction Status Description
+The table given below explains `transaction_status` values for Ewallet transaction.
+
+| Transaction Status | Description |
+| ------------------ | ----------- |
+| settlement | Transaction is successfully paid, customer has completed the transaction. |
+| pending | Transaction is successfully created to payment provider but it's not yet completed by the customer. |
+| expire | Transaction is failed as the payment is not done by customer within the given time period. |
+| cancel | Transaction is canceled by you. |
+| deny | Transaction is rejected by the payment provider. |
+| refund | Transaction is refunded by you. |
+
 ## Additional Notes
-If GoPay deeplink is being used on smartphone application (Android/iOS app), you need to include additional configurations to ensure that your app will be able to redirect customer to Gojek app. Please make sure that the WebView allows opening `gojek://` deeplink protocol.
+#### Allowing App Redirect for Mobile Platform App
+If app deeplink redirect method is being used within WebView, you may need to include additional configurations to ensure that your app will be able to redirect customer to Gojek-GoPay app. Please make sure that the WebView allows opening `gojek://` deeplink protocol.
 
 <!-- tabs:start -->
 
-#### **Android**
+#### **Android Native**
 On **Android** if using WebView, please make sure that the WebView allows opening `gojek://` deeplink protocol. You need to modify your web view `shouldOverrideUrlLoading` functions as shown below.
 
 ```java
@@ -476,7 +501,7 @@ On **Android** if using WebView, please make sure that the WebView allows openin
  }
 ```
 
-#### **iOS**
+#### **iOS Native**
 
 On **iOS**, you will need to add `LSApplicationQueriesSchemes` key to your app's `Info.plist`.
 
@@ -487,27 +512,19 @@ On **iOS**, you will need to add `LSApplicationQueriesSchemes` key to your app's
 </array>
 ```
 
-#### **Other Framework**
+#### **WebView & Other**
 
-If you are using other framework such as React Native, Flutter, etc. Please follow [this FAQ on how to allow Gojek deeplink redirect.](/en/other/faq/technical.md#customer-fails-to-be-redirected-to-gojek-deeplink-on-mobile-app-what-should-i-do)
+If you are using other framework such as React Native, Flutter, etc. Please follow [this FAQ on how to allow Gojek-GoPay deeplink redirect.](/en/other/faq/technical.md#customer-fails-to-be-redirected-to-gojek-deeplink-on-mobile-app-what-should-i-do)
 
 <!-- tabs:end -->
-
-## Description
-The table given below explains `transaction_status` values for GoPay transaction.
-
-| Transaction Status | Description |
-| ------------------ | ----------- |
-| settlement | Transaction is successful, customer has completed the transaction. |
-| pending | Transaction is successfully created to GoPay but it not completed by the customer. |
-| expire | Transaction is failed as the payment is not done by customer within the given time period. |
-| cancel | Transaction is canceled by you. |
-| deny | Transaction is rejected by the bank. |
-| refund | Transaction is refunded by you. |
-
 <br>
 
 Link: [*More detailed definition of transaction_status & fraud_status*](/en/after-payment/status-cycle.md)
+
+#### Making Sure App Redirect Works on Web Based Mobile Platform App
+If you are implementing redirect using web based code (Browser, PWA, React Native, within WebView, etc.) on a Mobile App, sometimes the platform may block you from redirecting customer to another app. 
+
+Please follow [this FAQ on how to allow deep/universal link redirect.](/en/other/faq/technical.md#customer-fails-to-be-redirected-to-gojek-deeplink-on-mobile-app-what-should-i-do)
 
 ## Next Step
 <br>

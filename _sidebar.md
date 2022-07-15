@@ -43,6 +43,7 @@
   - [Core API Docs ↗](https://api-docs.midtrans.com)
   - [Core API Sample Demo ↗](https://bit.ly/MidSampleApp)
   - [Iris API Docs ↗](https://iris-docs.midtrans.com/)
+  - [Payment Link API Docs](en/technical-reference/payment-link-api.md "Midtrans - Payment Link API Docs")
   - [Docs Changelog](en/technical-reference/docs-changelog.md "Midtrans - Docs Changelog")
 - [**![](asset/image/main/midtrans-icons-security.svg)Security**](en/security/overview.md "Midtrans - Brief Security Documentation")
   - [PCI DSS ↗](https://support.midtrans.com/hc/en-us/articles/202710560-How-secure-is-my-information-i-e-payments-customer-details-in-Midtrans-system-)

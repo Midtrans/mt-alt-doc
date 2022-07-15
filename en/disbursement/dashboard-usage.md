@@ -196,7 +196,7 @@ Setup Iris HTTP(S) POST Notification by setting the Notification URL under menu 
 
 !> Make sure that the Notification URL **can be reached from Public Internet**. Midtrans **cannot send notifications to localhost**, URL protected with authorization or password, URL behind VPN, unusual destination port, and so on. You may also need to make sure the [following IP address](/en/technical-reference/ip-address#notification-ip-address) is not blocked from your infrastructure.
 
-?> **Tips**: If you are still running/developing your notification handler on localhost, you can utilize the services (such as [Ngrok](https://ngrok.com/), [Serveo](http://serveo.net/), [Localhost.Run](http://localhost.run/), and so on) to expose your localhost server to public Internet. Once you have obtained the Internet accessible URL, you can add it to the *Notification endpoint URL* field on *Iris Dashboard*.
+?> **Tips**: If you are still running/developing your notification handler on localhost, you can utilize the services (such as [Ngrok](https://ngrok.com/), [Tsocket](http://tsocket.org/), [Localhost.Run](http://localhost.run/), and so on) to expose your localhost server to public Internet. Once you have obtained the Internet accessible URL, you can add it to the *Notification endpoint URL* field on *Iris Dashboard*.
 
 ### Balance Threshold
 The Balance Threshold feature is to give you email notificiation if your source of funds Account Balance is below the set threshold. e.g. The balance threshold is set to IDR 1,000,000,- if you perform payouts and the balance goes below that number, Iris will send you a notification via email, that your balance has gone below the threshold limit. It is Available under menu `Settings > Balance Threshold`.

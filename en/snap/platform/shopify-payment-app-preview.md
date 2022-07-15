@@ -1,0 +1,1 @@
+The page content [is migrated to this page. Click to visit.](/en/snap/platform/overview.md).

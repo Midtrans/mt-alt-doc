@@ -10,7 +10,7 @@
         var originalHtml = '';
         var currentUrlPath = document.location.origin + document.location.pathname;
         // ajax fetch original html
-        fetch('./index.html')
+        fetch(document.location.href)
             .then(function (response){ 
                 return response.text() 
             })

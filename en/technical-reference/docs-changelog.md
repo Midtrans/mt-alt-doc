@@ -3,6 +3,66 @@
 
 <!-- #### Unreleased 
 -->
+#### 2022/07/08
+- add further info on Shopify guide: validation error email, payment retry, multiple payment ids, restock limitation. Update images.
+
+#### 2022/07/04
+- improve HTTP(s) notification best practice, header, & security aspect
+
+#### 2022/06/23
+- remove previous HPSDK version of Shopify integration guide
+- add current version of Shopify integration guide & its relevant info
+
+#### 2022/06/10
+- add beta Payment Link API reference & overview sections
+
+#### 2022/06/09
+- improve frequent false-positive report explanation
+- update testing credentials for ShopeePay & Kredivo
+- replace some no longer exists external links
+
+#### 2022/04/21
+- add custom VA number param support for Mandiri Bill
+
+#### 2022/03/11
+- update Sandbox env with new IP adresses, as announced via email previously
+- add Snap within iframe limitation
+
+#### 2022/03/01
+- update & add more community contributed libraries
+
+#### 2022/01/14
+- improve universal/deeplink redirect url FAQ
+- add note Snap Preferences only apply to Snap Popup mode
+- add faq on available online installment terms on sandbox env
+- add note to verify webhook notif authenticity via signature key instead of IP whitelisting
+- clarify how to activate CoreAPI on prod env & its default state
+
+#### 2021/12/10
+- add faq on how to test offline installment on Sandbox environment
+
+#### 2021/12/06
+- add 3DS 2 sandbox test card
+
+#### 2021/11/30
+- improve wording & reorder after payment overview
+- E-Pay BRI rebrand to BRImo
+
+#### 2021/11/11
+- add link & details on CMS demo store
+
+#### 2021/11/04
+- add new json field on callback & http notification of card payment 3DS 2
+- add faq on how to prepare 3DS 2
+- add tips on running example code repo easily via Gitpod
+- faq on ShopeePay finish-redirect don't have any appended params
+- faq on download-report/reset-password email not received
+
+#### 2021/10/29
+- improve wording, description and sample on:
+	- Core API bank transfer - Mandiri Bill
+	- Core API emoney
+- faq on idempotency-key usage scenario on API request
 
 #### 2021/10/19
 - improve description and wording on:
@@ -15,7 +75,7 @@
 #### 2021/09/24
 - add emphasis on importance of verifying & handling payment status update
 - add link to verify payment status on security page
-- add note of 3DS 2.0 Snap redirect behaviour
+- add note of 3DS 2 Snap redirect behaviour
 - improve snap integration guide section for better snap redirect method visibility
 - improve snap integration guide html sample: add sample w/ js callback, improve code readability
 - note on FDS deny: will not result in success transaction
@@ -24,7 +84,7 @@
 - add iris account & dashboard usage section
 
 #### 2021/09/17
-- update 'pending' notif definition to include 3DS 2.0 card payment note
+- update 'pending' notif definition to include 3DS 2 card payment note
 - ensure consistency of transaction & fraud status table between different technical reference pages
 - ensure each page use h2 instead of h3 as section heading
 - right sidebar UI improvement: better visual structure & less crowded feel
@@ -32,12 +92,12 @@
 - faq: add note to handle payment deeplink url on webview topics
 - add section about Snap via webview in snap guide
 - add link to snap webview section & its demo on relevant pages
-- add note of 3DS 2.0 callback behaviour on snap js callback section
+- add note of 3DS 2 callback behaviour on snap js callback section
 - add link and visibility of GoPay Recurring
 
 #### 2021/09/10
 - faq: about granular reason of payment failure on frontend e-money app
-- add note of 3DS 2.0 js callback behaviour on card payment integration guide
+- add note of 3DS 2 js callback behaviour on card payment integration guide
 - update fragment link to Core API docs according to new urls
 - update drupal guide according to latest module, now also support Drupal 9
 

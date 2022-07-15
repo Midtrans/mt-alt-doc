@@ -34,9 +34,9 @@ By following above points, all the data transmission coming from customer device
 
 In order to ensure the customer-to-Midtrans encryption are properly implemented, merchants are required to use official Midtrans provided JavaScript library (midtrans.min.js, snap.js, or Mobile SDK) for card transactions. Merchants are strictly prohibited to record card credentials to their own system, unless PCI DSS certified. 
 
-Some auditors may falsely report to see credentials transmitted in plain text. This is possible when the audit is done on the customer device itself, in which case, the data is expected to be visible from the customer device. Auditor should try to check from non-customer device such as network layer (as third-party between Midtrans and customer), to see the data being encrypted from third party.
+Note: Some auditors may run into false-positive reports about being able to see credentials transmitted in plain text. This is possible when the audit is done on the customer device itself, in which case, the data is expected to be visible (not yet encrypted) from the customer device. The better approach is auditors should try to check from non-customer devices such as the network layer or lower layer (as third-party between Midtrans and customer). In that case they will expect to see that the data is securely encrypted from any unauthorized party.
 
-Additionally HTTPs GET method encrypts any GET query / request credentials (via TLS/HTTPS). It may expose the destination web domain to proxy, but **will not** expose any parameter.
+Please also note that HTTPs GET method automatically encrypts any GET query / request credentials (via TLS/HTTPS). Although it sometimes can reveal the destination web domain (which is a safe public information), it **will not** expose any confidential parameter.
 
 ### Sensitive Data Encryption
 
@@ -46,7 +46,7 @@ All encryption and security procedures follow the PCI-DSS standards to ensure hi
 
 ### Vulnerability Disclosure
 
-Midtrans is always open to inputs or suggestions related our security processes. If you believe you have found a bug in Midtrans, please contact `security@midtrans.com` or `support@midtrans.com` and we will respond as soon as possible. We thank you for your cooperation in not disclosing these issues publicly.
+Midtrans is always open to inputs or suggestions related our security processes. If you believe you have found a bug or security issue in Midtrans, please contact `security@midtrans.com` or [Contact Us Page](https://midtrans.com/contact-us) and we will respond as soon as possible. We encourage your cooperation to disclose it responsibly with us.
 
 ### Keep Your Server Key Secured
 

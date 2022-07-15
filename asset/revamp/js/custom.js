@@ -223,7 +223,7 @@ function previewSnap(el){
   if(!window.snapScriptLoaded){
     var snapScriptEl = document.createElement('script');
     snapScriptEl.setAttribute('src','https://app.sandbox.midtrans.com/snap/snap.js');
-    snapScriptEl.setAttribute('data-client-key','VT-client-yrHf-c8Sxr-ck8tx');
+    snapScriptEl.setAttribute('data-client-key','SB-Mid-client-61XuGAwQ8Bj8LxSS');
     document.head.appendChild(snapScriptEl); 
     window.snapScriptLoaded = 1;
   }

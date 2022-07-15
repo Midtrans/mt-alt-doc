@@ -1,10 +1,19 @@
 # allow cache image asset for a week on CF side, to reduce bandwidth on Netlify
 /asset/image/*
   Cache-Control: public, s-max-age=604800
-  Cache-Tag: ver03022100
+  Cache-Tag: ver01122100
+/asset/favicon/*
+  Cache-Control: public, s-max-age=604800
+  Cache-Tag: ver01122100
 /asset/revamp/icons/*
   Cache-Control: public, s-max-age=604800
-  Cache-Tag: ver03022100
+  Cache-Tag: ver01122100
 /asset/revamp/img/*
   Cache-Control: public, s-max-age=604800
-  Cache-Tag: ver03022100
+  Cache-Tag: ver01122100
+/asset/revamp/styles/fonts/*
+  Cache-Control: public, s-max-age=604800
+  Cache-Tag: ver01122100
+
+# @TODO: maybe change to 3rd party CDN fonts? possible alternatives: 
+# cdnfonts.com, https://www.jsdelivr.com/github, https://www.jsdelivr.com/?query=font%20menlo&docs=gh

@@ -2,7 +2,7 @@
 <hr>
 
 
-*Direct Debit* is one of the payment methods offered by Midtrans. Using this payment method, the customer can pay using their E-Banking debit account. Midtrans sends real-time notifications when the customer completes the payment. Currently, Midtrans can integrate with the following *Direct Debit* payment methods such as BCA KlikPay, CIMB Clicks, Danamon Online Banking, and e-Pay BRI.
+*Direct Debit* is one of the payment methods offered by Midtrans. Using this payment method, the customer can pay using their E-Banking debit account. Midtrans sends real-time notifications when the customer completes the payment. Currently, Midtrans can integrate with the following *Direct Debit* payment methods such as BCA KlikPay, CIMB Clicks, Danamon Online Banking, and BRImo (previously known as e-Pay BRI).
 
 <div class="cards-r-4">
   <div>
@@ -19,7 +19,7 @@
   </div>
   <div>
 
-![epay bri](./../../asset/image/coreapi/epay_bri.png ":size=120")
+![BRImo](./../../asset/image/coreapi/epay_bri.png?dummyParamToPurgeCFCache=1 ":size=120")
   </div>
 </div>
 
@@ -116,7 +116,7 @@ curl -X POST \
   }
 }'
 ```
-#### **e-Pay BRI**
+#### **BRImo**
 ```bash
 curl -X POST \
   https://api.sandbox.midtrans.com/v2/charge \
@@ -278,7 +278,7 @@ The sample API responses and a description of the response body for the availabl
 </article>
 </details>
 
-#### **e-Pay BRI**
+#### **BRImo**
 **Sample Response**
 
 ```json
@@ -304,7 +304,7 @@ The sample API responses and a description of the response body for the availabl
 | Element            | Description                                                  | Type   | Notes                                                        |
 | ------------------ | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ |
 | status_code        | This is the status of the API call.                          | String | For more details, refer to [Error Code and Response Code](/en/technical-reference/error-response-code.md#status-codes-and-errors). |
-| status_message     | A message from ePay BRI describing the status of the transaction. | String |                                                              |
+| status_message     | A message from BRImo describing the status of the transaction. | String |                                                              |
 | transaction_id     | The *Transaction ID* of the specific transaction.            | String |                                                              |
 | order_id           | The specific *Order ID*.                                     | String |                                                              |
 | redirect_url       | The URL to which the customer is redirected from the bank's website. | String |                                                              |
@@ -492,7 +492,7 @@ The sample HTTP notification request received at merchant backend for *Direct De
    "approval_code": "uRaSu1XAnIm56i"
  }
 ```
-#### **e-Pay BRI**
+#### **BRImo**
 ```json
 {
   "transaction_time": "2019-11-11 15:09:35",
@@ -530,6 +530,10 @@ Best practices to build a production-ready
 
 </div>
 
+## Note & Limitation
+
+#### BRImo Rebranding
+Since November 2021 *E-Pay* BRI has been rebranded as *BRImo*. If you have it integrated on your side, please adjust your frontend/UI accordingly. For example by changing the text & logo displayed to customer side, as for the backend side, you are not required to change.
 
 ## Next Step:
 <br>
