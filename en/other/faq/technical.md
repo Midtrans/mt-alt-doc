@@ -20,6 +20,8 @@ Make sure that your **endpoint should not return/response**:
 
 Also it is **important to double check that your infrastructure layer** such as reverse-proxy (Nginx/Apache/etc.), network layer, firewall, etc. does not perform any of the above problematic issue.
 
+Make sure that the Notification URL **can be reached from Public Internet**. Midtrans **cannot send notifications to localhost**, URL protected with authorization or password, URL behind VPN, unusual destination port, and so on. You may also need to make sure the [following IP address](/en/technical-reference/ip-address#notification-ip-address) is not blocked from your infrastructure.
+
 <details open>
 <summary><b>Inspect & Reproduce HTTP Notification Sending Process</b></summary>
 <article>
@@ -474,6 +476,32 @@ If the status is updated on Midtrans but not on merchant's system, please check 
 
 Most likely the issue is caused by mis-implementation of **Notification URL** handler on merchant backend. For more details, refer to [View notification history](/en/after-payment/http-notification.md#viewing-notification-history).
 
+#### What is the example usage scenario of idempotency-key during API requests?
+There might be valid different situations where merchant want to use either “1-same” or “different” idempotency keys during API requests. Which one to use, will vary based on different contexts and needs. Some sample scenarios:
+
+**Scenario 1#:**
+
+Multiple requests (with the same params) & with 1 **same idempotency-key**, will **produce: 1 same response** (no duplicate transaction). 
+
+This is useful for cases like: merchant was encountering timeouts on their side when calling the API, so merchant just want to “ask for the **same response as the previous request**”. This can ensure that operations is executed only once. Like asking: Create this transaction once, or Refund with this amount once.
+
+**Scenario 2#:**
+
+Multiple requests with **different idempotency-keys**, will produce: multiple different responses (because the requests incur multiple different transactions).
+
+This is useful for cases like: merchant’s first request was resulting in a deny/failure response (e.g. due to bank deny, or bank having temporary issue), so merchant want to “intentionally **retry with another transaction attempt**, because the previous 1 got denied”. This is like asking: Create another transaction for me, or Do another refund with this amount.
+
+#### Why download-transaction/reset-password email doesn’t get received on my email?
+- Please make sure to double **check your email’s spam/junk/quarantine folder**, the email may be falsely flagged as spam/malicious.
+- If you are using a **company-managed email account domain** instead of personal email account (e.g. `nick@xyzclothingstore.com` instead of `nick@gmail.com`, yahoo.com, etc.) there are few possibilities:
+	- Usually your **company has email filtering/whitelisting/firewall** etc., please check with your company’s IT helpdesk to **check if any email from \@midtrans.com domain got blocked**.
+	- Ensure that your **email storage is not full**, sometimes your email storage is full and can’t receive any new email.
+	- Ensure that your **company email domain/address is properly configured**, sometimes there is misconfiguration in your company’s IT department that makes your email address unreachable.
+	- Ensure that your **email address is reachable & can receive email from external sender**, try sending an email from your personal email-account (like from your \@gmail.com) to your company-email address. If you can’t receive any email, then there's an issue with your company-email account, please check with your company’s IT helpdesk.
+- Try checking the **number of transactions you tried to download**, if the number is big, e.g. +10.000, it may take more than 1 minutes to be generated. If it’s more than +300.000 it may take more than 1 hour. So please patiently wait, or try downloading in smaller chunk by reducing "time range" on the transaction-search filter.
+
+Else, your email address may **have been unreachable sometimes in the past** (due to some reason explained above) when Midtrans tried to send email. When Midtrans fails to send emails about 3-5 times to an address, that address will be **marked as "unreachable/bad-address"** and Midtrans will stop sending any future emails. You will need to [contact Midtrans](https://midtrans.com/contact-us), to reset it.
+
 <!-- END OF Category --><hr>
 ### Snap
 
@@ -500,7 +528,7 @@ You can follow the configurations given below to avoid this situation.
 
 On your `AndroidManifest.xml`, configure:
 
-```text
+```
 android:fitsSystemWindows="true"
 ```
 If the problem persists, make sure to do the same with your views, WebViews, and so on.
@@ -693,7 +721,7 @@ midtransSDK.startPaymentUiFlow(CONTEXT);
 #### How to display specific payment channel via mobile SDK client code?
 It is recommended to specify payment channel from merchant backend/server. Before forwarding request to *Snap* API, you can modify the JSON payload to add `enabled_payments` parameter. For example, add the following to the JSON.
 
-```text
+```
 ...
 "enabled_payments": ["credit_card", "mandiri_clickpay", "cimb_clicks",
     "bca_klikbca", "bca_klikpay", "bri_epay", "echannel", "permata_va",
@@ -823,19 +851,70 @@ But the downside is that if the customer ends up abandoning the payment, it won�
 This is expected. In production mode, a failure of payment within Gojek App will be contained only within the app, and will allow customer to retry payment. So, failure is not notified to you or Midtrans. Transaction status will remain as pending, to allow retry attempt from the customer. If the customer fails to do successful payment within the expiry-time (default expiry is 15 minutes) the transaction status will change to `EXPIRE` and cannot be paid.
 
 #### Customer fails to be redirected to gojek:// deeplink on mobile app. What should I do?
-This may happen if the customer don't have the Gojek app installed, please make sure the **latest Gojek app version is installed on the customer's device**. If this doesn't solve the issue, please continue below.
+Proceed to read the next question to see the answer.
 
-This may also happen if you mistakenly encode, shorten, add, or remove any character from the deeplink URL. Please ensure that the URL you presented to customer is the **same URL retrieved from Midtrans API, without any modification**. Modifying the URL may result in the URL unable to be opened by customer's device.
+#### Failure to redirect the customer to Gojek GoPay, Shopee Pay, and other e-Money payment provider app. What should I do?
+There are some possibilities to check:
 
-Sometimes, customer may also encounter error message `net:ERR_UNKNOWN_URL_SCHEME`.
+**1. Customer Don't Have The Latest Payment Provider's App Installed**
 
-The issue usually happen if the customer is transacting (with Gopay payment method) within your mobile app, which the app implementation is using WebView, and the WebView implementation by default may not allow opening deeplink URL to Gojek app (or other external app).
+Please make sure & inform the customer to install the payment provider's app (Gojek, Shopee, etc.), if they don't have it installed already on their transacting device. 
 
-You will need to make sure that your app's WebView configuration allows opening `gojek://` deeplink protocol (or any other app required by payment provider). This section below will give you basic idea on how to configure your app implementation to allow opening other app deeplink (`gojek://` and `shopeeid://` will be used as example). 
+If they have it installed, please ask them to update to the **latest app version**. Sometimes older version of the app may have issue, so it is advised to update.
+
+**2. Your System May Have Modified The Payment Redirect URL**
+
+This may also happen if you mistakenly encode, shorten, add, or remove any character from the redirect URL. Please ensure that the URL you presented to customer is the **same URL retrieved from Midtrans API, without any modification**. Modifying the URL may result in the URL unable to be opened by customer's device.
+
+**3. Your iOS App's Implementation Prevent Redirect to the Payment App**
+##### iOS
+If your app is native iOS app, you will need to add `LSApplicationQueriesSchemes` key to your app's `Info.plist`
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+<string>gojek</string>
+<string>shopeeid</string>
+</array>
+```
+This is to ensure that deeplink from your app to the (external) destination payment app is allowed.
+
+**4. Your Web Based Redirect Implementation is Blocked by Browser Security Policy**
+
+##### Web Based Redirect Implementation
+If the customer is transacting through Mobile Web Browser, PWA or App's WebView, and the destination payment app fail to open, try the following suggestions.
+
+Avoid redirecting via JavaScript. Some web browsers **may block** link opening or redirection through JavaScript, because browsers consider it as malicious pop-up (especially on iOS/Apple platforms, due to strong security/privacy measures).
+
+E.g. **Avoid doing** this, via JavaScript:
+```javascript
+
+window.open("gojek://gopay/merchanttransfer?tref=RHHM5IIFEIZCAUEWYDFITLBW", '_blank');
+```
+
+Other cases where Browser/Webview may block redirect to app according to several of our test (so **please avoid**):
+- Using delayed/asynchronous javascript (e.g. `setTimeout` or JS promise) to perform redirect.
+- Redirecting using new window/tab (e.g. `target="_blank"` or `window.open( ... , '_blank')`) to perform redirect.
+- [Further reference about this blocking behavior](https://stackoverflow.com/a/39926507). Sometimes javascript redirect would also works when it happens immediately after a valid user action/click, but please be careful as Web Browser may have inconsistent behavior.
+
+The **safest most recommended redirect method** is to allow customer to click the redirect link themselves. For example via HTML link element (`a` tag):
+```html
+
+<a href="gojek://gopay/merchanttransfer?tref=RHHM5IIFEIZCAUEWYDFITLBW" rel="noopener">Click to Pay with Gopay</a>
+```
+Browser will allow opening the link, because it recognizes it as valid user click (intent to visit a link).
+
+**5. Your App's WebView Redirect Implementation is Blocked by Android/iOS Platform**
+
+The issue can happen if the customer is transacting from within a WebView implementation of your mobile app. The WebView default behavior may not allow opening universal/deeplink redirect URL to the (external) destination payment app. These are (technical or security) limitations from the platform itself that we must follow, not something that we can directly control.
+
+To solve this, you will need to make sure that your app's WebView configuration allows opening universal/deeplink redirect URL to the (external) destination payment app. The next section below will give you basic idea on how to configure your app's Webview implementation. 
 
 Please follow according to the app platform your app is being implemented in:
 
 ##### Android
+On Android platform, customer may also encounter error message `net:ERR_UNKNOWN_URL_SCHEME` as indication of the issue.
+
 If your app is native Android app, You need to override `shouldOverrideUrlLoading` functions of your WebView object as follows.
 
 ```java
@@ -907,19 +986,8 @@ public boolean shouldOverrideUrlLoading(WebView view, String url) {
 </article>
 </details>
 
-##### iOS
-If your app is native iOS app, you will need to add `LSApplicationQueriesSchemes` key to your app's `Info.plist`
-
-```xml
-<key>LSApplicationQueriesSchemes</key>
-<array>
-<string>gojek</string>
-<string>shopeeid</string>
-</array>
-```
-
 ##### iOS Webview Specific
-If you are implementing ShopeePay method and presenting it within Webview on iOS and encounter issue. Configure/override your WebView like below:
+If your app is iOS based app. Configure/override your WebView like below:
 
 ```obj-c
 
@@ -952,22 +1020,6 @@ Based [on this resource](https://laptrinhx.com/ios-wkwebview-cannot-handle-url-s
 
 If you are using iOS WebView implementation to show Snap payment page, here is another [sample code in Swift](https://gist.github.com/Xaxxis/4a9d90ecf7adc0c3013e2f323a1e9b74#file-viewcontroller-swift-L29-L46) that has been tested to work for GoPay and ShopeePay deeplink url.
 
-##### Web Browser or Progressive Web App (PWA)
-If the customer is transacting through Mobile Web Browser or PWA, and the Gojek App fails to open, please make sure that you are not trying to open `gojek://` deeplink via JavaScript. Some web browsers **may block** link opening or redirection through JavaScript, because browsers consider it as malicious pop-up.
-
-**Avoid doing** this, via JavaScript:
-```javascript
-
-window.open("gojek://gopay/merchanttransfer?tref=RHHM5IIFEIZCAUEWYDFITLBW", '_blank');
-```
-
-Instead, please **do this**, allow customer to click the deeplink URL themselves, for example via HTML link element (`a` tag):
-```html
-
-<a href="gojek://gopay/merchanttransfer?tref=RHHM5IIFEIZCAUEWYDFITLBW" rel="noopener" target="_blank">Click to Pay with Gopay</a>
-```
-Browser will allow opening the deeplink URL, because it recognizes it as valid user click.
-
 ##### React Native
 If your app is React Native app, try whitelisting the deeplink via the `originWhitelist`. For example:
 
@@ -995,7 +1047,7 @@ If it doesn't work, try `onShouldStartLoadWithRequest`, as shown in the example 
   />
 ```
 
-Then, implement function to handle `gojek://`, as shown in the example shown below.
+Then, implement function to handle the URL, as shown in the example shown below.
 
 ```javascript
 import { WebView, Linking } from 'react-native';
@@ -1013,14 +1065,14 @@ openExternalLink= (req) => {
   }
 }
 ```
-For more reference, please visit:
+For further React Native reference on this issue, please visit:
 - https://facebook.github.io/react-native/docs/linking#opening-external-links
 - https://stackoverflow.com/questions/54248411/react-native-deep-link-from-within-webview
 - https://stackoverflow.com/questions/56800122/err-unknown-url-scheme-on-react-native-webview
 - https://stackoverflow.com/questions/35531679/react-native-open-links-in-browser
 
 ##### Flutter
-If your app is Flutter based app, if you are using WebView, referring to [this community resource](https://stackoverflow.com/a/60515494), you will need to implement this listener of the WebView in order to override Deeplink URL to be opened by the device's OS:
+If your app is Flutter based app, if you are using WebView, referring to [this community resource](https://stackoverflow.com/a/60515494), you will need to implement this listener of the WebView in order to override URL to be opened by the device's OS:
 ```javascript
 _subscription = webViewPlugin.onUrlChanged.listen((String url) async {
       print("navigating to deeplink...$url");
@@ -1041,10 +1093,18 @@ _subscription = webViewPlugin.onUrlChanged.listen((String url) async {
 For more reference, please visit:
 - https://github.com/fluttercommunity/flutter_webview_plugin/issues/43
 
-##### If None Works
-The main goal is that to configure your WebView to allow opening the deeplink/universal link of the destination payment app. This usually require you to override/config your WebView to listen for specific URL prefixes, then invoke the URL to be opened on the OS level (e.g: via Android's `intent` or iOS `openURL`). 
+##### If None Above Works
+The main goal is that to configure your WebView to allow opening the universal/deeplink redirect URL to the (external) destination payment app. This usually require you to override/config your WebView to listen for specific URL prefixes, then invoke the URL to be opened on the OS level (e.g: via Android's `intent` or iOS `openURL`). 
 
-If none of the sample code above works for you, please follow this same goal but you will need to figure out how to implement it on the framework/platform that you are using. You may need to consult with the documentation, or the community resources for that particular framework/platform.
+The URLs list is:
+```txt
+gojek://
+shopee://
+https://gojek.link
+https://wsa.wallet.airpay.co.id
+```
+
+If none of the sample code above works for you, try to follow this same goal but you will need to figure out how to implement it on the framework/platform that you are using. You may need to consult with the documentation, or the community resources for that particular framework/platform.
 
 If it still fails, you should consider integrating with native Midtrans Mobile SDK. 
 
@@ -1055,14 +1115,9 @@ Please not that as consequences of implementing custom URLs listener/whitelist/h
 - You may need to update your implementation to add more URLs to handle, e.g: when adding new payment methods.
 - The URLs from the payment provider may changes without prior notice, so you may need to update your implementation when that happens.
 
-These limitation and risk unfortunately are due to the nature of how WebView, deeplink, and universal link works on each mobile platforms. Midtrans, payment provider, or merchant have no direct control over how they behave. We only follow the rule of the platforms.
+These limitation and risk unfortunately are due to the nature of how WebView, deeplink, and universal link works on each mobile platforms. Midtrans, payment provider, or merchant have no direct control over how they behave. We only follow the specification of the platforms. Proceed at your own risk.
 
-#### Failure to redirect the customer to Gojek GoPay, Shopee Pay, and other e-Money payment provider app. What should I do?
-Refer to the section [above](#customer-fails-to-be-redirected-to-gojek-deeplink-on-mobile-app-what-should-i-do).
-
-It applies to other E-Money payment providers too. For example, if the issue happens to `shopeeid://` app deeplink, then proceed with the suggestion above to allow deeplink whitelist, and add `shopeeid://` to the configuration.
-
-Also please refer to [this section if none of them works](#if-none-works).
+Specific for ShopeePay, ShopeePay team themself also confirmed: the redirect URL is not optimized to be handled from within WebView. They recommend to open the URL via device's browser in order for the redirect to work properly.
 
 #### Customer redirected to app store instead of directly to payment app for e-money transaction. What should I do?
 For e-money payment methods (GoPay, ShopeePay, etc.), Midtrans will provide you Deep/Universal Link for your app/web to redirect your customer. This issue can happen if you are implementing your payment page in a Webview, and handling the redirect link within Webview in your app.
@@ -1181,8 +1236,16 @@ It is advised for customer to ask the source-wallet for the fund status.
 
 If the transaction was GoPay to GoPay, the refund policy will be much faster (instantly, in most cases) since the refund is not subject to external party policy.
 
+#### Why does ShopeePay payment finish redirect doesn't have any parameter appended?
+Currently, this is expected. Unfortuantely due to **limitation on ShopeePay**, the finish redirection that happen from Shopee App to your web/app url (when customer has finished payment) **will not** have any parameter automatically appended. So your plain finish-url will be used.
+
+In this case your web/app may need to have its own session-management to remember/store what is the order_id of the transaction, and they you can call Midtrans' [Get Status API (or wait for HTTP Notification)](/en/after-payment/overview.md) to inquire for the transaction status. Or display a generic finish page to your customer.
+
+This behavior is not like [GoPay, which will produce additional parameters](/en/core-api/e-wallet.md#implementing-finish-redirect-callback-handler) like `order_id=` & `result=`.
+
 <!-- END OF Category --><hr>
 ### Card Payment
+<!-- @TODO explain 3DS 2 specifics -->
 #### How can I check the reasons for the denial of a customer's card transaction?
 The reason of a denied credit card transaction can be checked on merchant Dashboard. Go to home page, and search order id. Click ⓘ on "**Transaction failure**" red indicator, to display the reason for denied transaction.
 
@@ -1192,11 +1255,22 @@ If the card is blocked within the OTP/3DS page of the card issuer/bank, the cust
 Unfortunately, Midtrans as the Payment Gateways have no direct control over the issue, because the block happened on the card issuer (and their network) side. The customer should explain the issue to the card issuer.
 
 #### The customer stuck on 3DS/OTP screen. What is happening?
-3DS/OTP page is directly served by card issuer/bank's website. The issue is very likely caused by downtime or maintenance on the website.
+3DS/OTP page is directly served by card issuer/bank's website. The issue is very likely caused by downtime or maintenance on the website. Which could be temporary, Customer can try again later after a few moments.
 
-The customer should contact the card issuer/bank call center. The customer should provide the card issuer/bank the screenshot or message of the issue on the 3DS page. Please note that some card issuer/bank might mistakenly check only if the card has any offline payment issue. They might not check from online/3DS perspective whether it is able to transact online or not. The customer should mention specifically that, they are unable to pay on 3DS enabled online merchant.
+If the issue Persist, the customer should contact the card issuer/bank call center. The customer should provide the card issuer/bank the screenshot or message of the issue on the 3DS page. Please note that some card issuer/bank might mistakenly check only if the card has any offline payment issue. They might not check from online/3DS perspective whether it is able to transact online or not. The customer should mention specifically that, they are unable to pay on 3DS enabled online merchant.
 
 Unfortunately, Midtrans as the Payment Gateways have no direct control over the issue, because the block happened on Card Issuer (and their network) side. The customer should explain the issue to the card issuer.
+
+#### The customer stuck on redirecting to 3DS/OTP screen. What is happening?
+In some rare cases customer may seems stuck on Midtrans' 3DS/OTP redirect page where it says "Tap to Retry".
+
+What causes the issue are usually:
+- Customer's device/browser network connection issue. -- Which customer can be advised to retry using a different network/browser/device with more stable network connections.
+- Destination 3DS/OTP web page issue on card issuer's side.
+
+3DS/OTP page is directly served by card issuer/bank's website. The issue is very likely caused by downtime or maintenance on the website. Which could be temporary, Customer can be advised to try again later after a few moments.
+
+If the issue Persist, the customer should contact the card issuer/bank call center. Please note that unfortunately some card issuer/bank might mistakenly not able to detect the issue, because most card issuer use 3rd party vendor to serve the 3DS/OTP pages. The card issuer will need to check with their vendor in this case.
 
 #### The customer does not receive 3DS/OTP, so he can’t proceed with payment or the customer can proceed with the payment but the transaction becomes non 3DS. What is the issue? What should I do?
 In case of OTP could not be received by customer, the issue is between card issuer’s (bank’s) 3DS (OTP) page and the customer's phone. This may be caused by any of the likely reasons:
@@ -1258,8 +1332,8 @@ Since the issue is between customer and card issuer, you and Midtrans cannot do 
 
 #### Using 3DS Card transaction flow v1 Core API, how can I ensure that the transaction is 3DS end to end?
 To ensure that the transaction is 3DS, check the following parameters.
-1. Get Token Process (endpoint `/v2/token`)
-       Make sure `redirect_url` is present on the response as shown in the sample given below.
+1. Get Token Process (endpoint `/v2/token`): 
+  Make sure `redirect_url` is present on the response as shown in the sample given below.
 
 
 ```javascript
@@ -1272,7 +1346,7 @@ To ensure that the transaction is 3DS, check the following parameters.
   hash: "481111-1114-xxx"
 }
 ```
-2. Callback from 3DS iframe
+2. Callback from 3DS iframe: 
   Response object should have `status_message: "Success, 3D Secure token generated"` and `eci` field, as a proof that the OTP/3DS page has been successfully completed by customer and verified by card issuer. A sample is shown below.
 
 ```javascript
@@ -1285,7 +1359,7 @@ To ensure that the transaction is 3DS, check the following parameters.
 ```
 ECI for **non-3DS** transaction is `07` or `00` (bad value). For more details, refer to [What is ECI on 3DS Protocol](https://support.midtrans.com/hc/en-us/articles/204161150-What-is-ECI-on-3DS-protocol-).
 
-3. Charge process (endpoint `/v2/charge`)
+3. Charge process (endpoint `/v2/charge`): 
   There will be `eci` value as well.
   ECI for **non-3DS** transaction is `07` or `00 `(bad value).
 
@@ -1325,6 +1399,62 @@ If you are goal is to do recurring card transaction flow, It is recommended for 
 Alternatively, only if needed, you can also: 
 - Opt to use [Register Card API](/en/core-api/advanced-features.md#recurring-transaction-with-register-card-api) to save the card on Midtrans first, before attempting to perform recurring.
 - If you really want to perform non-3DS transactions, you can also opt to have an agreement with the acquiring bank to grant you a non-3DS MID. Please contact Midtrans Activation Team to learn more.
+
+<!-- invisible anchor to preserve old id?= url link, due to question being renamed now -->
+<small id="how-should-merchants-prepare-for-card-3ds-20-changes">&nbsp;</small>
+#### How should merchants prepare for Card 3DS 2 changes?
+##### Changes from Merchant Perspective
+<details open>
+<summary>If Integrating via Core API</summary>
+<article>
+
+If you are using Core API payment product, here are some notable **changes from Merchant perspective**:
+- When transaction is processed via [3DS 2](https://api-docs.midtrans.com/#card-feature-3d-secure-3ds) (if the acquiring bank and the MID support), there's a small possibility of the transaction is still waiting for the card's 3DS provider to process/verify it, which then which it will result in transaction_status `pending` within the frontend callback. So please ensure you have properly follow the [card payment method integration guide](/en/core-api/credit-card), especially on [this step till the end](/en/core-api/credit-card.md#_3ds-authentication-page-json-response).
+- If your implementation already uses HTTP notification/webhook to update payment status, as mentioned on the link above, you should be fine and don’t need to update your implementation.
+- Note: Specific if you are a merchant who implemented card integration **before 2019**, you might be implementing old-3DS-flow, you will need to update your implementation to the current latest [3DS flow](/en/core-api/credit-card.md). The indication of you are on old-3DS-flow are the 3DS popup implemented/happens before `/charge` API call. Otherwise, you should be fine.
+</article>
+</details>
+
+<details>
+<summary>If Integrating via Snap API</summary>
+<article>
+
+If you are using Snap payment product, most of the changes are automatically handled by Snap itself, so you don’t have to update your implementation. But here are some notable **changes from merchant perspective**:
+- Card payment which processed via [3DS 2](https://api-docs.midtrans.com/#card-feature-3d-secure-3ds) (when the acquiring bank and the MID support), there's a small possibility of the transaction is still waiting for the card's 3DS provider to process/verify it, which then Snap will trigger `onPending` callback instead of `onSuccess`. To handle the payment success update, as usual you should [handle HTTP Notification](/en/snap/integration-guide.md#_4-handling-after-payment).
+</article>
+</details>
+
+##### Changes from Customer Perspective
+Notable **changes from customer perspective**:
+- Customer's 3DS 2 transaction may not required OTP/2FA/3DS-challenge input, when the 3DS provider determines their transaction is safe/low-risk. In that case the 3DS process requires no customer interaction, thus their transaction will be more convenient and seamless, without degrading the security aspect.
+	- This is because additional necessary information is exchanged in the background automatically. So that the risk can be determined more seamlessly.
+- More detailed benefits & changes [explained here](https://api-docs.midtrans.com/#card-feature-3d-secure-3ds).
+
+##### New JSON Fields
+On the card payment method’s [callback](/en/core-api/credit-card.md#_3ds-authentication-page-json-response) & [HTTP notification](/en/after-payment/http-notification.md#sample-for-various-payment-methods), the JSON will contains **some new fields**:
+- `three_ds_version` this field will give you information about which 3DS version was used during the transaction e.g. `"1"` or `"2"`.
+- `challenge_completion` this field will give you information about whether the 3DS 2 challenge-input was prompted to customer & was completed by them e.g. `true` or `false`. Note: 
+	- This field may only exists if applicable (e.g. only exists if transaction was processed via 3DS 2 & customer was prompted with 3DS 2 challenge-input).
+	- In the case of the transaction is still waiting for the card's 3DS provider to process/verify it, this field's value may initially be `false`, and then become `true` after the 3DS verification is done.
+
+However, most of the time from a merchant perspective, you don’t need to know whether the transaction was processed via 3DS 2 or not, or if the customer was prompted with the 3DS challenge-input with input or not. As a merchant what usually you need to know [is just the ECI code](https://support.midtrans.com/hc/en-us/articles/204161150-What-is-ECI-on-3DS-protocol-). To determine whether the transaction was 3DS or not. If the transaction was 3DS, most of the time the risk liability (in case of fraud, etc.) does not fall to the merchant. So from risk-perspective merchant should be fine.
+
+#### How can merchant test 3DS 2 payment flow on sandbox?
+You will be able to test various 3DS 2 scenarios using the sandbox card testing credentials provided in the [Sandbox Testing page, under 3D Secure 2 section](/en/technical-reference/sandbox-test.md#_3d-secure-20).
+
+#### How to test offline installment on Sandbox environment?
+Offline Installment is the type of payment where Card Issuing Bank used for making an installment payment and the Acquiring Bank need not be the same. For example, a customer makes an installment payment using BNI Card and the Acquiring Bank is Mandiri.
+
+You can use for example `"481111, 521111"` as dummy BINs value, which have corresponding test cards that are acceptable on Sandbox environment. You can check [here for more sandbox test cards](/en/technical-reference/sandbox-test.md#card-payments) that you can use as BINs value. E.g. choose some cards, and then use their first 6-digit as BINs value.  
+
+Please only use the dummy BINs value as testing purpose on Sandbox, so that you can test to the point that the transaction is successfully accepted as expected on Sandbox. When you are in a Production environment you need to change the BINs value to real BINs card issuer. Alternatively, you can use real BINs value on Sandbox, you only will be able to test & proceed up until the 3DS/OTP page. That should be enough to test & ensure that the BINs param is valid & working. But please expect the payment will be denied after 3DS/OTP, because the card likely is not recognized by our Sandbox.
+
+Please refer here for more info on [how to implement offline installment for card payment](/en/other/faq/technical.md#how-should-i-implement-offline-installment-card-payment).
+
+#### What are the available online installment terms on Sandbox environment?
+By default the usual available online installment terms that is activated on sandbox accounts are only: `3, 6, 12`. You should test using those available terms on Sandbox.
+
+But in case you really need to add more terms & or add additional online installment acquiring bank, please contact Midtrans Support Team or your account manager / Midtrans Business Team. We can try to accomodate your specific sandbox account requirement.
 
 <!-- END OF Category --><hr>
 ### CMS Plugins

@@ -157,7 +157,7 @@ For example the final redirect URL may look like this: `https://tokoecommerce.co
 
 You may use this information to display custom message to your customer on your finish URL.
 
-Note: Specific if the payment method is Credit Card & processed via [3DS 2.0](https://api-docs.midtrans.com/#card-feature-3d-secure-3ds) (when the acquiring bank and the MID support), there's small possibility of the transaction is still waiting for the card's 3DS provider to process/verify it, which then Snap will trigger redirect with `?transaction_status=pending` instead of `capture/settlement`. To handle the payment success update, as usual you should [handle HTTP Notification](/en/snap/integration-guide.md#_4-handling-after-payment).
+Note: Specific if the payment method is Credit Card & processed via [3DS 2](https://api-docs.midtrans.com/#card-feature-3d-secure-3ds) (when the acquiring bank and the MID support), there's small possibility of the transaction is still waiting for the card's 3DS provider to process/verify it, which then Snap will trigger redirect with `?transaction_status=pending` instead of `capture/settlement`. To handle the payment success update, as usual you should [handle HTTP Notification](/en/snap/integration-guide.md#_4-handling-after-payment).
 
 --------------------
 ### Snap.js Function and Options
@@ -173,6 +173,7 @@ For more details, refer to [Snap Docs](https://snap-docs.midtrans.com/#frontend-
 Which for example (using both `language=en` & `gopayMode=deeplink` options) the final result url as shown below.
 
 ```text
+
 https://app.sandbox.midtrans.com/snap/v2/vtweb/cf9534e3-ddf7-43f9-a1b7-5f618d2d1c96?language=en&gopayMode=deeplink
 ```
 
@@ -217,7 +218,7 @@ window.snap.pay('SNAP_TRANSACTION_TOKEN', {
 ```
 <!-- tabs:end -->
 
-\*Specific if the payment method is Credit Card & processed via [3DS 2.0](https://api-docs.midtrans.com/#card-feature-3d-secure-3ds) (when the acquiring bank and the MID support), there's small possibility of the transaction is still waiting for the card's 3DS provider to process/verify it, which then Snap will trigger `onPending` callback instead of `onSuccess`. To handle the payment success update, as usual you should [handle HTTP Notification](/en/snap/integration-guide.md#_4-handling-after-payment).
+\*Specific if the payment method is Credit Card & processed via [3DS 2](https://api-docs.midtrans.com/#card-feature-3d-secure-3ds) (when the acquiring bank and the MID support), there's small possibility of the transaction is still waiting for the card's 3DS provider to process/verify it, which then Snap will trigger `onPending` callback instead of `onSuccess`. To handle the payment success update, as usual you should [handle HTTP Notification](/en/snap/integration-guide.md#_4-handling-after-payment).
 
 ### Custom Finish URL
 By default, Snap will redirect the customer to [Finish Redirect URL configured on Dashboard](#configuring-redirect-url). But you can override that configuration by specifying `callbacks.finish` parameter. This will allow you to have specific redirect for each specific payment.
@@ -270,6 +271,8 @@ You can configure Enable Payment with Snap Preference on Midtrans *Dashboard*. T
 6. Click **Save**.
 
 ![snap preference payment channels](./../../asset/image/snap-adv-enabled-payment-dash.png)
+
+?> ***Note:*** the configuration that is set using this method will only be applied to Snap payment transaction that is being opened via Snap Popup method (frontend javascript implementation method with snap.js). If your implementation is via Snap Redirect mode, please use configuration on the next section.
 
 #### B) Specify Payment Channel via API Request
 You can add and customize `enabled_payments` parameter. That will apply specifically for the transaction.
@@ -633,6 +636,8 @@ curl -X POST \
 
 Then you will proceed with [displaying Snap payment page](/en/snap/integration-guide.md#_2-displaying-snap-payment-page-on-frontend) as usual. After customer proceed with payment and result in successful first transaction, you will receive `saved_token_id` & `saved_token_id_expired_at` in the JSON of HTTP notification. `saved_token_id` is unique for each customer's card. Store this `saved_token_id` in your database and associate that card token to your customer.
 
+!> Important: Be sure to store the card's `saved_token_id_expired_at`. When that date time has been surpassed, the card's `saved_token_id` will be no longer usable, it means the card is expired. In that case you will need to ask your customer to re-do the card saving process with their re-newed card.
+
 #### Sample HTTP Notification with `saved_token_id`
 ```json
 {
@@ -843,7 +848,9 @@ The sample Snap payment page with online installment feature is displayed below.
 
 To allow installment feature with banks which do not issue Installment MID, merchant can use offline installment feature. With offline installment feature, the transaction will initially be charged in full amount and will be converted into installment later. To activate the installment feature, you are required to have agreement with the bank. Please consult Midtrans Activation Team for installment MID.
 
-You have to add the `installment` parameter with combination of BIN filter feature. The purpose of BIN filter is to limit certain cards from making offline installment, based on the agreement between you and issuing banks.
+You have to add the `installment` parameter with combination of `whitelist_bins` feature. The purpose of Whitelist BIN is to allow only certain acceptable cards to proceed with offline installment payment, based on the agreement between you and issuing banks.
+
+Usually you will also need to add `bank` parameter to specify which card acquirer bank should be used for the offline installment payment.
 
 ```json
 ...
@@ -858,7 +865,8 @@ You have to add the `installment` parameter with combination of BIN filter featu
         "offline": [ <installment terms as array of integers> ]
       }
     },
-    "whitelist_bins": [ <card BINs as array of strings> ]
+    "whitelist_bins": [ <card BINs as array of strings> ],
+    "bank": <specify acquirer bank> // input the destination card acquirer bank that will be used
   }
 ...
 ```
@@ -884,7 +892,8 @@ Example of the JSON parameters used during [backend API request step](/en/snap/i
     "whitelist_bins": [
       "481111",
       "410505"
-    ]
+    ],
+    "bank": "mandiri"
   }
 }
 ```
@@ -911,7 +920,8 @@ curl -X POST \
     "whitelist_bins": [
       "481111",
       "410505"
-    ]
+    ],
+    "bank": "mandiri"
   }
 }'
 ```
@@ -926,6 +936,8 @@ Parameter | Description
 --- | ---
 `required` | If `true`, the customer must pay as installment for that specific transaction. <br>If `false`, the customer can choose to pay as installment or regular full payment for that specific transaction.
 `terms` | under `terms` array, on online installment, you can specify the bank name <br>(For example- BNI, BCA, CIMB, Mandiri, and so on)
+
+!> Important: When you use `whitelist_bins` to create a Snap transaction, it will be applied to all card transaction for that Snap transaction. It could means that you will not be able to mix offline installment with online installment or regular full payment into one Snap transaction. Read [further recommendations here](/en/other/faq/technical.md#how-should-i-implement-offline-installment-card-payment).
 
 ### Pre-Authorization Payment
 Pre-authorization feature means customer's fund will not be directly deducted after transaction, but its amount/limit will be temporary reserved (blocked). Then you can initiate "capture" action later via [Core API](https://api-docs.midtrans.com/#capture-transaction). By default, if there is no "capture" action for the transaction for 7 days, reserved fund will be released after 7 days.
@@ -1331,6 +1343,15 @@ cloudfront.net
 *.google-analytics.com
 ```
 Please whitelist the above domains/URLs in your CSP header/rule, to ensure proper working of Snap.js.
+
+### Snap Popup in an IFrame
+**Avoid** displaying Snap payment popup within an iframe from your main checkout page. As it may cause unexpected results that Snap's size won't fit to the size of the browser/device.
+
+Snap automatically tries to fit to the webpage’s size, if you put Snap within an iframe, it tries to fit to the iframe size instead. Thus it is not recommended. If you insist on doing it with iframe, you can try to resize the iframe size to fit the main webpage’s.
+
+But we always recommend to follow the basic Snap integration:
+- Use Snap’s javascript directly on your checkout webpage, and [make sure to use meta-viewport tag](/en/snap/integration-guide.md#_2-displaying-snap-payment-page-on-frontend).
+- Or alternatively use [Snap’s redirect method](/en/snap/integration-guide.md#alternative-way-to-display-snap-payment-page-via-redirect).
 
 ## Reference
 

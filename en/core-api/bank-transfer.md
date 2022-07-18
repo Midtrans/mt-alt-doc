@@ -182,8 +182,8 @@ curl -X POST \
       "gross_amount": 44000
   },
   "echannel" : {
-      "bill_info1" : "Payment For:",
-      "bill_info2" : "debt"
+      "bill_info1" : "Payment:",
+      "bill_info2" : "Online purchase"
   }
 }'
 ```
@@ -194,13 +194,15 @@ curl -X POST \
 
 | Element             | Description                                                  | Type   | Required |
 | ------------------- | ------------------------------------------------------------ | ------ | -------- |
-| payment_type        | The *Bank Transfer* payment method.                          | String | Required |
+| payment_type        | The *E-channel* payment method.                          | String | Required |
 | transaction_details | The details of the transaction like the order_id and gross_amount. | -      | Required |
 | order_id            | The order ID of the transaction.                             | String | Required |
 | gross_amount        | The total amount of transaction, defined from your side.     | String | Required |
 | echannel            | Charge details using Mandiri Bill Payment.                   | [Object](https://api-docs.midtrans.com/#e-channel-object) | Required |
 | bill_info1          | Label 1. Mandiri allows only 10 characters. Exceeding characters will be truncated.                   | String | Required |
 | bill_info2          | Value for Label 1. Mandiri allows only 30 characters. Exceeding characters will be truncated.         | String | Required |
+
+You can customize with your own message to the customer on the `bill_info` params. It will usually shown when customer attempt to pay via ATM or MBanking app, during confirmation of transfer. For example you can show something like `Payment:` `Purchase at myonlinestore.com`, or `Deposit:` `John Doe at myinvestment.com`
 
 </article>
 </details>
@@ -519,8 +521,8 @@ To configure the Payment Notification URL, follow the steps given below.
 <div class="my-card">
 
 #### [HTTP(S) Notification/Webhooks](/en/after-payment/http-notification.md)
-
 </div>
+
 
 ## 4. Switching to Production Mode
 In this section, you will learn how switching from Sandbox environment to Production environment, in order to start accepting real world payment for your business. This is also known as "Going Live".
@@ -534,6 +536,19 @@ Best practices to build a production-ready
 
 </div>
 
+
+#### Transaction Status Description
+The description of `transaction_status` value for *Bank Transfer* payment method is given below.
+
+| Transaction Status | Description |
+| ------------------ | ----------- |
+| settlement | Transaction is successfully paid, customer has completed the transaction. |
+| pending | Transaction is created successfully but it is not completed by the customer. |
+| expire | Transaction is failed as the payment is not done by customer within the given time period. |
+| cancel | Transaction is cancelled by you. |
+| deny | Transaction is rejected by the bank. |
+
+Link: [*More detailed definition of transaction_status & fraud_status*](/en/after-payment/status-cycle.md)
 
 ## Specifying VA Number
 Virtual Account number which is displayed to customer, contains two parts. for example, in `{91012}{12435678}` , the first part is the company-prefix-number and the second part is a unique-va-number. The second part can be customized. Following conditions need to be followed while customizing VA number:
@@ -591,6 +606,18 @@ Please add **bank_transfer** parameter during [Charge API Request](/en/core-api/
   }
 ...
 ```
+
+#### **Mandiri Bill**
+```json
+...
+  "echannel" : {
+    "bill_info1" : "Payment:",
+    "bill_info2" : "Online purchase",
+    "bill_key" : "081211111111"
+}
+...
+```
+
 <!-- tabs:end -->
 
 #### VA Number Specification
@@ -602,21 +629,9 @@ BCA `sub_company_code` | String | Optional | BCA sub company code directed for t
 Permata `va_number` | String | Optional | Length should be 10. Only supported for b2b VA type.
 BNI `va_number` | String | Optional | Length should be within 1 to 8.
 BRI `va_number` | String | Optional | Length should be within 1 to 13.
+Mandiri Bill `bill_key` | String | Optional | Length should be within 6 to 12.
 
 ?>***Note***: In *Production* environment, not every bank may support custom VA number (e.g. Permata), as the default state. It depends on the type of VA configured for your merchant account & your business agreement with the bank. Please consult Midtrans Activation team for further information.
-
-#### Transaction Status Description
-The description of `transaction_status` value for *Bank Transfer* payment method is given below.
-
-| Transaction Status | Description |
-| ------------------ | ----------- |
-| settlement | Transaction is successful, customer has completed the transaction. |
-| pending | Transaction is created successfully but it is not completed by the customer. |
-| expire | Transaction is failed as the payment is not done by customer within the given time period. |
-| cancel | Transaction is cancelled by you. |
-| deny | Transaction is rejected by the bank. |
-
-Link: [*More detailed definition of transaction_status & fraud_status*](/en/after-payment/status-cycle.md)
 
 ## Next Step
 <br>

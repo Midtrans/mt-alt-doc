@@ -3,7 +3,7 @@
 
 ## Notification IP Address
 
-Midtrans sends (outgoing) payment notifications from various IP addresses to your notification url (backend). In case your system needs to whitelist IP addresses, please add Midtrans CIDR given below to your whitelist.
+Midtrans sends (outgoing) [HTTP notifications / webhook](/en/after-payment/http-notification) status update from various IP addresses to your notification url (as backend to backend request). In case your system needs to whitelist IP addresses, please add Midtrans CIDR given below to your whitelist.
 ```
 Production Environment:
 103.208.23.0/24
@@ -11,11 +11,17 @@ Production Environment:
 103.127.16.0/23
 103.127.17.6/32
 
-Sandbox Environment:
+Sandbox Environment (DEPRECATED on 15/03/2022):
 103.58.103.177
+
+Sandbox Environment (starting from 15/03/2022):
+34.101.68.130
+34.101.92.69
 ```
 
-?> If you are unable to **receive notification from Midtrans**, please ensure that your infrastructure has whitelisted the above-mentioned IP addresses.
+Although we are providing the IP list, we don’t quite recommend relying on IP whitelisting to ensure notification authenticity. Instead, we **strongly recommend you to verify the authenticity** by [implementing the methods explained here](/en/after-payment/http-notification.md#verifying-notification-authenticity).
+
+?> If you are unable to **receive notification from Midtrans**, please ensure that your infrastructure is allowing HTTPs connection from the above-mentioned IP addresses. Additionally try to [follow this troubleshooting section](/en/after-payment/http-notification.md#suggestion-on-troubleshooting-http-notification-failures).
 
 ## API Domain Endpoint
 

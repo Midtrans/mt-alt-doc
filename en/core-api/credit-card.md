@@ -457,7 +457,9 @@ A sample API response for *Card* payment method is shown below.
   "fraud_status": "accept",
   "masked_card": "481111-1114",
   "bank": "bni",
-  "card_type": "credit"
+  "card_type": "credit",
+  "three_ds_version": "2",
+  "challenge_completion": true
 }
 ```
 
@@ -593,7 +595,9 @@ A sample of successful transaction callback response, is shown below.
   "fraud_status": "accept",
   "approval_code": "1597223068747",
   "masked_card": "481111-1114",
-  "card_type": "credit"
+  "card_type": "credit",
+  "three_ds_version": "2",
+  "challenge_completion": true
 }
 ```
 
@@ -625,7 +629,7 @@ If the `transaction_status` is `pending`, it means the transaction is waiting fo
 
 ?>***Note*** : To update the **Transaction Status** on merchant backend/database, **do not** solely rely on frontend callbacks. For security reasons, to make sure that the **Transaction Status** is authentically coming from Midtrans, you can update **Transaction Status** by waiting for [HTTP Notification](/en/after-payment/http-notification.md) or timely call [API Get Status](/en/after-payment/get-status) on your backend.
 
-Specific if the transaction is processed via [3DS 2.0](https://api-docs.midtrans.com/#card-feature-3d-secure-3ds) (when the acquiring bank and the MID support), there's small possibility of the transaction is still waiting for the card's 3DS provider to process/verify it, which it will result in transaction_status `pending` within the frontend callback. To get confirmation of payment success, you can follow *Note* above.
+Specific if the transaction is processed via [3DS 2](https://api-docs.midtrans.com/#card-feature-3d-secure-3ds) (when the acquiring bank and the MID support), there's small possibility of the transaction is still waiting for the card's 3DS provider to process/verify it, which it will result in transaction_status `pending` within the frontend callback. To get confirmation of payment success, you can follow *Note* above.
 
 ## 4. Handling After Payment
 When the *Transaction Status* changes, Midtrans notifies you at the redirect URL and sends HTTP notification to the merchant backend. This ensures that you are updated of the transaction status securely.

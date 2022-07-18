@@ -55,6 +55,32 @@ FDS means Fraud Detection System. "Denied by FDS" means to simulate a transactio
 
 > **Note**: Not every acquiring banks might be able to accept JCB and Amex card. You can use BNI & BCA acquiring for JCB. BCA acquiring can accept Amex.
 
+#### 3D Secure 2
+Specific cards for testing 3DS 2 card payment scenario.
+
+<!-- @TODO: uncomment these commented cards after their result are as expected -->
+|VISA | Description |
+|---|---|
+|Card 3DS 2 Enrolled. <br> *frictionless 3DS (3DS input NOT prompted)* | **Accept:** 4556 5579 5572 6624 <br> **Accept**: 4024 0071 8944 9340 <br> **Deny:** 4485 4364 5535 4151|
+|Card 3DS 2 Enrolled. <br> *challenged by 3DS (3DS input prompted)* | **Accept:** 4916 9940 6425 2017 <br> **Deny:** 4604 6331 9421 9929 <br><br> **Result still** `Pending` **initially** (will become **Accept** after 60sec delay): <br> 4024 0071 7626 5022|
+| 3DS authentication is either failed or could not be attempted; possible reasons being both card and Issuing Bank are not secured by 3DS(technical errors or improper configuration). | **Deny:** 4716 1250 5984 7899 |
+
+|MASTERCARD | Description |
+|---|---|
+|Card 3DS 2 Enrolled. <br> *frictionless 3DS (3DS input NOT prompted)* | **Accept:** 5333 2591 5564 3223 <br> **Deny:** 5328 7203 8458 2224|
+|Card 3DS 2 Enrolled. <br> *challenged by 3DS (3DS input prompted)* | **Accept:** 5306 8899 4283 3340 <br> **Deny:** 5424 1840 4982 1670 <br><br> **Result still** `Pending` **initially** (will become **Accept** after 60sec delay): <br> 5487 9716 3133 0522|
+| 3DS authentication is either failed or could not be attempted; possible reasons being both card and Issuing Bank are not secured by 3DS(technical errors or improper configuration). | **Deny:** 5250 5486 9206 9390 |
+
+|AMEX | Description |
+|---|---|
+|Card 3DS 2 Enrolled. <br> *frictionless 3DS (input NOT prompted)* | **Accept:** 3415 0209 8634 895 <br> **Deny:** 3456 9539 9207 589|
+|Card 3DS 2 Enrolled. <br> *challenged by 3DS (3DS input prompted)* | **Accept:** 3486 3826 7931 507 <br> **Deny:** 3720 2110 6351 394 <br><br> **Result still** `Pending` **initially** (will become **Accept** after 60sec delay): <br> 3451 9777 1649 926|
+| 3DS authentication is either failed or could not be attempted; possible reasons being both card and Issuing Bank are not secured by 3DS(technical errors or improper configuration). | **Deny:** 3794 5219 9603 6850 |
+
+> **Note:** Not every acquiring bank is compatible with card 3DS 2, you may get `"three_ds_version": "1"` in the card transaction response (which means the payment is processed with 3DS 1 instead of 3DS 2). 
+> 
+> It can be because the acquiring bank used on your Sandbox account is not compatible to acquire 3DS 2 cards. Especially for Amex 3DS 2 card.
+
 #### **Bank-Specific**
 
 This is useful for Installment/Promo scenario which require bank specific card.
@@ -115,6 +141,7 @@ It is used for testing a specific scenario where the card is not eligible for on
 |Payment Methods | Description|
 |----------|------------|
 |GoPay | On mobile platform you are automatically redirected to GoPay Simulator. <br>On desktop, QR Code image is displayed. To perform a test transaction, enter the QR Code image URL in [QRIS Simulator](https://simulator.sandbox.midtrans.com/qris/index). <br><br><small>Note: if the QRIS Simulator fails, please try [GoPay QR Simulator](https://simulator.sandbox.midtrans.com/gopay/ui/index), you may be on older version of merchant account before QRIS implemented.</small> |
+|ShopeePay | On mobile platform you are automatically redirected to ShopeePay Simulator. <br>On desktop, QR Code image is displayed. To perform a test transaction, enter the QR Code image URL in [QRIS Simulator](https://simulator.sandbox.midtrans.com/qris/index).|
 |QRIS | To perform a test transaction, copy the QR Code image URL and use it in [QRIS Simulator](https://simulator.sandbox.midtrans.com/qris/index). |
 |Indosat Dompetku | **Accept number:** 08123456789 <br>**Deny number:** other than 08123456789 |
 |Mandiri E-cash | **Accept number:** 0987654321 <br> **PIN:** 12345 <br> **OTP:** 12123434|
@@ -147,7 +174,7 @@ It is used for testing a specific scenario where the card is not eligible for on
 |----------|------------|
 |Mandiri Clickpay | **Card Number:** 4111 1111 1111 1111 <br> **Accept Token:** 000000 <br> **Deny Token:** 111111|
 |CIMB Clicks | Midtrans will redirect CIMB Clicks test transaction to a payment simulator. <br> **Success Transaction:** testuser00  <br> **Failure Transaction:** testuser01|
-|ePay BRI | Midtrans will redirect ePay BRI test transaction to a payment simulator. <br> **Success Transaction:** testuser00 <br> **Failure Transaction:** testuser03|
+|BRImo | Midtrans will redirect BRImo (previously known as E-Pay BRI) test transaction to a payment simulator. <br> **Success Transaction:** testuser00 <br> **Failure Transaction:** testuser03|
 |BCA Klikpay | Midtrans will redirect BCA Klikpay test transaction to a payment simulator.|
 |KlikBCA | Midtrans will register user id filled in KlikBCA input. To perform a test transaction, use the [KlikBca Simulator](https://simulator.sandbox.midtrans.com/bca/klikbca/index).|
 
@@ -156,9 +183,10 @@ It is used for testing a specific scenario where the card is not eligible for on
 
 |Payment Methods | Description|
 |----------|------------|
-|Akulaku | Midtrans will redirect to Akulaku simulator page.|
+|Akulaku | Midtrans will automatically redirect to Akulaku simulator page. Test credentials will be displayed.|
+|Kredivo | Midtrans will automatically redirect to Kredivo simulator page. Test credentials will be displayed.|
 
 ## Note & Limitation
 
-!> **Note: Do not attempt to pay with a real-world payment-provider/bank** to a transaction created in the Sandbox environment. **Sandbox transactions cannot accept real payment, and should be paid only with the sandbox simulator** explained in this page. Midtrans will not be responsible and may not be able to help you recover any real-world payment funds if you do this mistake.
+!> **Note: Do not attempt to pay with a real-world payment-provider/bank** to a transaction created in the Sandbox environment. **Sandbox transactions cannot accept real payment, and should be paid only with the sandbox simulator** explained in this page. Midtrans will not be responsible and may not be able to help you recover any real-world payment funds if you made such mistake.
 

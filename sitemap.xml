@@ -2,247 +2,259 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://docs.midtrans.com/</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/payments/overview</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/snap/overview</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/snap/preparation</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/snap/integration-guide</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/snap/interactive-demo</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/snap/advanced-feature</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/snap/with-plugins</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/snap/platform/overview</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/core-api/overview</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/core-api/overview?id=available-ways-to-integrate</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/core-api/credit-card</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/core-api/bank-transfer</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/core-api/e-wallet</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/core-api/direct-debit</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/core-api/convenience-store</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/core-api/cardless-credit</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/core-api/advanced-features</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/disbursement/overview</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/midtrans-account/overview</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/after-payment/overview</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/after-payment/email-notification</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/after-payment/http-notification</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/after-payment/get-status</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/after-payment/status-cycle</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/after-payment/dashboard-usage</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/after-payment/payout</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/technical-reference/overview</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/technical-reference/api-header</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/technical-reference/sandbox-test</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/technical-reference/library-plugin</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/technical-reference/postman-collection</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/technical-reference/ip-address</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/technical-reference/error-response-code</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/technical-reference/going-live</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://docs.midtrans.com/en/technical-reference/payment-link-api</loc>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/technical-reference/docs-changelog</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/security/overview</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/core-api/overview#various-ways-to-integrate-with-core-api</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/payment-link/overview</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://docs.midtrans.com/en/payment-link/with-api</loc>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/other/faq/technical</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.midtrans.com/en/other/faq/gopay-pos</loc>
-    <lastmod>2021-09-24T16:13:37+07:00</lastmod>
+    <lastmod>2022-07-04T17:22:57+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>

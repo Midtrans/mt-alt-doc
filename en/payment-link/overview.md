@@ -1,6 +1,6 @@
 # Payment Link Overview
 <hr>
-Payment link provides an easy way to accept payments from your customers. Midtrans generates a link which redirects the customer to Midtrans payment page. No technical integration is required. It is suitable for small business owners or sellers on social media platforms such as Instagram, Facebook and so on.
+Payment link provides an easy way to accept payments from your customers. Midtrans generates a link which redirects the customer to Midtrans payment page. No technical integration is required. It is suitable for small business owners or sellers on social media platforms such as Instagram, Facebook, WhatsApp and so on.
 
 ## Creating a Payment Link
 To create a _Payment Link_, [login to your MAP account](/en/overview.md#accessing-midtrans-administration-portal), (optionally [switch to your desired environment mode](/en/midtrans-account/overview.md#switching-environment)) and follow the steps given below.
@@ -59,3 +59,13 @@ If you are planning only to use Payment Link without any other technical integra
 3. Briefly [understand the Midtrans Dashboard](/en/after-payment/dashboard-usage.md).
 
 If you are also planning to use other technical integration method, you may want to [explore more integration options.](/en/payments/overview.md)
+
+## Optional: Payment Link via API
+Instead, if you prefer to integrate programmatically via API, you can refer to the following section linked below. It can be more suitable if you have an SMB/Enterprise business that you already have your own commerce system.
+
+
+<div class="my-card">
+
+#### [Payment Link via API](/en/payment-link/with-api.md)
+Explains how merchants can create & manage **Payment Link** using API <span class="badge badge-yellow">BETA</span>.
+</div>

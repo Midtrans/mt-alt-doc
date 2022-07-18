@@ -57,6 +57,10 @@ Core API enables you to customize the payment-flow or the user interface to fit 
 
 #### [Payment Link](/en/payment-link/overview.md)
 The Midtrans Payment Link method helps you to invoice your customers receive payments without having a website. Share a link that redirects your customers to Midtrans's payment page. No technical integration is required, create links with just a few taps or clicks from our dashboard with customizable payment details.
+</div><div class="my-card">
+
+#### [Payment Link via API Integration](/en/payment-link/with-api.md)
+It is also possible to integrate programmatically via API <span class="badge badge-yellow">BETA</span>, and have the same featues as Payment Link above.
 </div>
 
 <div class="my-card">
@@ -144,6 +148,7 @@ Compatible with web and non-web applications (hardware devices or custom softwar
           <li>No coding or programming needed.</li>
           <li>Create payment link from <strong>Dashboard</strong>.</li>
            <li>Payment link can be shared in your Blog, Social Media, Messenger, WhatsApp, Email, etc.</li>
+          <li>Customizable number of payment (usage), URL part, & longer lifetime</li>
         </ul>
       </td>
       <td>
@@ -151,6 +156,19 @@ Compatible with web and non-web applications (hardware devices or custom softwar
           <li>Send invoice to customer quickly, without complex integration. </li>
           <li>Sell on social media. </li>
           <li>Create once & use it for many customers, for products like tickets, virtual products, etc.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Payment Link via API Integration</strong></th>
+      <td>
+        <ul>
+          <li>Similar features & benefits as Payment Link, but easily integrated via API just like Snap.</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Can cover both use cases of Snap & Payment Link.</li>
         </ul>
       </td>
     </tr>

@@ -20,6 +20,12 @@ exports.handler = async function (event, context) {
       return;
     }
     
+    /**
+     * @HACK: this CORS Proxy currently only allow request addressed to the whitelisted domains.
+     * This is to avoid potential unathorized CORS requests from non Midtrans domain.
+     * But the downside is call from our own dev env (localhost) will also be expected to 
+     * be rejected.
+     */
     let targetHostname = (new URL(params.url)).hostname;
     if(!targetHostname.includes("midtrans.co") && !targetHostname.includes("veritrans.co")){
       const errorResponse = {
