@@ -1,10 +1,10 @@
 # How to Quickly Fix the 401 Error code?
 ![401 Unauthorized Overview](./../../../asset/image/faq/auth-401-illustration.svg)
 
-After submitting an API call to Midtrans, it is possible to receive HTTP 401 Unauthorized error response. This article discusses ways to troubleshoot a 401 (unauthorized) error.
+After submitting an API call to Midtrans, it is possible to receive HTTP 401 Unauthorized error code response. This article discusses ways to troubleshoot a 401 (unauthorized) error code.
 
 ## What is the 401 Error Code?
-The 401 Unauthorized error indicates that the merchant server’s request was not verified. When accessing the Midtrans API, 
+The 401 (Unauthorized) error code indicates that the merchant server’s request was not verified. When accessing the Midtrans API, 
 your backend sends a request, which in this case was not verified. You will receive a simple message telling you that the 
 request is unauthorized, like the sample bellow.
 
