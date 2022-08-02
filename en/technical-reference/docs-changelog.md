@@ -3,6 +3,9 @@
 
 <!-- #### Unreleased 
 -->
+#### 2022/08/02
+- update Snap Javascript Callback and add link to Snap Docs.
+
 #### 2022/07/08
 - add further info on Shopify guide: validation error email, payment retry, multiple payment ids, restock limitation. Update images.
 
