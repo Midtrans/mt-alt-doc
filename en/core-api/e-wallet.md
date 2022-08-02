@@ -452,14 +452,14 @@ To configure the Payment Notification URL, follow the steps given below.
 </div>
 
 ## 4. Switching to Production Mode
-In this section, you will learn how switching from Sandbox environment to Production environment, in order to start accepting real world payment for your business. This is also known as "Going Live".
+In this section, you will learn how to switch to Midtrans Production environment and to accept real payments from real customers. This is also known as "Going Live".
 
 <br>
 
 <div class="my-card">
 
 #### [Going Live](/en/technical-reference/going-live.md)
-Best practices to build a production-ready
+Learn how to switch from Sandbox to Production environment, to start accepting real payment
 
 </div>
 
