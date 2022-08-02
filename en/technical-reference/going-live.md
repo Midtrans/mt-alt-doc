@@ -3,20 +3,24 @@
 
 This document is designed to assist you in switching from *Sandbox* environment to *Production* environment, in order to start accepting real world payment for your business. This is also known as "Going Live".
 
-?>Make sure you have already completed the test payment using our [Payment Simulator](/en/technical-reference/sandbox-test.md) in the Sandbox environment to ensure that your implementation is working fine.
+?>Make sure you have already performed some successful [payment testing in the Sandbox environment](/en/technical-reference/sandbox-test.md), to ensure that your implementation is working properly.
 
 ## 1. Checking Your Production Account
-To make sure your payment channels on Production account is already active, follow the steps given below.
-
+To make sure that your Midtrans account already has activated payment method(s) on Production Environment mode, follow the steps given below.
 1. Login to your Midtrans Administrative Portal using *Production* environment at https://dashboard.midtrans.com/login.
-
-2. To make sure your payment channels on Production account is active. 
-    - Go to menu **PAYMENT METHODS** from the dashboard page
+2. Go to menu **PAYMENT METHODS** from the dashboard page
     - *Active Payment Methods* page is displayed.
     - Then you can find a list of active payment methods ready in a production environment
 
 ![Active Payment Method](./../../asset/image/active-payment-methods.png)
 <br>
+
+In cases, you cannot access menu PAYMENT METHODS in the Midtrans Dashboard. You can also make sure your production account is active, by following the steps given below.
+
+1. On the home page, go to **SETTINGS > SNAP PREFERENCES**.
+   - *SNAP Preferences* page is displayed.
+2. Select **Payment Channels** tab.
+   - A list of active payment methods is displayed.
 
 ?>refer to [Access Midtrans Administration Portal](/en/midtrans-account/overview.md#accessing-midtrans-administration-portal) for more details.
 
@@ -25,7 +29,7 @@ To switch from Sandbox to Production environment, Client Key and Server Key prod
 
 To get access to the Client Key and Server Key, follow the steps given below.
 
-1. Login to your MAP account.
+1. Login to your Midtrans account.
 
 2. On the *Dashboard*, go to **Settings > Access Keys**.
 
@@ -220,4 +224,4 @@ Your website is now integrated with Midtrans. For more information, refer to [Co
 
 Now you are ready to accept real world payments in Production mode! You can test it yourself.
 
-?> If further assistance is required, please contact your Midtrans Business PIC or write to us at [support@midtrans.com](mailto:support@midtrans.com).
+?> If further assistance is required, please contact your Midtrans Business PIC or you can contact [Midtrans Contact Center](https://midtrans.com/contact-us/).
