@@ -218,7 +218,7 @@ window.snap.pay('SNAP_TRANSACTION_TOKEN', {
 ```
 <!-- tabs:end -->
 
-For more details on Snap JS callback's result JSON properties & the samples, refer to [this section of Snap Docs](https://snap-docs.midtrans.com/#js-callback)
+For more details on Snap JS callback's result JSON properties & the samples, refer to [this section of Snap Docs](https://snap-docs.midtrans.com/#js-callback).
 
 \*Specific if the payment method is Credit Card & processed via [3DS 2](https://api-docs.midtrans.com/#card-feature-3d-secure-3ds) (when the acquiring bank and the MID support), there's small possibility of the transaction is still waiting for the card's 3DS provider to process/verify it, which then Snap will trigger `onPending` callback instead of `onSuccess`. To handle the payment success update, as usual you should [handle HTTP Notification](/en/snap/integration-guide.md#_4-handling-after-payment).
 
