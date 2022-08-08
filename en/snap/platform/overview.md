@@ -100,7 +100,7 @@ There will be two parts:
 
 #### Install New Midtrans Payment App
 
-During the transition period, move from Old Midtrans App to New Midtrans App, you can install New Midtrans App before uninstalling the Old Midtrans App. You can install and test the New Midtrans App to ensure it will work. After the installation was successful, Shopify recommends uninstalling the Old Midtrans App to make the migration run well.
+During the transition period, move from Old Midtrans App to New Midtrans App, you can install New Midtrans App before uninstalling the Old Midtrans App. You can install and test the New Midtrans App to ensure it will work. Once you have install the new App, **Shopify recommends uninstalling the Old Midtrans App** to ensure smooth transition.
 
 1. Login to Midtrans [Merchant Administration Portal](https://dashboard.midtrans.com/login).
 
@@ -140,12 +140,12 @@ During the transition period, move from Old Midtrans App to New Midtrans App, yo
 
 
 #### Uninstall Old Midtrans Payment App
-!> If you **choose to uninstall the old one, you will not be able to re-install the old one again**.
+!> **Uninstalling the old Payment App is recommended by Sopify to ensure smooth transition**. If you still have both old and new app-enabled, we recommend uninstalling the Old Midtrans Payment App on your store. This is also to avoid confusion from the customer side & inconsistent payment status update behavior. So that only the new Midtrans Payment App is available for your customer to choose from.
 \
 \
- **Uninstalling the old Payment App is a must, It's recommendation from Sopify to make the migration run well**. If you still have both old and new app-enabled, we recommend uninstalling the Old Midtrans Payment App on your store, this is to avoid confusion from the customer side & inconsistent payment status update behavior. So that only the new Midtrans Payment App is available for your customer to choose from.
+ Once you **choose to uninstall the old one, you will not be able to re-install the old one again**.
 
-If you choose to uninstall the Old Midtrans Payment App(s), you can proceed to follow steps below.
+To uninstall the Old Midtrans Payment App(s), you can proceed to follow steps below.
 
 Before uninstalling, it is recommended to:
 - Please ensure that you have successfully installed the New Midtrans App and it works on your Shopify store.
