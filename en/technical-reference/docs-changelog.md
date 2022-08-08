@@ -3,6 +3,9 @@
 
 <!-- #### Unreleased 
 -->
+#### 2022/08/08
+- update Shopify old extension's deprecation date & notice.
+
 #### 2022/08/04
 - improve Snap JS callback advanced section by adding link to Snap Docs.
 - clarify Shopify partial refund limitations.
