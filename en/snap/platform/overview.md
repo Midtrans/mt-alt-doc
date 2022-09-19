@@ -383,6 +383,13 @@ The **detailed history will be displayed on Shopify admin panel's order details 
 Here is an example of 1 order that has 1 earlier payment id which is unpaid, and then 1 other payment id which is successfully paid, as observed from Shopify admin panel's order details timeline.
 ![Timeline 1 Order 2x Payments](./../../../asset/image/shopify-new-24-1-order-2x-payment.png ':size=400')
 
+##### Payment Method Icons on Shopify Payment Setting Page
+On the Shopify payment setting page, you will find there are payment method icons, some of you maybe think that the icons represent the payment methods on Midtrans, but it is not true, it does not represent the payment methods on Midtrans.
+![Payment icons](./../../../asset/image/shopify-new-25-payment-icons.png ':size=400')<br>
+That is just an icons selection screen on the Shopify side and will show on the payment method on the checkout page. It does not affect the actual payment methods on Midtrans.
+![Payment icons](./../../../asset/image/shopify-new-25-payment-icons-on-checkout.png ':size=400')<br>
+If you want to enable specific payment methods and affect on the Snap payment page, you can enable it from [Payment App account settings.](#payment-app-account-settings)
+
 ##### Item Stock & Status
 Few points to understand about order status & item stock management that is managed automatically with this integration:
 - Item stock will be reduced whenever order status become `pending` on Shopify side.
