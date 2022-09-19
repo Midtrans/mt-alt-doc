@@ -390,6 +390,11 @@ That is just an icons selection screen on the Shopify side and will show on the 
 ![Payment icons](./../../../asset/image/shopify-new-25-payment-icons-on-checkout.png ':size=400')<br>
 If you want to enable specific payment methods and affect on the Snap payment page, you can enable it from [Payment App account settings.](#payment-app-account-settings)
 
+##### Test Order with Enabling Test Mode is Not Charged
+Test order is helpful for you to make sure that the checkout process and settings for order processing, payment, inventory, shipping, email notifications, etc are all correct. You can place a test order by [simulating a transaction through test mode](#test-transaction-with-sandbox-mode)
+
+**You are not charged for a test order**, all orders made within this mode are not "real", and do not require "real payment/fund", so you are also **safe to ignore the payment for this order**.
+
 ##### Item Stock & Status
 Few points to understand about order status & item stock management that is managed automatically with this integration:
 - Item stock will be reduced whenever order status become `pending` on Shopify side.
