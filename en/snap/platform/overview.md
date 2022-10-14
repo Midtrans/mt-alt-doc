@@ -390,10 +390,12 @@ That is just an icons selection screen on the Shopify side and will show on the 
 ![Payment icons](./../../../asset/image/shopify-new-25-payment-icons-on-checkout.png ':size=400')<br>
 If you want to enable specific payment methods and affect on the Snap payment page, you can enable it from [Payment App account settings.](#payment-app-account-settings)
 
-##### Test Order with Enabling Test Mode is Not Charged
-Test order is helpful for you to make sure that the checkout process and settings for order processing, payment, inventory, shipping, email notifications, etc are all correct. You can place a test order by [simulating a transaction through test mode](#test-transaction-with-sandbox-mode)
+##### Shopify will not Charge Third-Party Transaction Fees for Test Order with Enabling Test Mode
+"Test order" is helpful for you to make sure that the checkout process and settings for order processing, payment, inventory, shipping, email notifications, etc are all correct. You can place a test order by [simulating a transaction through test mode](#test-transaction-with-sandbox-mode).
 
-**You are not charged for a test order**, all orders made within this mode are not "real", and do not require "real payment/fund", so you are also **safe to ignore the payment for this order**.
+When you use a third-party payment provider like "Midtrans" to take customer payments, shopify will add transaction fee for each transaction, the transaction fee varies depending on your [pricing plan](https://www.shopify.com/id/pricing).
+
+But if you want to do "test order" with enabling test mode, **Shopify should not charge you any payment processing fee for "test order" payments.**, all orders made within this mode are not "real", and do not require "real payment/fund", so you are **safe to ignore the payment for this order** because the payment is not real and the order should be safe to not actually fulfilled, you can check [shopify docs about test order](https://help.shopify.com/en/manual/checkout-settings/test-orders) for the detail.
 
 ##### In Some Rare Cases, Midtrans Unable to Update the Payment Status to Shopify
 In some rare cases, Midtrans unable to update payment status to the Shopify, e.g: mismatch status order, status order on midtrans is settlement, but status order on shopify is pending. If it happens and affect your status order on shopify, then there are possibility:
