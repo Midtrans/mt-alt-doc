@@ -384,11 +384,11 @@ Here is an example of 1 order that has 1 earlier payment id which is unpaid, and
 ![Timeline 1 Order 2x Payments](./../../../asset/image/shopify-new-24-1-order-2x-payment.png ':size=400')
 
 ##### Payment Method Icons on Shopify Payment Setting Page
-On the Shopify payment setting page, you will find there are payment method icons, some of you maybe think that the icons represent the payment methods on Midtrans, but it is not true, it does not represent the payment methods on Midtrans.
+On the Shopify payment setting page, you will find there are payment method icons. But be advised that **the icons selection does not directly affect the actual payment methods activated on Midtrans**.
 ![Payment icons](./../../../asset/image/shopify-new-25-payment-icons.png ':size=400')<br>
-That is just an icons selection screen on the Shopify side and will show on the payment method on the checkout page. It does not affect the actual payment methods on Midtrans.
+The selected icons will be shown on the payment button on the Shopify checkout page. It does not affect the actual payment methods on Midtrans' Snap payment page.
 ![Payment icons](./../../../asset/image/shopify-new-25-payment-icons-on-checkout.png ':size=400')<br>
-If you want to enable specific payment methods and affect on the Snap payment page, you can enable it from [Payment App account settings.](#payment-app-account-settings)
+If you want to configure active payment methods on the Snap payment page, you should configure it on [Midtrans Shopify Payment App Account Settings](#payment-app-account-settings).
 
 ##### Shopify will not Charge Third-Party Transaction Fees for Test Order with Enabling Test Mode
 "Test order" is helpful for you to make sure that the checkout process and settings for order processing, payment, inventory, shipping, email notifications, etc are all correct. You can place a test order by [simulating a transaction through test mode](#test-transaction-with-sandbox-mode).
