@@ -51,7 +51,14 @@ Depending on each situation, please **follow one which best fits your situation*
 
 	![Login MAP](./../../../asset/image/snap-prep-env-diff.jpg ':size=400')<br>
 
-2. Select __Settings -> Access Keys__.
+2. Select __Settings->Configuration__.
+
+	Some payment methods like BCA Klikpay, Brimo, Danamon Online, Octo Clicks, UOB EZ Pay, Akulaku, and Kredivo, required finish redirect URL after customer completed the payment. If you have activated payment methods above, you need to fill this value `https://pixel.midtrans.com/payments/redirect` on  **Settings > Configuration > Finish Redirect URL**
+
+	![Set Finish URL](./../../../asset/image/shopify-new-27-set-finish-url.png ':size=400')<br>
+
+
+3. Select __Settings -> Access Keys__.
 
 	Copy Midtrans __Merchant ID__ and __Server Key__ (Will be used for the next step).
 
@@ -59,26 +66,26 @@ Depending on each situation, please **follow one which best fits your situation*
 
 	![access key](./../../../asset/image/sirclo-2.png)<br>
 
-3. Login to your [Shopify Store](https://www.shopify.com/login).
+4. Login to your [Shopify Store](https://www.shopify.com/login).
 
-4. Follow this link to find [Payments via Midtrans App on Shopify App Store.](https://apps.shopify.com/midtrans-payment-gateway-new)
+5. Follow this link to find [Payments via Midtrans App on Shopify App Store.](https://apps.shopify.com/midtrans-payment-gateway-new)
 
 	![shopify app store](./../../../asset/image/shopify-new-20-midtrans-shopify-appstore.png)<br>
 
-5. Click __Add app__ button to install.
+6. Click __Add app__ button to install.
 
-6. You will be redirected to installation page, you can review the displayed information, then click __Install app__
+7. You will be redirected to installation page, you can review the displayed information, then click __Install app__
 	![Install Midtrans](./../../../asset/image/shopify-new-06-install.png ':size=400')<br>
 
-7. You will be redirected to the Onboarding page, please fill in your Midtrans __Merchant ID__ and __Server Key__ (from step 2) for each production and sandbox. Then click __Register__.
+8. You will be redirected to the Onboarding page, please fill in your Midtrans __Merchant ID__ and __Server Key__ (from step 2) for each production and sandbox. Then click __Register__.
 	![Register](./../../../asset/image/shopify-new-07-register.png ':size=400')<br>
 
-8. You will be redirected back to Shopify, and the page will indicates that your Shopify store is connected to Payments via Midtrans.
+9. You will be redirected back to Shopify, and the page will indicates that your Shopify store is connected to Payments via Midtrans.
 	![Connected to Midtrans](./../../../asset/image/shopify-new-08-success-install.png ':size=400')<br>
 
-9. To activate, click __Activate Payments via Midtrans__. You can also tick/untick desired payment method icons that will be shown in the payment button on your checkout page.
+10. To activate, click __Activate Payments via Midtrans__. You can also tick/untick desired payment method icons that will be shown in the payment button on your checkout page.
 
-10. Done! Now your Shopify online shop is ready to start accepting payments with Midtrans as payment gateway. Your customer will see __Payments via Midtrans__ as payment method on the checkout page.
+11. Done! Now your Shopify online shop is ready to start accepting payments with Midtrans as payment gateway. Your customer will see __Payments via Midtrans__ as payment method on the checkout page.
 	![Midtrans show in checkout page](./../../../asset/image/shopify-new-10-order.png ':size=400')<br>
 
 ![shopify](./../../../asset/image/shopify-new-19-snap-page.png ':size=400')<br>
@@ -108,7 +115,13 @@ During the transition period, move from Old Midtrans App to New Midtrans App, yo
 
 	![Login MAP](./../../../asset/image/snap-prep-env-diff.jpg ':size=400')<br>
 
-2. Select __Settings -> Access Keys__.
+2. Select __Settings->Configuration__.
+
+	Some payment methods like BCA Klikpay, Brimo, Danamon Online, Octo Clicks, UOB EZ Pay, Akulaku, and Kredivo, required finish redirect URL after customer completed the payment. If you have activated payment methods above, you need to fill this value `https://pixel.midtrans.com/payments/redirect` on  **Settings > Configuration > Finish Redirect URL**
+
+	![Set Finish URL](./../../../asset/image/shopify-new-27-set-finish-url.png ':size=400')<br>
+
+3. Select __Settings -> Access Keys__.
 
 	Copy Midtrans __Merchant ID__ and __Server Key__ (Will be used for the next step).
 
@@ -116,26 +129,26 @@ During the transition period, move from Old Midtrans App to New Midtrans App, yo
 
 	![access key](./../../../asset/image/sirclo-2.png)<br>
 
-3. Login to your [Shopify Store](https://www.shopify.com/login).
+4. Login to your [Shopify Store](https://www.shopify.com/login).
 
-4. Follow this link to find [Payments via Midtrans App on Shopify App Store.](https://apps.shopify.com/midtrans-payment-gateway-new)
+5. Follow this link to find [Payments via Midtrans App on Shopify App Store.](https://apps.shopify.com/midtrans-payment-gateway-new)
 
 	![shopify app store](./../../../asset/image/shopify-new-20-midtrans-shopify-appstore.png)<br>
 
-5. Click __Add app__ button to install.
+6. Click __Add app__ button to install.
 
-6. You will be redirected to installation page, you can review the displayed information, then click __Install app__
+7. You will be redirected to installation page, you can review the displayed information, then click __Install app__
 	![Install Midtrans](./../../../asset/image/shopify-new-06-install.png ':size=400')<br>
 
-7. You will be redirected to the Onboarding page, please fill in your Midtrans __Merchant ID__ and __Server Key__ (from step 2) for each production and sandbox. Then click __Register__.
+8. You will be redirected to the Onboarding page, please fill in your Midtrans __Merchant ID__ and __Server Key__ (from step 2) for each production and sandbox. Then click __Register__.
 	![Register](./../../../asset/image/shopify-new-07-register.png ':size=400')<br>
 
-8. You will be redirected back to Shopify, and the page will indicates that your Shopify store is connected to Payments via Midtrans.
+9. You will be redirected back to Shopify, and the page will indicates that your Shopify store is connected to Payments via Midtrans.
 	![Connected to Midtrans](./../../../asset/image/shopify-new-08-success-install.png ':size=400')<br>
 
-9. To activate, click __Activate Payments via Midtrans__. You can also tick/untick desired payment method icons that will be shown in the payment button on your checkout page.
+10. To activate, click __Activate Payments via Midtrans__. You can also tick/untick desired payment method icons that will be shown in the payment button on your checkout page.
 
-10. Done! Now your Shopify online shop is ready to start accepting payments with Midtrans as payment gateway. Your customer will see __Payments via Midtrans__ as payment method on the checkout page.
+11. Done! Now your Shopify online shop is ready to start accepting payments with Midtrans as payment gateway. Your customer will see __Payments via Midtrans__ as payment method on the checkout page.
 	![Midtrans show in checkout page](./../../../asset/image/shopify-new-10-order.png ':size=400')<br>
 
 
