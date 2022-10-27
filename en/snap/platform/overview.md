@@ -409,14 +409,14 @@ In real transaction, when you use a third-party payment provider such as "Midtra
 But if you want to do "Test Order" with enabling test mode, **Shopify should not charge you any payment processing fee for "Test Order" payments.** "Test Order" is helpful for you to make sure that the checkout process and settings for order processing, payment, inventory, shipping, email notifications, etc are all correct. You can place a "Test Order" by [simulating a transaction through test mode](#test-transaction-with-sandbox-mode). You can also check [Shopify docs about test order](https://help.shopify.com/en/manual/checkout-settings/test-orders) for further details.
 
 ##### In Some Rare Cases, Midtrans Unable to Update the Payment Status to Shopify
-In some rare cases, Midtrans unable to update payment status to the Shopify, e.g: mismatch status order, status order on midtrans is settlement, but status order on shopify is pending. If it happens and affect your status order on shopify, then there are possibility:
+In some rare case, payment status syncing to Shopify's system may fail. If it happens and affect your status order on Shopify, then there are possibility:
 
-- There is an issue on the Shopify side. e.g: Shopify service is unavailable, you can check [the Shopify status page](https://www.shopifystatus.com/) for reported service outages.
-- Your store is locked by Shopify. The store is locked if your shopify account does API request and exceeds [shopify API request limit](https://shopify.dev/api/usage/rate-limits), or if there is an issue with the account, such as a detected compromise or fraud risk, posting or uploading content/product that infringes on [the copyright or trademarks](https://help.shopify.com/en/manual/your-account/copyright-and-trademark) of others, or payment failure. The impact of your store being locked are:
-	1. The customer is still able to access your store and do the checkout process, but Midtrans unable to update the payment status, this is because shopify block/reject API request from your shopify account to update the payment status
+- There is an issue on the Shopify side. e.g: Shopify service is unavailable to receive and process Midtrans API request, you can check [the Shopify status page](https://www.shopifystatus.com/) for reported service outages.
+- Your store is locked by Shopify. The store is locked if your Shopify account does API request and exceeds [Shopify API request limit](https://shopify.dev/api/usage/rate-limits), or if there is an issue with the account, such as a detected compromise or fraud risk, posting or uploading content/product that infringes on [the copyright or trademarks](https://help.shopify.com/en/manual/your-account/copyright-and-trademark) of others, or payment failure. Some the impact of your store being locked are:
+	1. The customer is still able to access your store and do the checkout process, but Midtrans unable to update the payment status, this is because Shopify block/reject Midtrans API request
 	2. The Store is fully unavailable, the customer unable to access your store, and you unable to access the Shopify admin page.
 
-If you facing this issue, you should [Contact Shopify](https://help.shopify.com/en/support/login) to get the detail, due to only Shopify know the exact reason why your store is locked, then only Shopify can unlock your store.
+If you are facing this issue, we recommend you to [Contact Shopify](https://help.shopify.com/en/support/login) to get further details and request to unlock your store.
 
 ##### Item Stock & Status
 Few points to understand about order status & item stock management that is managed automatically with this integration:
