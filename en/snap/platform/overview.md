@@ -53,7 +53,7 @@ Depending on each situation, please **follow one which best fits your situation*
 
 2. Select __Settings->Configuration__.
 
-	Some payment methods like BCA Klikpay, Brimo, Danamon Online, Octo Clicks, UOB EZ Pay, Akulaku, and Kredivo, required finish redirect URL after customer completed the payment. If you have activated payment methods above, you need to fill this value `https://pixel.midtrans.com/payments/redirect` on  **Settings > Configuration > Finish Redirect URL**
+	Some payment methods such as UOB EZ Pay and Kredivo require a Finish Redirect URL after the customer completes the payment. If you have been activated the payment methods above, you can configure the Finish Redirect URL through the menu **Settings > Configuration**. Enter **Finish Redirect URL** with your Shopify URL website, then click Update Button.
 
 	![Set Finish URL](./../../../asset/image/shopify-new-27-set-finish-url.png ':size=400')<br>
 
@@ -117,7 +117,7 @@ During the transition period, move from Old Midtrans App to New Midtrans App, yo
 
 2. Select __Settings->Configuration__.
 
-	Some payment methods like BCA Klikpay, Brimo, Danamon Online, Octo Clicks, UOB EZ Pay, Akulaku, and Kredivo, required finish redirect URL after customer completed the payment. If you have activated payment methods above, you need to fill this value `https://pixel.midtrans.com/payments/redirect` on  **Settings > Configuration > Finish Redirect URL**
+	Some payment methods such as UOB EZ Pay and Kredivo require a Finish Redirect URL after the customer completes the payment. If you have been activated the payment methods above, you can configure the Finish Redirect URL through the menu **Settings > Configuration**. Enter **Finish Redirect URL** with your Shopify URL website, then click Update Button.
 
 	![Set Finish URL](./../../../asset/image/shopify-new-27-set-finish-url.png ':size=400')<br>
 
