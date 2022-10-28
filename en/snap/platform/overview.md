@@ -399,7 +399,7 @@ Here is an example of 1 order that has 1 earlier payment id which is unpaid, and
 ##### Payment Method Icons on Shopify Payment Setting Page
 On the Shopify payment setting page, you will find there are payment method icons. But be advised that **the icons selection does not directly affect the actual payment methods activated on Midtrans**.
 ![Payment icons](./../../../asset/image/shopify-new-25-payment-icons.png ':size=400')<br>
-The selected icons only will be shown on the payment button on the Shopify checkout page.
+The selected icons mainly will be shown on the payment button on the Shopify checkout page.
 ![Payment icons](./../../../asset/image/shopify-new-25-payment-icons-on-checkout.png ':size=400')<br>
 If you want to configure active payment methods on the Snap payment page, you should configure it on [Midtrans Shopify Payment App Account Settings](#payment-app-account-settings).
 
