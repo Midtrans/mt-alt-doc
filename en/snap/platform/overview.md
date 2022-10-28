@@ -414,7 +414,7 @@ In some rare cases, payment status syncing to Shopify's system may fail. If it h
 - There are issues on the Shopify side. e.g: Shopify service is unavailable to receive and process Midtrans' API request, you can check [the Shopify status page](https://www.shopifystatus.com/) for reported service outages.
 - Your store is locked by Shopify. The store may be locked due to your Shopify account performed API requests which exceeds [Shopify API request limit](https://shopify.dev/api/usage/rate-limits), or if there is an issue with the account, such as fraud risk, use of content/product that infringes on [the copyright or trademarks](https://help.shopify.com/en/manual/your-account/copyright-and-trademark) of others, payment failure, etc. Some of the impacts of your store being locked are:
 	1. Customers are still able to access your store and do the checkout process, but Midtrans unable to update the payment status, this is because Shopify block/reject API request from Midtrans.
-	2. The Store is fully unavailable, the customer unable to access your store, and you unable to access the Shopify admin page.
+	2. The Store is fully unavailable, customers unable to access your store, and you unable to access the Shopify admin page.
 
 If you are facing this issue, we recommend you to [Contact Shopify](https://help.shopify.com/en/support/login) to get further details then you can request to unlock your store.
 
