@@ -1351,6 +1351,49 @@ Due to the focus of Snap to be simple, easy to integrate, and focus on the custo
 
 You can alternatively store the Snap payment `token` (or `redirect_url`), and use it to re-display the Snap payment UI to the customer, so the GoPay, ShopeePay and QRIS payment page will be re-displayed according to the customer's session.
 
+### QRIS Related Behavior
+This behavior is applicable to Snap as per changes introduced on 12 September 2022.
+
+Background condition:
+- When you enable `gopay` (or other QRIS compatible e-money methods like `shopeepay`) payment method on Snap, by default Snap UI (whenever possible) will **automatically decide and show two possible scenario** for customer to pay:
+  - A) If the customer is detected using **mobile device, App Redirect** payment flow will be presented.
+  - B) If the customer is detected using **Desktop/PC, QRIS Scan** payment flow will be presented.
+
+Please note the following behavior:
+- Depending on which method the customer pay with (A or B), for each payment attempts:
+  - In **scenario A**: Midtrans will **mark the payment_type of the transaction as** `gopay` (or the e-money payment method chosen).
+  - In **scenario B**: Midtrans will **mark the payment_type of the transaction as** `qris`.
+- This will also impact the following:
+  - JSON fields sent on **Webhook/HTTP Notification** of the payment status.
+  - **Get Status API** response.
+  - The `Payment Type` displayed on **Midtrans Dashboard**, and when you download transactions.
+- The JSON fields format (returned on Webhook/HTTP Notifications & Get Status API response) is different between `"payment_type": "qris"` and `"payment_type": "gopay"`. Refer to the [notification example section](/en/after-payment/http-notification.md#sample-for-various-payment-methods) for details.
+
+Compared to previous behavior before this change, it was:
+- Regardless of scenario A or B, Midtrans will record it as `gopay` (or the e-money payment method chosen). Which was a bit misleading, because it does not exactly give a proper differentiator if the payment was paid via QRIS.
+
+**Reasons why** this changes was introduced:
+- To provide **clearer information whether the payment source** was made via e-money or QRIS.
+- The transaction fee for Gopay (e-money) payment method & QRIS is calculated differently. This change will provide **clearer information for the Merchant's side to do reconciliation of transactions fee**.
+- The previous flow was based on e-money QR, which was still in its early stages & each e-money has its own different QR standard. As of now QRIS is maturing to become the unifying standard, we have to continuously **optimize our flow to this latest evolving standard**.
+
+Though at first you may find it confusing because you did not explicitly enable `qris` on Snap or the customer did not choose it either, but you are receiving `qris` on notification.
+
+**Recommended action for merchant** side:
+- Please **ensure that your system’s implementation can handle this behavior** without breaking your system & its payment flow. Especially on the following parts (if applicable):
+  - Your **Notifications Handler implementation** logic.
+  - **Get Status API implementation** logic.
+  - **Reconciliation implementation** logic.
+
+Tips:
+- In terms of payment status, there will be no difference between the mentioned payment_type. Success status will still be `settlement`, unpaid will still be `expire`, waiting will still be `pending`, etc.
+  - So it will be safe for you to use the same logic (no changes) to check the payment status.
+- It will also generally support the same command such as `refund`, `expire`, etc.
+- So the change in `payment_type` will not affect payment status itself. 
+- If it helps make your implementation transition easier, 
+  - You can disregard the payment_type differences or consider. Or
+  - You can internally consider both `gopay` and `qris` payment_type to be one, just like previously.
+
 ### Note on Core API Get Status
 When a transaction is created on *Snap API*, it does not immediately assign any payment status on *Core API's* Get Status response.
 

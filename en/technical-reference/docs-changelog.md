@@ -11,6 +11,12 @@
 		- testing order payment fee
 		- rare case of Shopify API blocking payment status update
 
+#### 2022/09/23
+- add notes on Snap QRIS related behavior.
+
+#### 2022/09/20
+- update Gopay Core API additional notes on app redirect section
+
 #### 2022/09/13
 - add more findings on snap in iframe limitations
 - add info on snap multiple order id case

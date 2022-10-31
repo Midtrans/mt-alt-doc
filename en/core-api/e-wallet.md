@@ -465,43 +465,22 @@ The table given below explains `transaction_status` values for Ewallet transacti
 
 ## Additional Notes
 #### Allowing App Redirect for Mobile Platform App
-If app deeplink redirect method is being used within WebView, you may need to include additional configurations to ensure that your app will be able to redirect customer to Gojek-GoPay app. Please make sure that the WebView allows opening `gojek://` deeplink protocol.
+If app deeplink redirect method is being used within WebView, you may need to include additional configurations to ensure that your app will be able to redirect customer to Gojek-GoPay app. Please make sure that the WebView allows opening app redirect link urls.
 
 <!-- tabs:start -->
 
 #### **Android Native**
-On **Android** if using WebView, please make sure that the WebView allows opening `gojek://` deeplink protocol. You need to modify your web view `shouldOverrideUrlLoading` functions as shown below.
+On **Android** if using WebView, please make sure that the WebView allows opening other app redirect link urls.
 
-```java
- @Override
- public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        LogUtils.info(TAG, "shouldOverrideUrlLoading: " + url);
-        Intent intent;
-
-        if (url.contains("gojek://")) {
-            intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(url));
-            startActivity(intent);
-
-            return true;
-        }
- }
-```
+As a reference/example please follow [this FAQ on how to allow Gojek-GoPay app redirect link.](/en/other/faq/technical.md#android)
 
 #### **iOS Native**
+On **iOS** if using WebView, please make sure that the WebView allows opening other app redirect link urls.
 
-On **iOS**, you will need to add `LSApplicationQueriesSchemes` key to your app's `Info.plist`.
-
-```xml
-<key>LSApplicationQueriesSchemes</key>
-<array>
-<string>gojek</string>
-</array>
-```
+As a reference/example please follow [this FAQ on how to allow Gojek-GoPay app redirect link.](/en/other/faq/technical.md#ios-webview-specific)
 
 #### **WebView & Other**
-
-If you are using other framework such as React Native, Flutter, etc. Please follow [this FAQ on how to allow Gojek-GoPay deeplink redirect.](/en/other/faq/technical.md#customer-fails-to-be-redirected-to-gojek-deeplink-on-mobile-app-what-should-i-do)
+If you are using other framework such as React Native, Flutter, etc. Please follow [this FAQ on how to allow Gojek-GoPay app redirect link.](/en/other/faq/technical.md#customer-fails-to-be-redirected-to-gojek-deeplink-on-mobile-app-what-should-i-do)
 
 <!-- tabs:end -->
 <br>
