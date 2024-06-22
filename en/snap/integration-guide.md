@@ -557,6 +557,18 @@ The URL is updated and a confirmation message is displayed.
 #### [HTTP(S) Notification/Webhooks](/en/after-payment/http-notification.md)
 </div>
 
+## 5. Switching to Production Mode
+In this section, you will learn how to switch to Midtrans Production environment and to accept real payments from real customers. This is also known as "Going Live".
+
+<br>
+
+<div class="my-card">
+
+#### [Going Live](/en/technical-reference/going-live.md)
+Learn how to switch from Sandbox to Production environment, to start accepting real payment
+
+</div>
+
 ## Next Step
 <br>
 

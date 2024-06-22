@@ -324,10 +324,17 @@ The sample HTTP notification request received at merchant backend for *Over the 
 #### [HTTP(S) Notification/Webhooks](/en/after-payment/http-notification.md)
 </div>
 
-## Switching to Production Environment
-Follow the steps given below to switch to Midtrans *Production* environment and to accept real payments from real customers.
-1. Change API domain URL from `api.sandbox.midtrans.com` to `api.midtrans.com`.
-2. Use *Client Key* and *Server Key* for *Production* environment. For more details, refer to [Retrieving API Access Keys](/en/midtrans-account/overview.md#retrieving-api-access-keys).
+### 4. Switching to Production Mode
+In this section, you will learn how to switch to Midtrans Production environment and to accept real payments from real customers. This is also known as "Going Live".
+
+<br>
+
+<div class="my-card">
+
+#### [Going Live](/en/technical-reference/going-live.md)
+Learn how to switch from Sandbox to Production environment, to start accepting real payment
+
+</div>
 
 ## Next Step:
 <br>

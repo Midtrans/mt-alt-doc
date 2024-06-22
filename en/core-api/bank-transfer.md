@@ -523,6 +523,20 @@ To configure the Payment Notification URL, follow the steps given below.
 #### [HTTP(S) Notification/Webhooks](/en/after-payment/http-notification.md)
 </div>
 
+
+## 4. Switching to Production Mode
+In this section, you will learn how to switch to Midtrans Production environment and to accept real payments from real customers. This is also known as "Going Live".
+
+<br>
+
+<div class="my-card">
+
+#### [Going Live](/en/technical-reference/going-live.md)
+Learn how to switch from Sandbox to Production environment, to start accepting real payment
+
+</div>
+
+
 #### Transaction Status Description
 The description of `transaction_status` value for *Bank Transfer* payment method is given below.
 
